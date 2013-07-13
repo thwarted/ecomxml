@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+
+<!-- CUSTOMER INQUIRY -->
+
+<tt0009 id="tt0009">
+
+<!-- THIS IS THE ACTUAL DATA REQUIRED FOR TRANSACTION COMPLETION -->
+	<sg_data_to_macs>
+
+		<COMPANY>01</COMPANY>
+		<DIVISION>10</DIVISION>
+		<UID></UID>
+		<PASSWORD>temppass</PASSWORD>
+		<ORD_NUM></ORD_NUM>
+		<CUST_EDP></CUST_EDP>
+		<FNAME>Fair Hon</FNAME>
+		<LNAME>Rescue Sqd</LNAME>
+		<COMPANY_NAME></COMPANY_NAME>
+		<STREET>20 Prospect St</STREET>
+		<CITY>Fair Haven</CITY>
+		<STATE>VT</STATE>
+		<ZIPCODE>05743</ZIPCODE>
+		<COUNTRY>0000</COUNTRY>
+		<DAY_PHONE></DAY_PHONE>
+		<NGT_PHONE></NGT_PHONE>
+		<EMAIL_ADDR>fhs@yahoo.com</EMAIL_ADDR>
+		<CUST_NUM></CUST_NUM>
+		<CUSTOMER_LOGON></CUSTOMER_LOGON>
+
+	</sg_data_to_macs>
+
+<!-- THIS IS ANY ADDITIONAL TRANSACTION DATA -->
+	<user_data_for_return_with_response>
+
+		<a>ASDF</a>
+		<b>GHJK</b>
+		<c>HJKL</c>
+		<d>1234</d>
+		<e></e>
+		<f></f>
+		<g></g>
+		<h></h>
+		<i></i>
+		<j></j>
+		<k></k>
+		<l></l>
+		<m></m>
+		<n></n>
+		<o></o>
+		<p></p>
+		<q></q>
+		<r></r>
+		<s></s>
+		<t></t>
+		<u></u>
+		<v></v>
+		<w></w>
+		<x></x>
+		<y></y>
+		<z></z>
+
+	</user_data_for_return_with_response>
+
+</tt0009>

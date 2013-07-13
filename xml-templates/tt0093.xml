@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+
+<!-- CREATE STANDING ORDER MAINTENANCE -->
+
+<tt0093 id="tt0093">
+
+<!-- THIS IS THE ACTUAL DATA REQUIRED FOR TRANSACTION COMPLETION -->
+	<sg_data_to_macs>
+
+		<COMPANY>01</COMPANY>
+		<DIVISION>01</DIVISION>
+		<UID>1999120110125791</UID>
+		<UPDATE_FLAG></UPDATE_FLAG>
+		<HDR_CUST_EDP></HDR_CUST_EDP>
+		<HDR_PM></HDR_PM>
+		<HDR_PM_TYPE></HDR_PM_TYPE>
+		<HDR_CC_NO></HDR_CC_NO>
+		<HDR_CC_EXP></HDR_CC_EXP>
+		<HDR_CO></HDR_CO>
+		<HDR_DIV></HDR_DIV>
+		<STAND_ORD_DETAIL>
+			<DTL_DELETE_ITEM></DTL_DELETE_ITEM>
+			<DTL_SHIPTO_EDP></DTL_SHIPTO_EDP>
+			<DTL_SHIPTO_SM></DTL_SHIPTO_SM>
+			<DTL_SHIPTO_SM_TYPE></DTL_SHIPTO_SM_TYPE>
+			<DTL_NEXT_DATE></DTL_NEXT_DATE>
+			<DTL_TEMP_DATE></DTL_TEMP_DATE>
+			<DTL_STOP_DATE></DTL_STOP_DATE>
+			<DTL_POST_START></DTL_POST_START>
+			<DTL_POST_STOP></DTL_POST_STOP>
+			<DTL_ITEM_EDP></DTL_ITEM_EDP>
+			<DTL_ITEM_NO></DTL_ITEM_NO>
+			<DTL_ITEM_SHIPS></DTL_ITEM_SHIPS>
+			<DTL_ITEM_INT_N></DTL_ITEM_INT_N>
+			<DTL_ITEM_INT_X></DTL_ITEM_INT_X>
+		</STAND_ORD_DETAIL>
+
+	</sg_data_to_macs>
+
+<!-- THIS IS ANY ADDITIONAL TRANSACTION DATA -->
+	<user_data_for_return_with_response>
+
+		<a>ASDF</a>
+		<b>GHJK</b>
+		<c>HJKL</c>
+		<d>1234</d>
+		<e></e>
+		<f></f>
+		<g></g>
+		<h></h>
+		<i></i>
+		<j></j>
+		<k></k>
+		<l></l>
+		<m></m>
+		<n></n>
+		<o></o>
+		<p></p>
+		<q></q>
+		<r></r>
+		<s></s>
+		<t></t>
+		<u></u>
+		<v></v>
+		<w></w>
+		<x></x>
+		<y></y>
+		<z></z>
+	</user_data_for_return_with_response>
+
+</tt0093>

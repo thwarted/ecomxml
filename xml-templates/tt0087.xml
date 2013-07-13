@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+
+<!-- TIE CUSTOM TO VARIABLE KIT -->
+
+<tt0087 id="tt0087">
+
+<!-- THIS IS THE ACTUAL DATA REQUIRED FOR TRANSACTION COMPLETION -->
+	<sg_data_to_macs>
+
+		<COMPANY>01</COMPANY>
+		<DIVISION>01</DIVISION>
+		<UID>1999050509273240</UID>
+		<PROD_NUM>SCREEN PET</PROD_NUM>
+                <CUSTOM_ITEM_1></CUSTOM_ITEM_1>
+                <CUSTOM_ITEM_2></CUSTOM_ITEM_2>
+                <CUSTOM_ITEM_3></CUSTOM_ITEM_3>
+                <CUSTOM_ITEM_4></CUSTOM_ITEM_4>
+                <CUSTOM_ITEM_5></CUSTOM_ITEM_5>
+                <CUSTOM_ITEM_6></CUSTOM_ITEM_6>
+                <CUSTOM_ITEM_7></CUSTOM_ITEM_7>
+                <CUSTOM_ITEM_8></CUSTOM_ITEM_8>
+                <CUSTOM_ITEM_9></CUSTOM_ITEM_9>
+                <CUSTOM_ITEM_10></CUSTOM_ITEM_10>
+                <CUSTOM_ITEM_11></CUSTOM_ITEM_11>
+                <CUSTOM_ITEM_12></CUSTOM_ITEM_12>
+                <CUSTOM_ITEM_13></CUSTOM_ITEM_13>
+                <CUSTOM_ITEM_14></CUSTOM_ITEM_14>
+                <CUSTOM_ITEM_15></CUSTOM_ITEM_15>
+                <CUSTOM_ITEM_16></CUSTOM_ITEM_16>
+                <CUSTOM_ITEM_17></CUSTOM_ITEM_17>
+                <CUSTOM_ITEM_18></CUSTOM_ITEM_18>
+                <CUSTOM_ITEM_19></CUSTOM_ITEM_19>
+                <CUSTOM_ITEM_20></CUSTOM_ITEM_20>
+                <SHIPTO_NUM></SHIPTO_NUM>
+		<PAGE_NO></PAGE_NO>
+		<ITEM_LINE_NUMBER></ITEM_LINE_NUMBER>
+		<COMP_SEQ_NUMBER></COMP_SEQ_NUMBER>
+		<FLAG></FLAG>
+		<ITEM_TYPE></ITEM_TYPE>
+		<D1_CUSTOM_FRAME></D1_CUSTOM_FRAME>
+
+	</sg_data_to_macs>                		
+
+
+<!-- THIS IS ANY ADDITIONAL TRANSACTION DATA -->
+	<user_data_for_return_with_response>
+
+		<a>ASDF</a>
+		<b>GHJK</b>
+		<c>HJKL</c>
+		<d>1234</d>
+		<e></e>
+		<f></f>
+		<g></g>
+		<h></h>
+		<i></i>
+		<j></j>
+		<k></k>
+		<l></l>
+		<m></m>
+		<n></n>
+		<o></o>
+		<p></p>
+		<q></q>
+		<r></r>
+		<s></s>
+		<t></t>
+		<u></u>
+		<v></v>
+		<w></w>
+		<x></x>
+		<y></y>
+		<z></z>
+
+	</user_data_for_return_with_response>
+
+</tt0087>

@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+
+<!-- ADD ORDER COMMENTS -->
+
+<tt0043 id="tt0043">
+
+<!-- THIS IS THE ACTUAL DATA REQUIRED FOR TRANSACTION COMPLETION -->
+	<sg_data_to_macs>
+
+		<COMPANY>01</COMPANY>
+		<DIVISION>01</DIVISION>
+		<UID>1999050509273240</UID>
+		
+		<ORD_COMMENT_1></ORD_COMMENT_1>
+		<PRT_PKSLP_1></PRT_PKSLP_1>
+		<PRT_LABEL_1></PRT_LABEL_1>
+		<PRT_GREET_1></PRT_GREET_1>
+		<PRT_INVOICE_1></PRT_INVOICE_1>
+
+		<ORD_COMMENT_2></ORD_COMMENT_2>
+		<PRT_PKSLP_2></PRT_PKSLP_2>
+		<PRT_LABEL_2></PRT_LABEL_2>
+		<PRT_GREET_2></PRT_GREET_2>
+		<PRT_INVOICE_2></PRT_INVOICE_2>
+
+		<ORD_COMMENT_3></ORD_COMMENT_3>
+		<PRT_PKSLP_3></PRT_PKSLP_3>
+		<PRT_LABEL_3></PRT_LABEL_3>
+		<PRT_GREET_3></PRT_GREET_3>
+		<PRT_INVOICE_3></PRT_INVOICE_3>
+
+		<ORD_COMMENT_4></ORD_COMMENT_4>
+		<PRT_PKSLP_4></PRT_PKSLP_4>
+		<PRT_LABEL_4></PRT_LABEL_4>
+		<PRT_GREET_4></PRT_GREET_4>
+		<PRT_INVOICE_4></PRT_INVOICE_4>
+
+		<ORD_COMMENT_5></ORD_COMMENT_5>
+		<PRT_PKSLP_5></PRT_PKSLP_5>
+		<PRT_LABEL_5></PRT_LABEL_5>
+		<PRT_GREET_5></PRT_GREET_5>
+		<PRT_INVOICE_5></PRT_INVOICE_5>
+
+		<ORD_COMMENT_6></ORD_COMMENT_6>
+		<PRT_PKSLP_6></PRT_PKSLP_6>
+		<PRT_LABEL_6></PRT_LABEL_6>
+		<PRT_GREET_6></PRT_GREET_6>
+		<PRT_INVOICE_6></PRT_INVOICE_6>
+
+		<ORD_COMMENT_7></ORD_COMMENT_7>
+		<PRT_PKSLP_7></PRT_PKSLP_7>
+		<PRT_LABEL_7></PRT_LABEL_7>
+		<PRT_GREET_7></PRT_GREET_7>
+		<PRT_INVOICE_7></PRT_INVOICE_7>
+
+		<ORD_COMMENT_8></ORD_COMMENT_8>
+		<PRT_PKSLP_8></PRT_PKSLP_8>
+		<PRT_LABEL_8></PRT_LABEL_8>
+		<PRT_GREET_8></PRT_GREET_8>
+		<PRT_INVOICE_8></PRT_INVOICE_8>
+
+		<ORD_COMMENT_9></ORD_COMMENT_9>
+		<PRT_PKSLP_9></PRT_PKSLP_9>
+		<PRT_LABEL_9></PRT_LABEL_9>
+		<PRT_GREET_9></PRT_GREET_9>
+		<PRT_INVOICE_9></PRT_INVOICE_9>
+
+		<ORD_COMMENT_10></ORD_COMMENT_10>
+		<PRT_PKSLP_10></PRT_PKSLP_10>
+		<PRT_LABEL_10></PRT_LABEL_10>
+		<PRT_GREET_10></PRT_GREET_10>
+		<PRT_INVOICE_10></PRT_INVOICE_10>
+
+	</sg_data_to_macs>
+
+<!-- THIS IS ANY ADDITIONAL TRANSACTION DATA -->
+	<user_data_for_return_with_response>
+
+		<a>ASDF</a>
+		<b>GHJK</b>
+		<c>HJKL</c>
+		<d>1234</d>
+		<e></e>
+		<f></f>
+		<g></g>
+		<h></h>
+		<i></i>
+		<j></j>
+		<k></k>
+		<l></l>
+		<m></m>
+		<n></n>
+		<o></o>
+		<p></p>
+		<q></q>
+		<r></r>
+		<s></s>
+		<t></t>
+		<u></u>
+		<v></v>
+		<w></w>
+		<x></x>
+		<y></y>
+		<z></z>
+
+	</user_data_for_return_with_response>
+
+</tt0043>

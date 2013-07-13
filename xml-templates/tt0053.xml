@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+
+<!-- VARIABLE KIT VALIDATION -->
+
+<tt0053 id="tt0053">
+
+<!-- THIS IS THE ACTUAL DATA REQUIRED FOR TRANSACTION COMPLETION -->
+	<sg_data_to_macs>
+
+		<COMPANY>01</COMPANY>
+		<DIVISION>01</DIVISION>
+		<UID>1999050509273240</UID>
+		<KIT_PROD_NUM>QC P1 0210 01 1</KIT_PROD_NUM>
+		<UPSL_A></UPSL_A>
+		<UPSL_B></UPSL_B>
+		<UPSL_C></UPSL_C>
+		<UPSL_D></UPSL_D>
+		<R1_PROD_NUM_1>QC R1 0210 01 4</R1_PROD_NUM_1>
+		<R1_PROD_QTY_1>1</R1_PROD_QTY_1>
+		<R1_PROD_NUM_2></R1_PROD_NUM_2>
+		<R1_PROD_QTY_2></R1_PROD_QTY_2>
+		<R1_PROD_NUM_3></R1_PROD_NUM_3>
+		<R1_PROD_QTY_3></R1_PROD_QTY_3>
+		<R1_PROD_NUM_4></R1_PROD_NUM_4>
+		<R1_PROD_QTY_4></R1_PROD_QTY_4>
+		<R1_PROD_NUM_5></R1_PROD_NUM_5>
+		<R1_PROD_QTY_5></R1_PROD_QTY_5>
+		<R1_PROD_NUM_6></R1_PROD_NUM_6>
+		<R1_PROD_QTY_6></R1_PROD_QTY_6>
+		<R1_PROD_NUM_7></R1_PROD_NUM_7>
+		<R1_PROD_QTY_7></R1_PROD_QTY_7>
+		<R1_PROD_NUM_8></R1_PROD_NUM_8>
+		<R1_PROD_QTY_8></R1_PROD_QTY_8>
+		<R1_PROD_NUM_9></R1_PROD_NUM_9>
+		<R1_PROD_QTY_9></R1_PROD_QTY_9>
+		<R1_PROD_NUM_10></R1_PROD_NUM_10>
+		<R1_PROD_QTY_10></R1_PROD_QTY_10>
+		<R1_PROD_NUM_11></R1_PROD_NUM_11>
+		<R1_PROD_QTY_11></R1_PROD_QTY_11>
+		<R1_PROD_NUM_12></R1_PROD_NUM_12>
+		<R1_PROD_QTY_12></R1_PROD_QTY_12>
+		<R1_PROD_NUM_13></R1_PROD_NUM_13>
+		<R1_PROD_QTY_13></R1_PROD_QTY_13>
+		<R1_PROD_NUM_14></R1_PROD_NUM_14>
+		<R1_PROD_QTY_14></R1_PROD_QTY_14>
+		<R1_PROD_NUM_15></R1_PROD_NUM_15>
+		<R1_PROD_QTY_15></R1_PROD_QTY_15>
+		<R1_PROD_NUM_16></R1_PROD_NUM_16>
+		<R1_PROD_QTY_16></R1_PROD_QTY_16>
+		<R1_PROD_NUM_17></R1_PROD_NUM_17>
+		<R1_PROD_QTY_17></R1_PROD_QTY_17>
+		<R1_PROD_NUM_18></R1_PROD_NUM_18>
+		<R1_PROD_QTY_18></R1_PROD_QTY_18>
+		<R1_PROD_NUM_19></R1_PROD_NUM_19>
+		<R1_PROD_QTY_19></R1_PROD_QTY_19>
+		<R1_PROD_NUM_20></R1_PROD_NUM_20>
+		<R1_PROD_QTY_20></R1_PROD_QTY_20>
+		<R1_PROD_NUM_21></R1_PROD_NUM_21>
+		<R1_PROD_QTY_21></R1_PROD_QTY_21>
+		<R1_PROD_NUM_22></R1_PROD_NUM_22>
+		<R1_PROD_QTY_22></R1_PROD_QTY_22>
+		<R1_PROD_NUM_23></R1_PROD_NUM_23>
+		<R1_PROD_QTY_23></R1_PROD_QTY_23>
+		<R1_PROD_NUM_24></R1_PROD_NUM_24>
+		<R1_PROD_QTY_24></R1_PROD_QTY_24>
+		<R1_PROD_NUM_25></R1_PROD_NUM_25>
+		<R1_PROD_QTY_25></R1_PROD_QTY_25>
+
+	</sg_data_to_macs>
+
+<!-- THIS IS ANY ADDITIONAL TRANSACTION DATA -->
+	<user_data_for_return_with_response>
+
+		<a>ASDF</a>
+		<b>GHJK</b>
+		<c>HJKL</c>
+		<d>1234</d>
+		<e></e>
+		<f></f>
+		<g></g>
+		<h></h>
+		<i></i>
+		<j></j>
+		<k></k>
+		<l></l>
+		<m></m>
+		<n></n>
+		<o></o>
+		<p></p>
+		<q></q>
+		<r></r>
+		<s></s>
+		<t></t>
+		<u></u>
+		<v></v>
+		<w></w>
+		<x></x>
+		<y></y>
+		<z></z>
+
+	</user_data_for_return_with_response>
+
+</tt0053>

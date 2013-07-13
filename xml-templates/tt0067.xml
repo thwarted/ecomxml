@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+
+<!-- GIFT CERTIFICATE CANCEL -->
+
+<tt0067 id="tt0067">
+
+<!-- THIS IS THE ACTUAL DATA REQUIRED FOR TRANSACTION COMPLETION -->
+	<sg_data_to_macs >
+
+		<COMPANY>01</COMPANY>
+		<DIVISION>01</DIVISION>
+		<UID>1999050509273240</UID>
+		<GC_NUM_1></GC_NUM_1>
+		<GC_CHK_DIG_1></GC_CHK_DIG_1>
+		<GC_NUM_2></GC_NUM_2>
+		<GC_CHK_DIG_2></GC_CHK_DIG_2>
+		<GC_NUM_3></GC_NUM_3>
+		<GC_CHK_DIG_3></GC_CHK_DIG_3>
+		<GC_NUM_4></GC_NUM_4>
+		<GC_CHK_DIG_4></GC_CHK_DIG_4>
+		<GC_NUM_5></GC_NUM_5>
+		<GC_CHK_DIG_5></GC_CHK_DIG_5>
+		<GC_NUM_6></GC_NUM_6>
+		<GC_CHK_DIG_6></GC_CHK_DIG_6>
+		<GC_NUM_7></GC_NUM_7>
+		<GC_CHK_DIG_7></GC_CHK_DIG_7>
+		<GC_NUM_8></GC_NUM_8>
+		<GC_CHK_DIG_8></GC_CHK_DIG_8>
+		<GC_NUM_9></GC_NUM_9>
+		<GC_CHK_DIG_9></GC_CHK_DIG_9>
+		<GC_NUM_10></GC_NUM_10>
+		<GC_CHK_DIG_10></GC_CHK_DIG_10>
+		<GC_NUM_11></GC_NUM_11>
+		<GC_CHK_DIG_11></GC_CHK_DIG_11>
+		<GC_NUM_12></GC_NUM_12>
+		<GC_CHK_DIG_12></GC_CHK_DIG_12>
+		<GC_NUM_13></GC_NUM_13>
+		<GC_CHK_DIG_13></GC_CHK_DIG_13>
+		<GC_NUM_14></GC_NUM_14>
+		<GC_CHK_DIG_14></GC_CHK_DIG_14>
+		<GC_NUM_15></GC_NUM_15>
+		<GC_CHK_DIG_15></GC_CHK_DIG_15>
+		<GC_NUM_16></GC_NUM_16>
+		<GC_CHK_DIG_16></GC_CHK_DIG_16>
+      	 	<GC_NUM_17></GC_NUM_17>
+		<GC_CHK_DIG_17></GC_CHK_DIG_17>
+		<GC_NUM_18></GC_NUM_18>
+		<GC_CHK_DIG_18></GC_CHK_DIG_18>
+		<GC_FLAG></GC_FLAG>
+		
+	</sg_data_to_macs>
+
+<!-- THIS IS ANY ADDITIONAL TRANSACTION DATA -->
+	<user_data_for_return_with_response>
+
+		<a>ASDF</a>
+		<b>GHJK</b>
+		<c>HJKL</c>
+		<d>1234</d>
+		<e></e>
+		<f></f>
+		<g></g>
+		<h></h>
+		<i></i>
+		<j></j>
+		<k></k>
+		<l></l>
+		<m></m>
+		<n></n>
+		<o></o>
+		<p></p>
+		<q></q>
+		<r></r>
+		<s></s>
+		<t></t>
+		<u></u>
+		<v></v>
+		<w></w>
+		<x></x>
+		<y></y>
+		<z></z>
+
+	</user_data_for_return_with_response>
+
+</tt0067>

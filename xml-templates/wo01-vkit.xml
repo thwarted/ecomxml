@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+
+<!-- ORDER RECAP -->
+
+<wo01 id="wo01">
+
+<!-- THIS IS THE ACTUAL DATA REQUIRED FOR ORDER RECAP TRANSACTION COMPLETION -->
+
+     <sg_data_to_macs>
+
+	     <COMPANY>01</COMPANY>
+	     <DIVISION>01</DIVISION>
+	
+	<R10>
+     	   <R10_SEQ>01</R10_SEQ>
+           <R10_REC_TYPE>10</R10_REC_TYPE>
+	   <R10_SOURCE>DMWEB</R10_SOURCE>
+	   <R10_MAIL_DATE></R10_MAIL_DATE>
+           <R10_PAY_METHOD>VI</R10_PAY_METHOD>
+           <R10_FNAME>PINKY</R10_FNAME>
+           <R10_MINITIAL>M</R10_MINITIAL>
+           <R10_LNAME>BROWNY</R10_LNAME>
+           <R10_TITLE>Ms</R10_TITLE>
+           <R10_COMPANY_NAME>SGA</R10_COMPANY_NAME>
+           <R10_ADDRESS_REF1></R10_ADDRESS_REF1>
+           <R10_ADDRESS_REF2></R10_ADDRESS_REF2>
+           <R10_STREET>1615, S CONG AVE</R10_STREET>
+           <R10_CITY>DELRAY BEACH</R10_CITY>
+           <R10_STATE>FL</R10_STATE>
+           <R10_ZIP_CODE>33445</R10_ZIP_CODE>
+           <R10_COUNTRY_CODE>0000</R10_COUNTRY_CODE>
+           <R10_DAY_PHONE>954-789-5643</R10_DAY_PHONE>
+           <R10_NGT_PHONE></R10_NGT_PHONE>
+           <R10_OLD_CUST_NUM></R10_OLD_CUST_NUM>
+           <R10_CUST_NUM></R10_CUST_NUM>
+           <R10_CUST_CHKDIG></R10_CUST_CHKDIG>
+           <R10_CUST_EDP></R10_CUST_EDP>
+           <R10_NO_PROMO></R10_NO_PROMO>
+           <R10_NO_RENT></R10_NO_RENT>
+	</R10>
+
+
+	<R13>
+           <R13_SEQ>02</R13_SEQ>
+           <R13_REC_TYPE>13</R13_REC_TYPE>
+           <R13_EMAIL_ADDR>PINKY@TEST.COM</R13_EMAIL_ADDR>
+           <R13_NET_PASSWORD>LOTUS</R13_NET_PASSWORD>
+           <R13_RECAP_FLAG>R</R13_RECAP_FLAG>
+           <R13_IP_ADDRESS></R13_IP_ADDRESS>
+           <R13_USER_ID>1999050509273240</R13_USER_ID>
+	</R13>
+
+	<R15>
+           <R15_SEQ>03</R15_SEQ>
+           <R15_REC_TYPE></R15_REC_TYPE>
+	   <R15_REMIT_AMT></R15_REMIT_AMT>
+           <R15_FUTURE_DATE></R15_FUTURE_DATE>
+           <R15_PURCHASE_ORD></R15_PURCHASE_ORD>
+	   <R15_ENTERED_DATE></R15_ENTERED_DATE>
+	   <R15_ENTERED_TIME></R15_ENTERED_TIME>
+	   <R15_ENTERED_BY></R15_ENTERED_BY>
+           <R15_HOLD_COMPLETE></R15_HOLD_COMPLETE>
+           <R15_EXPEDITE_ORD></R15_EXPEDITE_ORD>
+           <R15_NO_BACKORDER></R15_NO_BACKORDER>
+           <R15_POSTPONE_ORD></R15_POSTPONE_ORD>
+           <R15_NO_INSURANCE></R15_NO_INSURANCE>
+           <R15_CCUF_FRONT></R15_CCUF_FRONT>
+           <R15_OVERPAYMENT></R15_OVERPAYMENT>
+           <R15_STANDING_ORD></R15_STANDING_ORD>
+           <R15_GENDER></R15_GENDER>
+           <R15_OPT_CODE></R15_OPT_CODE>
+           <R15_SHIP_METHOD>02</R15_SHIP_METHOD>
+           <R15_DEMOGRAPHICS></R15_DEMOGRAPHICS>
+           <R15_SALES_TERR></R15_SALES_TERR>
+           <R15_SALES_REP></R15_SALES_REP>
+           <R15_FAX_PHONE></R15_FAX_PHONE>
+           <R15_ORDER_XREF></R15_ORDER_XREF>
+           <R15_CUST_TYPE></R15_CUST_TYPE>
+	   <R15_ERROR_FLAG></R15_ERROR_FLAG>
+           <R15_INSTALLMENT></R15_INSTALLMENT>
+           <R15_SHIP_DATE></R15_SHIP_DATE>
+           <R15_USER_HOLD_CODE></R15_USER_HOLD_CODE>
+           <R15_BANK_ACCT></R15_BANK_ACCT>
+   	   <R15_RUT_NUM></R15_RUT_NUM>
+           <R15_CONTINUITY_FLAG></R15_CONTINUITY_FLAG>
+           <R15_BYPASS_ADV></R15_BYPASS_ADV>
+           <R15_DISCOUNT_CODE1></R15_DISCOUNT_CODE1>
+	   <R15_DISCOUNT_CODE2></R15_DISCOUNT_CODE2>
+	   <R15_BIRTHDAY></R15_BIRTHDAY>
+	</R15>
+
+	<R20>
+           <R20_SEQ>04</R20_SEQ>
+           <R20_REC_TYPE>20</R20_REC_TYPE>
+           <R20_CC_TYPE>VI</R20_CC_TYPE>
+           <R20_CC_CARD_NUM>4444333322221111</R20_CC_CARD_NUM>
+           <R20_CC_EXP_YEAR>99</R20_CC_EXP_YEAR>
+           <R20_CC_EXP_MONTH>12</R20_CC_EXP_MONTH>
+           <R20_CC_AUTH_CODE></R20_CC_AUTH_CODE>
+           <R20_CC_AUTH_FLAG></R20_CC_AUTH_FLAG>
+	</R20>
+
+
+	<R40_1>
+           <R40_1_SEQ>05</R40_1_SEQ>
+           <R40_1_REC_TYPE>40</R40_1_REC_TYPE>
+           <R40_1_ITEM_QTY>1</R40_1_ITEM_QTY>
+           <R40_1_ITEM_EDP></R40_1_ITEM_EDP>
+           <R40_1_TAX_NUM></R40_1_TAX_NUM>
+           <R40_1_ITEM_NUM>CUSTOM K4</R40_1_ITEM_NUM>
+           <R40_1_TAX_AMT></R40_1_TAX_AMT>
+           <R40_1_TAX_RATE></R40_1_TAX_RATE>
+           <R40_1_TAX_EXEMPT></R40_1_TAX_EXEMPT>
+           <R40_1_SHIP_METHOD>02</R40_1_SHIP_METHOD>
+	   <R40_1_PH_AMT></R40_1_PH_AMT>
+	   <R40_1_PRICE></R40_1_PRICE>
+	   <R40_1_SHIP_DATE></R40_1_SHIP_DATE>
+	   <R40_1_POS_RET></R40_1_POS_RET>
+	   <R40_1_ADDITIONAL_POSTAGE></R40_1_ADDITIONAL_POSTAGE>
+           <R40_1_ASSO_PROD_NUM></R40_1_ASSO_PROD_NUM>
+           <R40_1_OVERIDE_PRICE></R40_1_OVERIDE_PRICE>
+           <R40_1_CLUB_SALES_TYPE></R40_1_CLUB_SALES_TYPE>
+           <R40_1_RETURN_FLAG></R40_1_RETURN_FLAG>
+           <R40_1_POVRD_REASON></R40_1_POVRD_REASON>
+	</R40_1>
+	
+	<R42_1>
+           <R42_1_SEQ>06</R42_1_SEQ>
+           <R42_1_REC_TYPE>42</R42_1_REC_TYPE>
+           <R42_1_ITEM_QTY>1</R42_1_ITEM_QTY>
+           <R42_1_ITEM_EDP>871</R42_1_ITEM_EDP>
+           <R42_1_TAX_NUM></R42_1_TAX_NUM>
+           <R42_1_ITEM_NUM>RICHP1 LARGE</R42_1_ITEM_NUM>
+           <R42_1_TAX_AMT></R42_1_TAX_AMT>
+           <R42_1_TAX_RATE></R42_1_TAX_RATE>
+           <R42_1_TAX_EXEMPT></R42_1_TAX_EXEMPT>
+           <R42_1_SHIP_METHOD>02</R42_1_SHIP_METHOD>
+           <R42_1_PH_AMT></R42_1_PH_AMT>
+           <R42_1_PRICE></R42_1_PRICE>
+	</R42_1>
+
+	<R42_2>
+           <R42_2_SEQ>07</R42_2_SEQ>
+           <R42_2_REC_TYPE>42</R42_2_REC_TYPE>
+           <R42_2_ITEM_QTY>1</R42_2_ITEM_QTY>
+           <R42_2_ITEM_EDP>614</R42_2_ITEM_EDP>
+           <R42_2_TAX_NUM></R42_2_TAX_NUM>
+           <R42_2_ITEM_NUM>SCREEN PET</R42_2_ITEM_NUM>
+           <R42_2_TAX_AMT></R42_2_TAX_AMT>
+           <R42_2_TAX_RATE></R42_2_TAX_RATE>
+           <R42_2_TAX_EXEMPT></R42_2_TAX_EXEMPT>
+           <R42_2_SHIP_METHOD>02</R42_2_SHIP_METHOD>
+           <R42_2_PH_AMT></R42_2_PH_AMT>
+           <R42_2_PRICE></R42_2_PRICE>
+	</R42_2>
+
+	<R42_3>
+           <R42_3_SEQ>08</R42_3_SEQ>
+           <R42_3_REC_TYPE>42</R42_3_REC_TYPE>
+           <R42_3_ITEM_QTY>1</R42_3_ITEM_QTY>
+           <R42_3_ITEM_EDP>455</R42_3_ITEM_EDP>
+           <R42_3_TAX_NUM></R42_3_TAX_NUM>
+           <R42_3_ITEM_NUM>RBS</R42_3_ITEM_NUM>
+           <R42_3_TAX_AMT></R42_3_TAX_AMT>
+           <R42_3_TAX_RATE></R42_3_TAX_RATE>
+           <R42_3_TAX_EXEMPT></R42_3_TAX_EXEMPT>
+           <R42_3_SHIP_METHOD>02</R42_3_SHIP_METHOD>
+           <R42_3_PH_AMT></R42_3_PH_AMT>
+           <R42_3_PRICE></R42_3_PRICE>
+	</R42_3>
+
+
+  </sg_data_to_macs>
+
+<!-- THIS IS ANY ADDITIONAL TRANSACTION DATA -->
+	<user_data_for_return_with_response>
+
+		<a>ASDF</a>
+		<b>GHJK</b>
+		<c>HJKL</c>
+		<d>1234</d>
+		<e></e>
+		<f></f>
+		<g></g>
+		<h></h>
+		<i></i>
+		<j></j>
+		<k></k>
+		<l></l>
+		<m></m>
+		<n></n>
+		<o></o>
+		<p></p>
+		<q></q>
+		<r></r>
+		<s></s>
+		<t></t>
+		<u></u>
+		<v></v>
+		<w></w>
+		<x></x>
+		<y></y>
+		<z></z>
+
+	</user_data_for_return_with_response>
+
+
+</wo01>
+
+
+
+
+
+
