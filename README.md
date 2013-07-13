@@ -16,7 +16,7 @@ They argued for a moment. Then they lost connection to the wifi network, as if s
 
 They left in stony silence, and when they found another working access point, he refused to tell her the password. He was being so unreasonable, she fumed to herself. She tethered her phone indignantly and started checking her email. Having received nothing new, she slammed her laptop shut as hard as she could. And then she screamed, throwing her laptop into the air.
 
-Her coworker leapt up and grabbed it before it smashed into the floor. "What is it? What's wrong?" he shouted. He opened her laptop and he saw it. A terribly formatted, bloody XML document hung was being displayed in a terminal window.
+Her coworker leapt up and grabbed it before it smashed into the floor. "What is it? What's wrong?" he shouted. He opened her laptop and he saw it. A terribly formatted, bloody XML document was being displayed in a terminal window.
 
 ---------------------------------------
 
