@@ -76,11 +76,11 @@ int tt0033_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_bu
     strcpy(gbp->sendbuf0033->request_id, "XML");
     strcpy(gbp->sendbuf0033->record_id, "0033");
 
-    strcpy(gbp->sendbuf0033->ip_address, r->connection->remote_ip);
+        strcpy(gbp->sendbuf0033->ip_address, r->connection->remote_ip);
 
 
     get_tag_data("COMPANY", gbp->sendbuf0033->company,gbp,stdout_buffer);
-    get_tag_data("DIVISION", gbp->sendbuf0033->division,gbp,stdout_buffer);
+        get_tag_data("DIVISION", gbp->sendbuf0033->division,gbp,stdout_buffer);
     get_tag_data("UID", gbp->sendbuf0033->userid,gbp,stdout_buffer);
         
 
@@ -161,7 +161,7 @@ int tt0033_CatSendStr(struct global_struct *gbp, char *sz_sendbufcat, tt0033_st_
             ptr_sendbuf->division,
             ptr_sendbuf->userid,
             ptr_sendbuf->ip_address,
-            ptr_sendbuf->filler);
+                        ptr_sendbuf->filler);
             
     return(gbp->j);
 }
@@ -180,19 +180,19 @@ int tt0033_ParceRecvStr(tt0033_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
 
 #endif
 /*
-        ap_rprintf(r,"<!DOCTYPE %s0034 PUBLIC \"-//%s//%s %s//%s\" \n", 
-                                              gbp->tag, originator, label, sg_version, language);
+                ap_rprintf(r,"<!DOCTYPE %s0034 PUBLIC \"-//%s//%s %s//%s\" \n", 
+                                                        gbp->tag, originator, label, sg_version, language);
 
         ap_rprintf(r,"                     \"%s%s0034.dtd\">\n", url_tag, tt_tag);
 */
         ap_rprintf(r,"%s0034 %s\"tt0034\">\n", gbp->tt_btag, gbp->bitag);
         ap_rprintf(r,"%s\n", sga_message);
-        ap_rprintf(r,"  %s>\n", gbp->mtag);
+        ap_rprintf(r,"	%s>\n", gbp->mtag);
 
 
     memset(ptr_recvbuf->request_id,'\0', tt0033_REQ_ID_LEN+1);
     memcpy(ptr_recvbuf->request_id, sz_recvbufcat + gbp->count, tt0033_REQ_ID_LEN);
-    ap_rprintf(r,"			<REQUEST_ID>%s</REQUEST_ID>\n", handle_special_chars(gbp,ptr_recvbuf->request_id));
+        ap_rprintf(r,"		<REQUEST_ID>%s</REQUEST_ID>\n", handle_special_chars(gbp,ptr_recvbuf->request_id));
     gbp->count += tt0033_REQ_ID_LEN;
 
     memset(ptr_recvbuf->record_id,'\0', tt0033_REC_ID_LEN+1);
@@ -201,56 +201,56 @@ int tt0033_ParceRecvStr(tt0033_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
 
     memset(ptr_recvbuf->userid,'\0', tt0033_USER_ID_LEN+1);
     memcpy(ptr_recvbuf->userid, sz_recvbufcat + gbp->count, tt0033_USER_ID_LEN);
-    ap_rprintf(r,"			<UID>%s</UID>\n", handle_special_chars(gbp,ptr_recvbuf->userid));
+        ap_rprintf(r,"		<UID>%s</UID>\n", handle_special_chars(gbp,ptr_recvbuf->userid));
     gbp->count += tt0033_USER_ID_LEN;
 
     memset(ptr_recvbuf->success,'\0', tt0033_SUCCESS_FLAG_LEN+1);
     memcpy(ptr_recvbuf->success, sz_recvbufcat + gbp->count, tt0033_SUCCESS_FLAG_LEN);
-    ap_rprintf(r,"			<SUCCESS_RESPONSE>%s</SUCCESS_RESPONSE>\n", handle_special_chars(gbp,ptr_recvbuf->success));
+        ap_rprintf(r,"		<SUCCESS_RESPONSE>%s</SUCCESS_RESPONSE>\n", handle_special_chars(gbp,ptr_recvbuf->success));
     gbp->count += tt0033_SUCCESS_FLAG_LEN;
 
     memset(ptr_recvbuf->err_message,'\0', tt0033_ERR_LEN + 1);
     memcpy(ptr_recvbuf->err_message, sz_recvbufcat + gbp->count, tt0033_ERR_LEN);
-    ap_rprintf(r,"			<MESSAGE>%s</MESSAGE>\n", handle_special_chars(gbp,ptr_recvbuf->err_message));
+        ap_rprintf(r,"		<MESSAGE>%s</MESSAGE>\n", handle_special_chars(gbp,ptr_recvbuf->err_message));
     gbp->count += tt0033_ERR_LEN;
 
-    gbp->count += tt0033_SEND_FILLER_LEN;
+        gbp->count += tt0033_SEND_FILLER_LEN;
 
         
     for(gbp->i = 0; gbp->i < tt0033_SHIPTO_COUNT; gbp->i++) 
-    {
-
-        memset(ptr_recvbuf->shipto[gbp->i].shipto_num,'\0', tt0033_SHIPTO_NO_LEN+1);
-        memcpy(ptr_recvbuf->shipto[gbp->i].shipto_num, sz_recvbufcat + gbp->count, tt0033_SHIPTO_NO_LEN);
-        gbp->count += tt0033_SHIPTO_NO_LEN;
-
-        memset(ptr_recvbuf->shipto[gbp->i].shipto_fname,'\0', tt0033_SHIPTO_FN_LEN+1);
-        memcpy(ptr_recvbuf->shipto[gbp->i].shipto_fname, sz_recvbufcat + gbp->count, tt0033_SHIPTO_FN_LEN);
-        gbp->count += tt0033_SHIPTO_FN_LEN;
-        sprintf(ptr_recvbuf->shipto[gbp->i].shipto_fname,"%s",
-        rtrim(ptr_recvbuf->shipto[gbp->i].shipto_fname, tt0033_SHIPTO_FN_LEN+1,gbp));
-
-        memset(ptr_recvbuf->shipto[gbp->i].shipto_lname,'\0', tt0033_SHIPTO_LN_LEN+1);
-        memcpy(ptr_recvbuf->shipto[gbp->i].shipto_lname, sz_recvbufcat + gbp->count, tt0033_SHIPTO_LN_LEN);
-        gbp->count += tt0033_SHIPTO_LN_LEN;
-
-        if((strlen(ptr_recvbuf->shipto[gbp->i].shipto_fname)) > 0) 
         {
-                ap_rprintf(r,"			<SHIPTO_DETAIL>\n");
-                ap_rprintf(r,"				<SHIPTO_NUM>%s</SHIPTO_NUM>\n", handle_special_chars(gbp,ptr_recvbuf->shipto[gbp->i].shipto_num));
-                ap_rprintf(r,"				<SHIPTO_FNAME>%s</SHIPTO_FNAME>\n", handle_special_chars(gbp,ptr_recvbuf->shipto[gbp->i].shipto_fname));
-                ap_rprintf(r,"				<SHIPTO_LNAME>%s</SHIPTO_LNAME>\n", handle_special_chars(gbp,ptr_recvbuf->shipto[gbp->i].shipto_lname));
-                ap_rprintf(r,"			</SHIPTO_DETAIL>\n");
-        }
-    }
 
-        ap_rprintf(r,"  %s>\n", gbp->metag);
+                memset(ptr_recvbuf->shipto[gbp->i].shipto_num,'\0', tt0033_SHIPTO_NO_LEN+1);
+                memcpy(ptr_recvbuf->shipto[gbp->i].shipto_num, sz_recvbufcat + gbp->count, tt0033_SHIPTO_NO_LEN);
+                gbp->count += tt0033_SHIPTO_NO_LEN;
+
+                memset(ptr_recvbuf->shipto[gbp->i].shipto_fname,'\0', tt0033_SHIPTO_FN_LEN+1);
+                memcpy(ptr_recvbuf->shipto[gbp->i].shipto_fname, sz_recvbufcat + gbp->count, tt0033_SHIPTO_FN_LEN);
+                gbp->count += tt0033_SHIPTO_FN_LEN;
+                sprintf(ptr_recvbuf->shipto[gbp->i].shipto_fname,"%s",
+                                        rtrim(ptr_recvbuf->shipto[gbp->i].shipto_fname, tt0033_SHIPTO_FN_LEN+1,gbp));
+
+                memset(ptr_recvbuf->shipto[gbp->i].shipto_lname,'\0', tt0033_SHIPTO_LN_LEN+1);
+                memcpy(ptr_recvbuf->shipto[gbp->i].shipto_lname, sz_recvbufcat + gbp->count, tt0033_SHIPTO_LN_LEN);
+                gbp->count += tt0033_SHIPTO_LN_LEN;
+
+                if((strlen(ptr_recvbuf->shipto[gbp->i].shipto_fname)) > 0) 
+                {
+                        ap_rprintf(r,"		<SHIPTO_DETAIL>\n");
+                        ap_rprintf(r,"			<SHIPTO_NUM>%s</SHIPTO_NUM>\n", handle_special_chars(gbp,ptr_recvbuf->shipto[gbp->i].shipto_num));
+                        ap_rprintf(r,"			<SHIPTO_FNAME>%s</SHIPTO_FNAME>\n", handle_special_chars(gbp,ptr_recvbuf->shipto[gbp->i].shipto_fname));
+                        ap_rprintf(r,"			<SHIPTO_LNAME>%s</SHIPTO_LNAME>\n", handle_special_chars(gbp,ptr_recvbuf->shipto[gbp->i].shipto_lname));
+                ap_rprintf(r,"		</SHIPTO_DETAIL>\n");
+                }
+        }
+
+        ap_rprintf(r,"	%s>\n", gbp->metag);
         ap_rprintf(r,"%s\n", pt_message);
-        ap_rprintf(r,"  %s>\n", gbp->rstag);
+        ap_rprintf(r,"	%s>\n", gbp->rstag);
 
         reparse_customer_data(r,gbp);
 
-        ap_rprintf(r,"  %s>\n", gbp->rsetag);
+        ap_rprintf(r,"	%s>\n", gbp->rsetag);
         ap_rprintf(r,"%s0034>\n", gbp->tt_betag);
 
     return(0);

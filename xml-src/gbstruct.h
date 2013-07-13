@@ -7,7 +7,7 @@
 #include "xmlparse.h"
 
 #include "wo01_defs.h"
-#include "wo03_defs.h"
+// #include "wo03_defs.h"
 
 #include "tt0001_defs.h"
 #include "tt0003_defs.h"
@@ -64,7 +64,13 @@
 #include "tt0113_defs.h"
 #include "tt0115_defs.h"
 #include "tt0117_defs.h"
+#include "tt0119_defs.h"
+#include "tt0121_defs.h"
 #include "tt0123_defs.h"
+#include "tt0125_defs.h"
+#include "tt0127_defs.h"
+#include "tt0129_defs.h"
+#include "tt0131_defs.h"
 
 
 /* This is where we define our global container for all transaction
@@ -75,29 +81,29 @@
 */
 
 /* MAXIMUM TRANSACTION NUMBER */
-#define MAXTRANSID		100	/* Set to the highest number transaction we currently support*/
+#define MAXTRANSID              100     /* Set to the highest number transaction we currently support*/
 
-#define MAXSYMBOLS		100	/* The maximum number of symbols to parse thru ANY xml 
-								transaction... probably more than enough                 */
-#define MAXSYMBOLLENGTH	1000	/* The maximum symbol length...                              */
+#define MAXSYMBOLS              100     /* The maximum number of symbols to parse thru ANY xml 
+                                                                transaction... probably more than enough                 */
+#define MAXSYMBOLLENGTH 1000    /* The maximum symbol length...                              */
 
-#define MAXDATALENGTH	50 /* 700 150 /*80*/
+#define MAXDATALENGTH   50 /* 700 150 /*80*/
 
 
 #define TAG_BUFFER_LENGTH 80
 
-#define  MAXSYMBOL	      	 26
-#define  MAXSYMBOLLEN	     5
-#define  MAXDATALEN		     10
+#define  MAXSYMBOL               26
+#define  MAXSYMBOLLEN        5
+#define  MAXDATALEN                  10
 
 #define  TAG_SIZE            50
-#define INPUT_BUFFER_SIZE    200000
+#define INPUT_BUFFER_SIZE    150000
 /* THE REQUEST STRUCTURE*/
 typedef struct {
 
-	int tttype_id;		/* the transaction type id # */
-	char *sgadata;		/* an array of pointers to possible requests */
-	char *requestdata;	/* an array of pointers to possible request data */
+        int tttype_id;          /* the transaction type id # */
+        char *sgadata;          /* an array of pointers to possible requests */
+        char *requestdata;      /* an array of pointers to possible request data */
 
 } req_xml;
 
@@ -105,100 +111,100 @@ typedef struct {
 
 struct global_struct
 {
-	/* This structure has been created to accommodate global 
-	   variables of the previous "rxpapp" utility.
-	*/
-	char stdout_buffer[INPUT_BUFFER_SIZE];
-//	char *stdout_buffer;
-	int	XML_ERROR_HEADER;
-	char rootpath[_MAX_PATH];               
-	char company[3];                        
-	char division[3];
-	int errstatus; 
+        /* This structure has been created to accommodate global 
+           variables of the previous "rxpapp" utility.
+        */
+        char stdout_buffer[INPUT_BUFFER_SIZE];
+//      char *stdout_buffer;
+        int     XML_ERROR_HEADER;
+        char rootpath[_MAX_PATH];               
+        char company[3];                        
+        char division[3];
+        int errstatus; 
 
-	int k,l;
-	char ch, tmp[2];
+        int k,l;
+        char ch, tmp[2];
 
-	XML_Parser Xp;
-	char linenumber[100];
+        XML_Parser Xp;
+        char linenumber[100];
 
     int start_len, got_char;
-	int totleft;
-	int thissend;
-	int bytes_sent;
+        int totleft;
+        int thissend;
+        int bytes_sent;
 
     int req_len;
     char *buffer;
-	char tttype_buf[TAG_BUFFER_LENGTH];
-	char *begin_tag;
-	char *begin_tag_id;
-	char *end_tag;
-	char *begin_sgadata_tag;
-	char *end_sgadata_tag;
-	char *begin_requestdata_tag;
-	char *end_requestdata_tag;
-	char *settag;
-	int ret;
-	char *buf;
-	char sz_tag_name1[TAG_SIZE];
-	char *pStart;
-	char *open_tag;
-	char *close_tag;
+        char tttype_buf[TAG_BUFFER_LENGTH];
+        char *begin_tag;
+        char *begin_tag_id;
+        char *end_tag;
+        char *begin_sgadata_tag;
+        char *end_sgadata_tag;
+        char *begin_requestdata_tag;
+        char *end_requestdata_tag;
+        char *settag;
+        int ret;
+        char *buf;
+        char sz_tag_name1[TAG_SIZE];
+        char *pStart;
+        char *open_tag;
+        char *close_tag;
     char    confirmbuf[5 + 1];
     char    tagname[TAG_SIZE];
 
-   	char *sendbufcat;
-	char *recvbufcat;
+        char *sendbufcat;
+        char *recvbufcat;
 
-	char *first;
-	char *last;
-	char    uid[UID_LEN+1];
-	char    ip_address[IP_ADDRESS_LEN+1];
-	char    request_id[REQ_ID_LEN + 1];
-	char    tran_id[TRAN_ID_LEN+1];
+        char *first;
+        char *last;
+        char    uid[UID_LEN+1];
+        char    ip_address[IP_ADDRESS_LEN+1];
+        char    request_id[REQ_ID_LEN + 1];
+        char    tran_id[TRAN_ID_LEN+1];
 
-	int data_start_pos;
-	int data_end_pos;
+        int data_start_pos;
+        int data_end_pos;
 
-	int count;
-	int where;
+        int count;
+        int where;
 
-	char    srctype[2];
+        char    srctype[2];
     char    tempsrc[80];
 
-	int a;
-	char *line;
-	char filename[1024];                    /* built filename */
-	char imagepath[_MAX_PATH];              /* path where the images are */
-	char logfile[30];						/*name of order logging file*/
+        int a;
+        char *line;
+        char filename[1024];                    /* built filename */
+        char imagepath[_MAX_PATH];              /* path where the images are */
+        char logfile[30];                                               /*name of order logging file*/
 
-	FILE *infile;                           /* Profile file handle */
-	int tt_ok;
-	int success;
+        FILE *infile;                           /* Profile file handle */
+        int tt_ok;
+        int success;
 
-	/* INF File information */
-	char webexec[80];                       
+        /* INF File information */
+        char webexec[80];                       
     char tmaxexec[80];                     
     char hphost[80];                        
     char webport[10];                       
     char tmaxport[10];                     
     char reqfile[30];                      
     char imageloc[60]; 
-	char out_string[5000];
-	char *p1;
-	char *p2;
-	char *p3;
+        char out_string[5000];
+        char *p1;
+        char *p2;
+        char *p3;
 
     char    totbuf[201];
 
-	int	this_transaction;
-	int useget;
+        int     this_transaction;
+        int useget;
 
-	char reqdata_tag[MAXSYMBOL][MAXSYMBOLLEN];
-	char reqdata_data[MAXSYMBOL][MAXDATALEN];
-//	char *reqdata = "a b c d e f g h i j k l m n o p q r s t u v w x y z";
-//	char reqdata[51];
-	char *reqdata;
+        char reqdata_tag[MAXSYMBOL][MAXSYMBOLLEN];
+        char reqdata_data[MAXSYMBOL][MAXDATALEN];
+//      char *reqdata = "a b c d e f g h i j k l m n o p q r s t u v w x y z";
+//      char reqdata[51];
+        char *reqdata;
     int rv,i,j, offset1;
 
 char tt_btag[TAG_BUFFER_LENGTH];
@@ -209,12 +215,12 @@ char wo_betag[TAG_BUFFER_LENGTH];
 
 char tag[5];
 
-       int	rc;
+       int      rc;
  
-//	char btag[TAG_BUFFER_LENGTH];
+//      char btag[TAG_BUFFER_LENGTH];
     char bitag[TAG_BUFFER_LENGTH];
 //    char betag[TAG_BUFFER_LENGTH];
-    char rtag[TAG_BUFFER_LENGTH];		/*global_struct*/
+    char rtag[TAG_BUFFER_LENGTH];               /*global_struct*/
     char ritag[TAG_BUFFER_LENGTH];
     char retag[TAG_BUFFER_LENGTH];
     char otag[TAG_BUFFER_LENGTH];
@@ -229,46 +235,46 @@ char tag[5];
     char rsitag[TAG_BUFFER_LENGTH];
     char rsetag[TAG_BUFFER_LENGTH];
     int requestdatacount ;
-	int sgadatacount;
+        int sgadatacount;
     char wsecode[180];
 
-	/* Some static arrays to hold the actual request/data strings*/
-	char global_sgadata[MAXSYMBOLS][MAXSYMBOLLENGTH];
-	char global_requestdata[MAXSYMBOLS][MAXSYMBOLLENGTH];
+        /* Some static arrays to hold the actual request/data strings*/
+        char global_sgadata[MAXSYMBOLS][MAXSYMBOLLENGTH];
+        char global_requestdata[MAXSYMBOLS][MAXSYMBOLLENGTH];
 
-	char global_data[MAXDATALENGTH];
+        char global_data[MAXDATALENGTH];
 
-	char global_sgadata_data[MAXSYMBOLS][MAXDATALENGTH];
-	char global_requestdata_data[MAXSYMBOLS][MAXDATALENGTH];
+        char global_sgadata_data[MAXSYMBOLS][MAXDATALENGTH];
+        char global_requestdata_data[MAXSYMBOLS][MAXDATALENGTH];
 
-	req_xml rqxml;
+        req_xml rqxml;
 
 #ifdef WIN32
-	HANDLE hInst;
-	SOCKET sock;
+        HANDLE hInst;
+        SOCKET sock;
     PHOSTENT phe;
     PSERVENT pse;
 #else
-	int sock;
+        int sock;
     struct hostent *phe;
     struct servent *pse;
 #endif
-	wo01_send_records *wo01_send_rec;
-	wo03_send_records *wo03_send_rec;
+        wo01_send_records *wo01_send_rec;
+        //wo03_send_records *wo03_send_rec;
 
-	wo01_recv wo01recvbuf;
-	wo03_recv wo03recvbuf;
+        wo01_recv wo01recvbuf;
+        //wo03_recv wo03recvbuf;
 
-	int max_record;
+        int max_record;
 
-	int R16_count;
-	int R21_count;
-	int R30_count;
-	int R31_count;
-	int R33_count;
-	int R40_count;
-	int R41_count;
-	int R42_count;
+        int R16_count;
+        int R21_count;
+        int R30_count;
+        int R31_count;
+        int R33_count;
+        int R40_count;
+        int R41_count;
+        int R42_count;
 
     tt0001_st_send *sendbuf0001;
     tt0001_st_recv *recvbuf0001;
@@ -435,8 +441,24 @@ char tag[5];
     tt0117_st_send *sendbuf0117;
     tt0117_st_recv *recvbuf0117;
 
+    tt0119_st_send *sendbuf0119;
+    tt0119_st_recv *recvbuf0119;
+
+    tt0121_st_send *sendbuf0121;
+    tt0121_st_recv *recvbuf0121;
+
     tt0123_st_send *sendbuf0123;
     tt0123_st_recv *recvbuf0123;
 
+    tt0125_st_send *sendbuf0125;
+    tt0125_st_recv *recvbuf0125;
 
+    tt0127_st_send *sendbuf0127;
+    tt0127_st_recv *recvbuf0127;
+
+    tt0129_st_send *sendbuf0129;
+    tt0129_st_recv *recvbuf0129;
+
+    tt0131_st_send *sendbuf0131;
+    tt0131_st_recv *recvbuf0131;
 };

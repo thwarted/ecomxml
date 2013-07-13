@@ -475,13 +475,13 @@ static const char *cmd_sgxml(cmd_parms *cmd, void *mconfig)
 int is_sgxml_server_request(request_rec *r, struct global_struct *gbp)
 {
 //ap_rprintf(r,"get post request body");
-//	char stdout_buffer[1048576/*HUGE_STRING_LEN];
-//	extern int offset;
+//      char stdout_buffer[1048576/*HUGE_STRING_LEN];
+//      extern int offset;
 
-	if ((errstatus = get_post_request_body(r,gbp->stdout_buffer)) >0) 
-			return errstatus;
+        if ((errstatus = get_post_request_body(r,gbp->stdout_buffer)) >0) 
+                        return errstatus;
 
-//	r->content_type = "text/html";
+//      r->content_type = "text/html";
 //    ap_send_http_header(r);
 
 
@@ -490,29 +490,29 @@ int is_sgxml_server_request(request_rec *r, struct global_struct *gbp)
 
 if(strlen(gbp->stdout_buffer)>0){
 
-	ap_rprintf(r,"%s",gbp->stdout_buffer);
+        ap_rprintf(r,"%s",gbp->stdout_buffer);
 
-	//sgparse(gbp->stdout_buffer, r, gbp);
+        //sgparse(gbp->stdout_buffer, r, gbp);
 }else
 {
-	ap_rprintf(r,"POST input is blank.");
+        ap_rprintf(r,"POST input is blank.");
 }
 
 
-	return 0;
+        return 0;
 }
 */
-/*	This function is called from the default handler routine.
-	If the HTTP method is M_POST, the sgxml Server assumes that
-	it has received an sgxml document as a form. This function
-	does the processing of the document and returns the 
-	response document to the client.
+/*      This function is called from the default handler routine.
+        If the HTTP method is M_POST, the sgxml Server assumes that
+        it has received an sgxml document as a form. This function
+        does the processing of the document and returns the 
+        response document to the client.
 */
 
 int get_post_request_body(request_rec *r, char *stdout_buffer,struct global_struct *gbp)
 {
 //    int rv,i,j, offset1 = 0;
-//	char dumpbuf1[1048576/*HUGE_STRING_LEN*/],dumpbuf2[1048576/*HUGE_STRING_LEN*/];
+//      char dumpbuf1[1048576/*HUGE_STRING_LEN*/],dumpbuf2[1048576/*HUGE_STRING_LEN*/];
 
     if ((gbp->rv = ap_setup_client_block(r, REQUEST_CHUNKED_DECHUNK)))
         return gbp->rv;
@@ -523,45 +523,45 @@ int get_post_request_body(request_rec *r, char *stdout_buffer,struct global_stru
    // r->expecting_100 = 0;
 
     if (ap_should_client_block(r))
-	{ 	
+        {       
 //        ap_hard_timeout("reading request body", r);
-		gbp->rv=0;
-		gbp->offset1=0;
+                gbp->rv=0;
+                gbp->offset1=0;
         while ((gbp->rv = ap_get_client_block(r, (char *)stdout_buffer+gbp->offset1, (INPUT_BUFFER_SIZE-1)-(gbp->rv))) > 0)
-		{
-//			strncat(stdout_buffer + offset1, dumpbuf1, rv);
-			gbp->offset1 = gbp->offset1 + gbp->rv;
-//	    ap_reset_timeout(r);
+                {
+//                      strncat(stdout_buffer + offset1, dumpbuf1, rv);
+                        gbp->offset1 = gbp->offset1 + gbp->rv;
+//          ap_reset_timeout(r);
 
-		}
-		if ((gbp->rv < 0)||(gbp->offset1<=0))
+                }
+                if ((gbp->rv < 0)||(gbp->offset1<=0))
             return HTTP_BAD_REQUEST;
 
-//		if((stdout_buffer = malloc(offset1)) == NULL)
-//		{
-//			ap_rprintf(r,"Could not allocate memory for input buffer.\n");
-//		}
-		//printf(" UNFORMATTED BUFFER = %s\n\n",dumpbuf2);
-//		memset(dumpbuf1,'\0',1048576);
+//              if((stdout_buffer = malloc(offset1)) == NULL)
+//              {
+//                      ap_rprintf(r,"Could not allocate memory for input buffer.\n");
+//              }
+                //printf(" UNFORMATTED BUFFER = %s\n\n",dumpbuf2);
+//              memset(dumpbuf1,'\0',1048576);
 //ap_rprintf(r,"reformat");
-		gbp->j = re_format((char *)stdout_buffer , (char *)stdout_buffer, gbp->offset1, gbp);
-		//printf("BUFFER = %s\n", buffer);
-		//printf("REFORMATTED BYTES = %d \nBUFFER LENGTH = %d   DUMPBUF2 LENGTH = %d \n\n",j, strlen(buffer), strlen(dumpbuf2));
+                gbp->j = re_format((char *)stdout_buffer , (char *)stdout_buffer, gbp->offset1, gbp);
+                //printf("BUFFER = %s\n", buffer);
+                //printf("REFORMATTED BYTES = %d \nBUFFER LENGTH = %d   DUMPBUF2 LENGTH = %d \n\n",j, strlen(buffer), strlen(dumpbuf2));
 
 for (gbp->j=(INPUT_BUFFER_SIZE-1); gbp->j>=0; gbp->j--)
 {
-	if(*(stdout_buffer+gbp->j)!='\0')
-	{
-		if(*(stdout_buffer+gbp->j)!='>')
-		{
-			*(stdout_buffer+gbp->j)='\0';
-		}
-	}
-	if(gbp->j>=10){
-	if((*(stdout_buffer+gbp->j)=='>')&&
-		((strstr(stdout_buffer+(gbp->j-10), "</tt") != NULL)||
-		(strstr(stdout_buffer+(gbp->j-10), "</wo") != NULL))) break;
-	}
+        if(*(stdout_buffer+gbp->j)!='\0')
+        {
+                if(*(stdout_buffer+gbp->j)!='>')
+                {
+                        *(stdout_buffer+gbp->j)='\0';
+                }
+        }
+        if(gbp->j>=10){
+        if((*(stdout_buffer+gbp->j)=='>')&&
+                ((strstr(stdout_buffer+(gbp->j-10), "</tt") != NULL)||
+                (strstr(stdout_buffer+(gbp->j-10), "</wo") != NULL))) break;
+        }
 }
 
 //ap_rprintf(r,"%sENDENDEND||%d||%d||",stdout_buffer,strlen(stdout_buffer),r->bytes_sent);
@@ -573,58 +573,58 @@ for (gbp->j=(INPUT_BUFFER_SIZE-1); gbp->j>=0; gbp->j--)
 }
 
 
-/*	Got to decode the form data from hexadecimal to ASCII.
-	Also strip the form name and the "=" sign.
+/*      Got to decode the form data from hexadecimal to ASCII.
+        Also strip the form name and the "=" sign.
 */
-	
+        
 int re_format(char *dest, char *src, int nbytes, struct global_struct *gbp)
 {
-//	int i =0,j,k,l;
-//	char ch, tmp[2];
-	gbp->tmp[1]='\0';
-	gbp->i=0;
-	/* Remove the field name we got in from the HTML form*/
-	while((*(src+gbp->i) != '=') && (gbp->i < nbytes))
-		gbp->i++;
+//      int i =0,j,k,l;
+//      char ch, tmp[2];
+        gbp->tmp[1]='\0';
+        gbp->i=0;
+        /* Remove the field name we got in from the HTML form*/
+        while((*(src+gbp->i) != '=') && (gbp->i < nbytes))
+                gbp->i++;
 
-	src = src + gbp->i + 1;
+        src = src + gbp->i + 1;
 
-	if( gbp->i == nbytes )
-		return -1;
+        if( gbp->i == nbytes )
+                return -1;
 
-	for(gbp->i=0;gbp->i<nbytes;gbp->i++)
-	{
-		gbp->ch = *src;
+        for(gbp->i=0;gbp->i<nbytes;gbp->i++)
+        {
+                gbp->ch = *src;
 
-		if( gbp->ch == '+')
-		{
-			*dest = ' ';
-		}
-		else if( gbp->ch != '%')
-		{
-			*dest = *src;
-		}
-		else if( gbp->ch  == '%')
-		{
-			src++;
-			gbp->tmp[0] = *src;
-			sscanf(gbp->tmp,"%x",&(gbp->j));
-			gbp->j = gbp->j << 4;
+                if( gbp->ch == '+')
+                {
+                        *dest = ' ';
+                }
+                else if( gbp->ch != '%')
+                {
+                        *dest = *src;
+                }
+                else if( gbp->ch  == '%')
+                {
+                        src++;
+                        gbp->tmp[0] = *src;
+                        sscanf(gbp->tmp,"%x",&(gbp->j));
+                        gbp->j = gbp->j << 4;
 
-			src++;
-			gbp->tmp[0] = *src;
-			sscanf(gbp->tmp,"%x",&(gbp->k));
-		
-			gbp->l = ( gbp->j | gbp->k) ;
-			*dest = gbp->l;
-			
-			gbp->i = gbp->i + 2;
-		}
-		dest++;
-		src++;
-	}
-	*dest = '\0';
-	return gbp->i;
+                        src++;
+                        gbp->tmp[0] = *src;
+                        sscanf(gbp->tmp,"%x",&(gbp->k));
+                
+                        gbp->l = ( gbp->j | gbp->k) ;
+                        *dest = gbp->l;
+                        
+                        gbp->i = gbp->i + 2;
+                }
+                dest++;
+                src++;
+        }
+        *dest = '\0';
+        return gbp->i;
 }
 
 
@@ -654,56 +654,56 @@ int re_format(char *dest, char *src, int nbytes, struct global_struct *gbp)
  */
 static int sgxml_handler(request_rec *r)
 {
-	return(start_sgxml_handler(r,(struct global_struct *)ap_pcalloc (r->pool, sizeof(struct global_struct))));
+        return(start_sgxml_handler(r,(struct global_struct *)ap_pcalloc (r->pool, sizeof(struct global_struct))));
 }
 int start_sgxml_handler(request_rec *r,struct global_struct *gbp)
 {
-//	excfg *dcfg;
-//	int offset_l = 0, i = 0, getslen = 0;
-//	struct global_struct *gbp;
+//      excfg *dcfg;
+//      int offset_l = 0, i = 0, getslen = 0;
+//      struct global_struct *gbp;
 
-//	char stdout_buffer[1048576/*HUGE_STRING_LEN*/];
-//	char *retbuf;
-//	FILE *stdout_file;
+//      char stdout_buffer[1048576/*HUGE_STRING_LEN*/];
+//      char *retbuf;
+//      FILE *stdout_file;
 
-//	memset(gb.stdout_buffer,'\0',1048576);
-//	memset((char *)&gb,'\0',sizeof(struct global_struct));
+//      memset(gb.stdout_buffer,'\0',1048576);
+//      memset((char *)&gb,'\0',sizeof(struct global_struct));
 //ap_rprintf(r,"is sgxml server request");
 /***********************************************/
-//	gbp = (struct global_struct *)ap_pcalloc (r->pool, sizeof(struct global_struct)); //clears the memory too
+//      gbp = (struct global_struct *)ap_pcalloc (r->pool, sizeof(struct global_struct)); //clears the memory too
 /*  This part has been added to handle M_POST request which
-	contain the sgxml document. The original code gets executed
-	if this if condition is not true. Only if the parser code
-	returns success then only it will return from here else
-	the original code is executed.
+        contain the sgxml document. The original code gets executed
+        if this if condition is not true. Only if the parser code
+        returns success then only it will return from here else
+        the original code is executed.
 */
 r->content_type = "text/html";
 ap_send_http_header(r);
 
-	if (r->method_number == M_POST) {
+        if (r->method_number == M_POST) {
 
-		if ((gbp->errstatus = get_post_request_body(r,gbp->stdout_buffer,gbp)) >0) {
-			return gbp->errstatus;
-//			ap_destroy_sub_req(r);
-		}
-	if(strlen(gbp->stdout_buffer)>0){
+                if ((gbp->errstatus = get_post_request_body(r,gbp->stdout_buffer,gbp)) >0) {
+                        return gbp->errstatus;
+//                      ap_destroy_sub_req(r);
+                }
+        if(strlen(gbp->stdout_buffer)>0){
 
-//	ap_rprintf(r,"%s",gbp->stdout_buffer);
+//      ap_rprintf(r,"%s",gbp->stdout_buffer);
 
-	sgparse(gbp->stdout_buffer, r, gbp);
-	}else
-	{
-		ap_rprintf(r,"POST input is blank.");
-	}
+        sgparse(gbp->stdout_buffer, r, gbp);
+        }else
+        {
+                ap_rprintf(r,"POST input is blank.");
+        }
 
 
-	}
-//	ap_destroy_sub_req(r);
-//		return is_sgxml_server_request(r,gbp);
-/*		if( is_sgxml_server_request(r) == OK)
-			return HTTP_OK;
-		else
-			return HTTP_BAD_REQUEST;
+        }
+//      ap_destroy_sub_req(r);
+//              return is_sgxml_server_request(r,gbp);
+/*              if( is_sgxml_server_request(r) == OK)
+                        return HTTP_OK;
+                else
+                        return HTTP_BAD_REQUEST;
 */
 /***********************************************/
 
@@ -728,32 +728,32 @@ ap_send_http_header(r);
 //    ap_soft_timeout("send sgxml call trace", r);
 //    ap_send_http_header(r);
 
-/*	
-	if ( (stdout_file = fopen(r->filename,"r")) == NULL)
-	{
-		printf("Error opening file\n");
-		return 1;
-	}
+/*      
+        if ( (stdout_file = fopen(r->filename,"r")) == NULL)
+        {
+                printf("Error opening file\n");
+                return 1;
+        }
 
-	while((retbuf = fgets(gb.stdout_buffer + offset_l, 1048576/*HUGE_STRING_LEN, (FILE *)stdout_file)) != NULL)
-	{
-		getslen = strlen(retbuf);
-		offset_l += getslen;
-	}
+        while((retbuf = fgets(gb.stdout_buffer + offset_l, 1048576/*HUGE_STRING_LEN, (FILE *)stdout_file)) != NULL)
+        {
+                getslen = strlen(retbuf);
+                offset_l += getslen;
+        }
 
-	if(retbuf == NULL && getslen == 0)
-	{
-		printf("*** Unable to read data: %s\n", r->filename);
-		fclose(stdout_file);
-		fflush(stdout);	
-		return 1;
-	}
+        if(retbuf == NULL && getslen == 0)
+        {
+                printf("*** Unable to read data: %s\n", r->filename);
+                fclose(stdout_file);
+                fflush(stdout); 
+                return 1;
+        }
 
-	fclose(stdout_file);
-	
-	sgparse(gb.stdout_buffer,r,&gb);
+        fclose(stdout_file);
+        
+        sgparse(gb.stdout_buffer,r,&gb);
 */
-	/*
+        /*
      * If we're only supposed to send header information (HEAD request), we're
      * already there.
      */

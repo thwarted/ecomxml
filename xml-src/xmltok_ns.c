@@ -28,14 +28,14 @@ const ENCODING *NS(encodings)[] = {
 
 static
 int NS(initScanProlog)(const ENCODING *enc, const char *ptr, const char *end,
-		       const char **nextTokPtr)
+                       const char **nextTokPtr)
 {
   return initScan(NS(encodings), (const INIT_ENCODING *)enc, XML_PROLOG_STATE, ptr, end, nextTokPtr);
 }
 
 static
 int NS(initScanContent)(const ENCODING *enc, const char *ptr, const char *end,
-		       const char **nextTokPtr)
+                       const char **nextTokPtr)
 {
   return initScan(NS(encodings), (const INIT_ENCODING *)enc, XML_CONTENT_STATE, ptr, end, nextTokPtr);
 }
@@ -74,23 +74,23 @@ const ENCODING *NS(findEncoding)(const ENCODING *enc, const char *ptr, const cha
 }
 
 int NS(XmlParseXmlDecl)(int isGeneralTextEntity,
-			const ENCODING *enc,
-			const char *ptr,
-			const char *end,
-			const char **badPtr,
-			const char **versionPtr,
-			const char **encodingName,
-			const ENCODING **encoding,
-			int *standalone)
+                        const ENCODING *enc,
+                        const char *ptr,
+                        const char *end,
+                        const char **badPtr,
+                        const char **versionPtr,
+                        const char **encodingName,
+                        const ENCODING **encoding,
+                        int *standalone)
 {
   return doParseXmlDecl(NS(findEncoding),
-			isGeneralTextEntity,
-			enc,
-			ptr,
-			end,
-			badPtr,
-			versionPtr,
-			encodingName,
-			encoding,
-			standalone);
+                        isGeneralTextEntity,
+                        enc,
+                        ptr,
+                        end,
+                        badPtr,
+                        versionPtr,
+                        encodingName,
+                        encoding,
+                        standalone);
 }

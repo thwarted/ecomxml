@@ -12,9 +12,9 @@
 #define  tt0011_DIVISION_LEN           2
 #define  tt0011_USER_ID_LEN            16
 #define  tt0011_IP_ADDR_LEN            16
-#define  tt0011_FILLER_LEN			25
+#define  tt0011_FILLER_LEN                      25
 
-#define  tt0011_SRC_LEN			     16
+#define  tt0011_SRC_LEN                      16
 #define  tt0011_SRC_FLAG_LEN           1
 
 
@@ -24,12 +24,12 @@
 #define  tt0011_REC_ID_LEN             4
 #define  tt0011_USER_ID_LEN            16
 #define  tt0011_SUCCESS_FLAG_LEN        1
-#define  tt0011_ERR_LEN			 80
-#define  tt0011_SEND_FILLER_LEN			45
+#define  tt0011_ERR_LEN                  80
+#define  tt0011_SEND_FILLER_LEN                 45
 
 
 #define  tt0011_VAL_SRC_LEN            1
-#define  tt0011_SRC_LEN		         16
+#define  tt0011_SRC_LEN                  16
 
 
 typedef struct
@@ -40,7 +40,7 @@ typedef struct
     char division[tt0011_DIVISION_LEN+1];
     char userid[tt0011_USER_ID_LEN+1];
     char ip_address[tt0011_IP_ADDR_LEN+1];
-	char filler[tt0011_FILLER_LEN+1];
+        char filler[tt0011_FILLER_LEN+1];
     char source_code[tt0011_SRC_LEN+1];
     char action_flag[tt0011_SRC_FLAG_LEN+1];
 
@@ -52,8 +52,8 @@ typedef struct
     char record_id[tt0011_REC_ID_LEN+1];
     char userid[tt0011_USER_ID_LEN+1];
     char success[tt0011_SUCCESS_FLAG_LEN+1];
-	char err_message[tt0011_ERR_LEN+1];
-	char filler[tt0011_SEND_FILLER_LEN+1];
+        char err_message[tt0011_ERR_LEN+1];
+        char filler[tt0011_SEND_FILLER_LEN+1];
 
     char valid_src[tt0011_VAL_SRC_LEN+1];
     char source_code[tt0011_SRC_LEN+1];

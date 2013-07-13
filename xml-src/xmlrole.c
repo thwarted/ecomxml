@@ -43,10 +43,10 @@ your version of this file under either the MPL or the GPL.
 #endif
 
 typedef int PROLOG_HANDLER(struct prolog_state *state,
-			   int tok,
-			   const char *ptr,
-			   const char *end,
-			   const ENCODING *enc);
+                           int tok,
+                           const char *ptr,
+                           const char *end,
+                           const ENCODING *enc);
 
 static PROLOG_HANDLER
   prolog0, prolog1, prolog2,
@@ -67,10 +67,10 @@ int syntaxError(PROLOG_STATE *);
 
 static
 int prolog0(PROLOG_STATE *state,
-	    int tok,
-	    const char *ptr,
-	    const char *end,
-	    const ENCODING *enc)
+            int tok,
+            const char *ptr,
+            const char *end,
+            const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -88,8 +88,8 @@ int prolog0(PROLOG_STATE *state,
     return XML_ROLE_NONE;
   case XML_TOK_DECL_OPEN:
     if (!XmlNameMatchesAscii(enc,
-			     ptr + 2 * MIN_BYTES_PER_CHAR(enc),
-			     "DOCTYPE"))
+                             ptr + 2 * MIN_BYTES_PER_CHAR(enc),
+                             "DOCTYPE"))
       break;
     state->handler = doctype0;
     return XML_ROLE_NONE;
@@ -102,10 +102,10 @@ int prolog0(PROLOG_STATE *state,
 
 static
 int prolog1(PROLOG_STATE *state,
-	    int tok,
-	    const char *ptr,
-	    const char *end,
-	    const ENCODING *enc)
+            int tok,
+            const char *ptr,
+            const char *end,
+            const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -116,8 +116,8 @@ int prolog1(PROLOG_STATE *state,
     return XML_ROLE_NONE;
   case XML_TOK_DECL_OPEN:
     if (!XmlNameMatchesAscii(enc,
-			     ptr + 2 * MIN_BYTES_PER_CHAR(enc),
-			     "DOCTYPE"))
+                             ptr + 2 * MIN_BYTES_PER_CHAR(enc),
+                             "DOCTYPE"))
       break;
     state->handler = doctype0;
     return XML_ROLE_NONE;
@@ -130,10 +130,10 @@ int prolog1(PROLOG_STATE *state,
 
 static
 int prolog2(PROLOG_STATE *state,
-	    int tok,
-	    const char *ptr,
-	    const char *end,
-	    const ENCODING *enc)
+            int tok,
+            const char *ptr,
+            const char *end,
+            const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -150,10 +150,10 @@ int prolog2(PROLOG_STATE *state,
 
 static
 int doctype0(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -168,10 +168,10 @@ int doctype0(PROLOG_STATE *state,
 
 static
 int doctype1(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -198,10 +198,10 @@ int doctype1(PROLOG_STATE *state,
 
 static
 int doctype2(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -215,10 +215,10 @@ int doctype2(PROLOG_STATE *state,
 
 static
 int doctype3(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -232,10 +232,10 @@ int doctype3(PROLOG_STATE *state,
 
 static
 int doctype4(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -252,10 +252,10 @@ int doctype4(PROLOG_STATE *state,
 
 static
 int doctype5(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -269,36 +269,36 @@ int doctype5(PROLOG_STATE *state,
 
 static
 int internalSubset(PROLOG_STATE *state,
-		   int tok,
-		   const char *ptr,
-		   const char *end,
-		   const ENCODING *enc)
+                   int tok,
+                   const char *ptr,
+                   const char *end,
+                   const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
     return XML_ROLE_NONE;
   case XML_TOK_DECL_OPEN:
     if (XmlNameMatchesAscii(enc,
-			    ptr + 2 * MIN_BYTES_PER_CHAR(enc),
-			    "ENTITY")) {
+                            ptr + 2 * MIN_BYTES_PER_CHAR(enc),
+                            "ENTITY")) {
       state->handler = entity0;
       return XML_ROLE_NONE;
     }
     if (XmlNameMatchesAscii(enc,
-			    ptr + 2 * MIN_BYTES_PER_CHAR(enc),
-			    "ATTLIST")) {
+                            ptr + 2 * MIN_BYTES_PER_CHAR(enc),
+                            "ATTLIST")) {
       state->handler = attlist0;
       return XML_ROLE_NONE;
     }
     if (XmlNameMatchesAscii(enc,
-			    ptr + 2 * MIN_BYTES_PER_CHAR(enc),
-			    "ELEMENT")) {
+                            ptr + 2 * MIN_BYTES_PER_CHAR(enc),
+                            "ELEMENT")) {
       state->handler = element0;
       return XML_ROLE_NONE;
     }
     if (XmlNameMatchesAscii(enc,
-			    ptr + 2 * MIN_BYTES_PER_CHAR(enc),
-			    "NOTATION")) {
+                            ptr + 2 * MIN_BYTES_PER_CHAR(enc),
+                            "NOTATION")) {
       state->handler = notation0;
       return XML_ROLE_NONE;
     }
@@ -317,10 +317,10 @@ int internalSubset(PROLOG_STATE *state,
 
 static
 int entity0(PROLOG_STATE *state,
-	    int tok,
-	    const char *ptr,
-	    const char *end,
-	    const ENCODING *enc)
+            int tok,
+            const char *ptr,
+            const char *end,
+            const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -337,10 +337,10 @@ int entity0(PROLOG_STATE *state,
 
 static
 int entity1(PROLOG_STATE *state,
-	    int tok,
-	    const char *ptr,
-	    const char *end,
-	    const ENCODING *enc)
+            int tok,
+            const char *ptr,
+            const char *end,
+            const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -354,10 +354,10 @@ int entity1(PROLOG_STATE *state,
 
 static
 int entity2(PROLOG_STATE *state,
-	    int tok,
-	    const char *ptr,
-	    const char *end,
-	    const ENCODING *enc)
+            int tok,
+            const char *ptr,
+            const char *end,
+            const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -381,10 +381,10 @@ int entity2(PROLOG_STATE *state,
 
 static
 int entity3(PROLOG_STATE *state,
-	    int tok,
-	    const char *ptr,
-	    const char *end,
-	    const ENCODING *enc)
+            int tok,
+            const char *ptr,
+            const char *end,
+            const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -399,10 +399,10 @@ int entity3(PROLOG_STATE *state,
 
 static
 int entity4(PROLOG_STATE *state,
-	    int tok,
-	    const char *ptr,
-	    const char *end,
-	    const ENCODING *enc)
+            int tok,
+            const char *ptr,
+            const char *end,
+            const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -416,10 +416,10 @@ int entity4(PROLOG_STATE *state,
 
 static
 int entity5(PROLOG_STATE *state,
-	    int tok,
-	    const char *ptr,
-	    const char *end,
-	    const ENCODING *enc)
+            int tok,
+            const char *ptr,
+            const char *end,
+            const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -439,10 +439,10 @@ int entity5(PROLOG_STATE *state,
 
 static
 int entity6(PROLOG_STATE *state,
-	    int tok,
-	    const char *ptr,
-	    const char *end,
-	    const ENCODING *enc)
+            int tok,
+            const char *ptr,
+            const char *end,
+            const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -456,10 +456,10 @@ int entity6(PROLOG_STATE *state,
 
 static
 int entity7(PROLOG_STATE *state,
-	    int tok,
-	    const char *ptr,
-	    const char *end,
-	    const ENCODING *enc)
+            int tok,
+            const char *ptr,
+            const char *end,
+            const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -483,10 +483,10 @@ int entity7(PROLOG_STATE *state,
 
 static
 int entity8(PROLOG_STATE *state,
-	    int tok,
-	    const char *ptr,
-	    const char *end,
-	    const ENCODING *enc)
+            int tok,
+            const char *ptr,
+            const char *end,
+            const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -500,10 +500,10 @@ int entity8(PROLOG_STATE *state,
 
 static
 int entity9(PROLOG_STATE *state,
-	    int tok,
-	    const char *ptr,
-	    const char *end,
-	    const ENCODING *enc)
+            int tok,
+            const char *ptr,
+            const char *end,
+            const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -517,10 +517,10 @@ int entity9(PROLOG_STATE *state,
 
 static
 int notation0(PROLOG_STATE *state,
-	      int tok,
-	      const char *ptr,
-	      const char *end,
-	      const ENCODING *enc)
+              int tok,
+              const char *ptr,
+              const char *end,
+              const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -534,10 +534,10 @@ int notation0(PROLOG_STATE *state,
 
 static
 int notation1(PROLOG_STATE *state,
-	      int tok,
-	      const char *ptr,
-	      const char *end,
-	      const ENCODING *enc)
+              int tok,
+              const char *ptr,
+              const char *end,
+              const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -558,10 +558,10 @@ int notation1(PROLOG_STATE *state,
 
 static
 int notation2(PROLOG_STATE *state,
-	      int tok,
-	      const char *ptr,
-	      const char *end,
-	      const ENCODING *enc)
+              int tok,
+              const char *ptr,
+              const char *end,
+              const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -575,10 +575,10 @@ int notation2(PROLOG_STATE *state,
 
 static
 int notation3(PROLOG_STATE *state,
-	      int tok,
-	      const char *ptr,
-	      const char *end,
-	      const ENCODING *enc)
+              int tok,
+              const char *ptr,
+              const char *end,
+              const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -592,10 +592,10 @@ int notation3(PROLOG_STATE *state,
 
 static
 int notation4(PROLOG_STATE *state,
-	      int tok,
-	      const char *ptr,
-	      const char *end,
-	      const ENCODING *enc)
+              int tok,
+              const char *ptr,
+              const char *end,
+              const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -612,10 +612,10 @@ int notation4(PROLOG_STATE *state,
 
 static
 int attlist0(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -630,10 +630,10 @@ int attlist0(PROLOG_STATE *state,
 
 static
 int attlist1(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -651,10 +651,10 @@ int attlist1(PROLOG_STATE *state,
 
 static
 int attlist2(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -662,7 +662,7 @@ int attlist2(PROLOG_STATE *state,
   case XML_TOK_NAME:
     {
       static const char *types[] = {
-	"CDATA",
+        "CDATA",
         "ID",
         "IDREF",
         "IDREFS",
@@ -673,10 +673,10 @@ int attlist2(PROLOG_STATE *state,
       };
       int i;
       for (i = 0; i < (int)(sizeof(types)/sizeof(types[0])); i++)
-	if (XmlNameMatchesAscii(enc, ptr, types[i])) {
-	  state->handler = attlist8;
-	  return XML_ROLE_ATTRIBUTE_TYPE_CDATA + i;
-	}
+        if (XmlNameMatchesAscii(enc, ptr, types[i])) {
+          state->handler = attlist8;
+          return XML_ROLE_ATTRIBUTE_TYPE_CDATA + i;
+        }
     }
     if (XmlNameMatchesAscii(enc, ptr, "NOTATION")) {
       state->handler = attlist5;
@@ -692,10 +692,10 @@ int attlist2(PROLOG_STATE *state,
 
 static
 int attlist3(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -711,10 +711,10 @@ int attlist3(PROLOG_STATE *state,
 
 static
 int attlist4(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -731,10 +731,10 @@ int attlist4(PROLOG_STATE *state,
 
 static
 int attlist5(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -749,10 +749,10 @@ int attlist5(PROLOG_STATE *state,
 
 static
 int attlist6(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -766,10 +766,10 @@ int attlist6(PROLOG_STATE *state,
 
 static
 int attlist7(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -787,30 +787,30 @@ int attlist7(PROLOG_STATE *state,
 /* default value */
 static
 int attlist8(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
     return XML_ROLE_NONE;
   case XML_TOK_POUND_NAME:
     if (XmlNameMatchesAscii(enc,
-			    ptr + MIN_BYTES_PER_CHAR(enc),
-			    "IMPLIED")) {
+                            ptr + MIN_BYTES_PER_CHAR(enc),
+                            "IMPLIED")) {
       state->handler = attlist1;
       return XML_ROLE_IMPLIED_ATTRIBUTE_VALUE;
     }
     if (XmlNameMatchesAscii(enc,
-			    ptr + MIN_BYTES_PER_CHAR(enc),
-			    "REQUIRED")) {
+                            ptr + MIN_BYTES_PER_CHAR(enc),
+                            "REQUIRED")) {
       state->handler = attlist1;
       return XML_ROLE_REQUIRED_ATTRIBUTE_VALUE;
     }
     if (XmlNameMatchesAscii(enc,
-			    ptr + MIN_BYTES_PER_CHAR(enc),
-			    "FIXED")) {
+                            ptr + MIN_BYTES_PER_CHAR(enc),
+                            "FIXED")) {
       state->handler = attlist9;
       return XML_ROLE_NONE;
     }
@@ -824,10 +824,10 @@ int attlist8(PROLOG_STATE *state,
 
 static
 int attlist9(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -841,10 +841,10 @@ int attlist9(PROLOG_STATE *state,
 
 static
 int element0(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -859,10 +859,10 @@ int element0(PROLOG_STATE *state,
 
 static
 int element1(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -887,18 +887,18 @@ int element1(PROLOG_STATE *state,
 
 static
 int element2(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
     return XML_ROLE_NONE;
   case XML_TOK_POUND_NAME:
     if (XmlNameMatchesAscii(enc,
-			    ptr + MIN_BYTES_PER_CHAR(enc),
-			    "PCDATA")) {
+                            ptr + MIN_BYTES_PER_CHAR(enc),
+                            "PCDATA")) {
       state->handler = element3;
       return XML_ROLE_CONTENT_PCDATA;
     }
@@ -926,10 +926,10 @@ int element2(PROLOG_STATE *state,
 
 static
 int element3(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -947,10 +947,10 @@ int element3(PROLOG_STATE *state,
 
 static
 int element4(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -965,10 +965,10 @@ int element4(PROLOG_STATE *state,
 
 static
 int element5(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -985,10 +985,10 @@ int element5(PROLOG_STATE *state,
 
 static
 int element6(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -1015,10 +1015,10 @@ int element6(PROLOG_STATE *state,
 
 static
 int element7(PROLOG_STATE *state,
-	     int tok,
-	     const char *ptr,
-	     const char *end,
-	     const ENCODING *enc)
+             int tok,
+             const char *ptr,
+             const char *end,
+             const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -1055,10 +1055,10 @@ int element7(PROLOG_STATE *state,
 
 static
 int declClose(PROLOG_STATE *state,
-	      int tok,
-	      const char *ptr,
-	      const char *end,
-	      const ENCODING *enc)
+              int tok,
+              const char *ptr,
+              const char *end,
+              const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_PROLOG_S:
@@ -1074,10 +1074,10 @@ int declClose(PROLOG_STATE *state,
 
 static
 int ignore(PROLOG_STATE *state,
-	   int tok,
-	   const char *ptr,
-	   const char *end,
-	   const ENCODING *enc)
+           int tok,
+           const char *ptr,
+           const char *end,
+           const ENCODING *enc)
 {
   switch (tok) {
   case XML_TOK_DECL_CLOSE:
@@ -1092,10 +1092,10 @@ int ignore(PROLOG_STATE *state,
 
 static
 int error(PROLOG_STATE *state,
-	   int tok,
-	   const char *ptr,
-	   const char *end,
-	   const ENCODING *enc)
+           int tok,
+           const char *ptr,
+           const char *end,
+           const ENCODING *enc)
 {
   return XML_ROLE_NONE;
 }

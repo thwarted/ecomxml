@@ -34,7 +34,7 @@ int             wo01_CatSendStr21(char *, wo01_rec21 *);
 int             wo01_CatSendStr30(char *, wo01_rec30 *);
 int             wo01_CatSendStr31(char *, wo01_rec31 *);
 int             wo01_CatSendStr33(char *, wo01_rec33 *);
-int             wo01_CatSendStr40(char *, wo01_rec40 *);
+int             wo01_CatSendStr40(char *, wo01_rec40 *, wo01_tmp_vars *);
 int             wo01_CatSendStr41(char *, wo01_rec41 *);
 int             wo01_CatSendStr42(char *, wo01_rec42 *);
 int             wo01_CatSendStrblank(char *);
@@ -722,7 +722,7 @@ int wo01_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_buff
                         set_tag_name(gbp->tagname, "R40_%d_POVRD_REASON", gbp->R40_count);
                         get_tag_data(gbp->tagname   , gbp->wo01_send_rec->rec40[gbp->R40_count - 1].povrd_reason,gbp,stdout_buffer);
 
-                        if(wo01_CatSendStr40(gbp->wo01_send_rec->tmaxrec[gbp->i], &gbp->wo01_send_rec->rec40[gbp->R40_count - 1]) == FAILURE)
+                        if(wo01_CatSendStr40(gbp->wo01_send_rec->tmaxrec[gbp->i], &gbp->wo01_send_rec->rec40[gbp->R40_count - 1], &gbp->wo01_send_rec->tmp_vars) == FAILURE)
                         {
                                 free(gbp->sendbufcat);
                                 free(gbp->recvbufcat);
@@ -1347,8 +1347,48 @@ int     wo01_CatSendStr33(char *sz_tmaxrec, wo01_rec33 *ptr_rec33)
                 return (FAILURE);
 }
 
-int     wo01_CatSendStr40(char *sz_tmaxrec, wo01_rec40 *ptr_rec40)
+int     wo01_CatSendStr40(char *sz_tmaxrec, wo01_rec40 *ptr_rec40, wo01_tmp_vars *ptr_tmp)
 {
+
+ memset(ptr_tmp->tmp_tax_rate, '\0', R40_TAX_RATE_LEN+1);
+ memset(ptr_tmp->tmp_tax_rate, ' ', R40_TAX_RATE_LEN);
+ 
+ ptr_tmp->j = 0;
+ ptr_tmp->tmp_ptr1 = ptr_rec40->tax_rate;
+
+ while(*(ptr_tmp->tmp_ptr1) != '.' && *(ptr_tmp->tmp_ptr1) != '\0')
+ {
+  ptr_tmp->j++;
+  ptr_tmp->tmp_ptr1++;
+ }
+
+ 
+ if(ptr_tmp->j > 2)
+ {
+  ptr_tmp->tmp_ptr1 = ptr_rec40->tax_rate;
+  ptr_tmp->tmp_ptr2 = ptr_tmp->tmp_tax_rate;
+  ptr_tmp->j = strlen(ptr_rec40->tax_rate);
+
+  for(ptr_tmp->i=0; ptr_tmp->i <= ptr_tmp->j; ptr_tmp->i++)
+  {
+
+   if(ptr_tmp->i == 2)
+   {
+    *(ptr_tmp->tmp_ptr2) = '.';
+    ptr_tmp->tmp_ptr2++;
+   }
+
+   if(*(ptr_tmp->tmp_ptr1)!= '.')
+   {
+    *(ptr_tmp->tmp_ptr2) = *(ptr_tmp->tmp_ptr1);
+    ptr_tmp->tmp_ptr2++;
+   }
+   ptr_tmp->tmp_ptr1++;
+  }
+
+  strcpy(ptr_rec40->tax_rate, ptr_tmp->tmp_tax_rate);
+ }
+
         memset(sz_tmaxrec, ' ', 320);
         sprintf(sz_tmaxrec,
                           "%-2.2s%-10.10s%04d%09d%-60.60s%-20.20s%07d"
@@ -1365,7 +1405,7 @@ int     wo01_CatSendStr40(char *sz_tmaxrec, wo01_rec40 *ptr_rec40)
                                   (int)((atof(ptr_rec40->tax_rate))*10000),
                                   ptr_rec40->tax_exempt,
                                   ptr_rec40->ship_method,
-                                  (int)((atof(ptr_rec40->ph_amt))*100),
+                                  (int)(atof(ptr_rec40->ph_amt)*100),
                                   (int)((atof(ptr_rec40->price))*100),
                                   ptr_rec40->ship_date,
                                   ptr_rec40->pos_ret,
@@ -1382,15 +1422,11 @@ int     wo01_CatSendStr40(char *sz_tmaxrec, wo01_rec40 *ptr_rec40)
 
         sz_tmaxrec[320] = '\0';
 
-
-        // *** Check P & H and Postage, if they have not been set move spaces to those fields ***
-
     if(ptr_rec40->ph_amt[0] == '\0')
            memset(sz_tmaxrec + 121, ' ', 7);    
  
         if(ptr_rec40->add_postage[0] == '\0')
            memset(sz_tmaxrec + 146, ' ', 7);
-
 
         if(strlen(sz_tmaxrec) == 320)
                 return (SUCCESS);
@@ -1477,12 +1513,12 @@ int wo01_ParceRecvStr(wo01_recv *ptr_recvbuf, char *rtnbuf, request_rec *r, stru
 
         ap_rprintf(r,"%s02 %s\"wo02\">\n", gbp->wo_btag, gbp->bitag);
         ap_rprintf(r,"%s\n", sga_message);
-        ap_rprintf(r,"  %s>\n", gbp->mtag);
+        ap_rprintf(r,"	%s>\n", gbp->mtag);
 
 
     memset(ptr_recvbuf->request_id,'\0', REQ_ID_LEN+1);
     memcpy(ptr_recvbuf->request_id, rtnbuf + gbp->count, REQ_ID_LEN);
-        ap_rprintf(r,"          <REQUEST_ID>%s</REQUEST_ID>\n", handle_special_chars(gbp,ptr_recvbuf->request_id));
+        ap_rprintf(r,"		<REQUEST_ID>%s</REQUEST_ID>\n", handle_special_chars(gbp,ptr_recvbuf->request_id));
     gbp->count += REQ_ID_LEN;
 
     memset(ptr_recvbuf->tran_id,'\0', TRAN_ID_LEN+1);
@@ -1491,105 +1527,110 @@ int wo01_ParceRecvStr(wo01_recv *ptr_recvbuf, char *rtnbuf, request_rec *r, stru
 
     memset(ptr_recvbuf->user_id,'\0', USER_ID_LEN+1);
     memcpy(ptr_recvbuf->user_id, rtnbuf + gbp->count, USER_ID_LEN);
-        ap_rprintf(r,"          <UID>%s</UID>\n", handle_special_chars(gbp,ptr_recvbuf->user_id));
+        ap_rprintf(r,"		<UID>%s</UID>\n", handle_special_chars(gbp,ptr_recvbuf->user_id));
     gbp->count += USER_ID_LEN;
 
         memset(ptr_recvbuf->success_flag,'\0', SUCCESS_FLAG_LEN+1);
     memcpy(ptr_recvbuf->success_flag, rtnbuf + gbp->count, SUCCESS_FLAG_LEN);
-        ap_rprintf(r,"          <SUCCESS_FLAG>%s</SUCCESS_FLAG>\n", handle_special_chars(gbp,ptr_recvbuf->success_flag));
+        ap_rprintf(r,"		<SUCCESS_FLAG>%s</SUCCESS_FLAG>\n", handle_special_chars(gbp,ptr_recvbuf->success_flag));
     gbp->count += SUCCESS_FLAG_LEN;
 
         memset(ptr_recvbuf->reject_reason,'\0', REJECT_REASON_LEN+1);
     memcpy(ptr_recvbuf->reject_reason, rtnbuf + gbp->count, REJECT_REASON_LEN);
-        ap_rprintf(r,"          <REJECT_REASON>%s</REJECT_REASON>\n", handle_special_chars(gbp,ptr_recvbuf->reject_reason));
+        ap_rprintf(r,"		<REJECT_REASON>%s</REJECT_REASON>\n", handle_special_chars(gbp,ptr_recvbuf->reject_reason));
     gbp->count += REJECT_REASON_LEN;
 
         gbp->count += 45;
 
         memset(ptr_recvbuf->product_dol,'\0', PRODUCT_DOL_LEN+1);
     memcpy(ptr_recvbuf->product_dol, rtnbuf + gbp->count, PRODUCT_DOL_LEN);
-        ap_rprintf(r,"          <PRODUCT_DOL>%s</PRODUCT_DOL>\n", handle_special_chars(gbp,ptr_recvbuf->product_dol));
+        ap_rprintf(r,"		<PRODUCT_DOL>%s</PRODUCT_DOL>\n", handle_special_chars(gbp,ptr_recvbuf->product_dol));
     gbp->count += PRODUCT_DOL_LEN;
 
         memset(ptr_recvbuf->discount_dol,'\0', DISC_DOL_LEN+1);
     memcpy(ptr_recvbuf->discount_dol, rtnbuf + gbp->count, DISC_DOL_LEN);
-        ap_rprintf(r,"          <DISCOUNT_DOL>%s</DISCOUNT_DOL>\n", handle_special_chars(gbp,ptr_recvbuf->discount_dol));
+        ap_rprintf(r,"		<DISCOUNT_DOL>%s</DISCOUNT_DOL>\n", handle_special_chars(gbp,ptr_recvbuf->discount_dol));
     gbp->count += DISC_DOL_LEN;
 
         memset(ptr_recvbuf->tax_dol,'\0', TAX_DOL_LEN+1);
     memcpy(ptr_recvbuf->tax_dol, rtnbuf + gbp->count, TAX_DOL_LEN);
-        ap_rprintf(r,"          <TAX_DOL>%s</TAX_DOL>\n", handle_special_chars(gbp,ptr_recvbuf->tax_dol));
+        ap_rprintf(r,"		<TAX_DOL>%s</TAX_DOL>\n", handle_special_chars(gbp,ptr_recvbuf->tax_dol));
     gbp->count += TAX_DOL_LEN;
 
         memset(ptr_recvbuf->postage_dol,'\0', POSTAGE_DOL_LEN+1);
     memcpy(ptr_recvbuf->postage_dol, rtnbuf + gbp->count, POSTAGE_DOL_LEN);
-        ap_rprintf(r,"          <POSTAGE_DOL>%s</POSTAGE_DOL>\n", handle_special_chars(gbp,ptr_recvbuf->postage_dol));
+        ap_rprintf(r,"		<POSTAGE_DOL>%s</POSTAGE_DOL>\n", handle_special_chars(gbp,ptr_recvbuf->postage_dol));
     gbp->count += POSTAGE_DOL_LEN;
+
+        memset(ptr_recvbuf->insurance_dol,'\0', INSURANCE_DOL_LEN+1);
+    memcpy(ptr_recvbuf->insurance_dol, rtnbuf + gbp->count, INSURANCE_DOL_LEN);
+        ap_rprintf(r,"		<INSURANCE_DOL>%s</INSURANCE_DOL>\n", handle_special_chars(gbp,ptr_recvbuf->insurance_dol));
+    gbp->count += INSURANCE_DOL_LEN;
 
         memset(ptr_recvbuf->total_dol,'\0', TOTAL_DOL_LEN+1);
     memcpy(ptr_recvbuf->total_dol, rtnbuf + gbp->count, TOTAL_DOL_LEN);
-        ap_rprintf(r,"          <TOTAL_DOL>%s</TOTAL_DOL>\n", handle_special_chars(gbp,ptr_recvbuf->total_dol));
+        ap_rprintf(r,"		<TOTAL_DOL>%s</TOTAL_DOL>\n", handle_special_chars(gbp,ptr_recvbuf->total_dol));
     gbp->count += TOTAL_DOL_LEN;
 
         memset(ptr_recvbuf->pay_method,'\0', PAY_METH_LEN+1);
     memcpy(ptr_recvbuf->pay_method, rtnbuf + gbp->count, PAY_METH_LEN);
-        ap_rprintf(r,"          <PAY_METHOD>%s</PAY_METHOD>\n", handle_special_chars(gbp,ptr_recvbuf->pay_method));
+        ap_rprintf(r,"		<PAY_METHOD>%s</PAY_METHOD>\n", handle_special_chars(gbp,ptr_recvbuf->pay_method));
     gbp->count += PAY_METH_LEN;
 
         memset(ptr_recvbuf->ship_method,'\0', SHIP_METH_LEN+1);
     memcpy(ptr_recvbuf->ship_method, rtnbuf + gbp->count, SHIP_METH_LEN);
-        ap_rprintf(r,"          <SHIP_METHOD>%s</SHIP_METHOD>\n", handle_special_chars(gbp,ptr_recvbuf->ship_method));
+        ap_rprintf(r,"		<SHIP_METHOD>%s</SHIP_METHOD>\n", handle_special_chars(gbp,ptr_recvbuf->ship_method));
     gbp->count += SHIP_METH_LEN;
 
         memset(ptr_recvbuf->order_no,'\0', ORD_NUM_LEN+1);
     memcpy(ptr_recvbuf->order_no, rtnbuf + gbp->count, ORD_NUM_LEN);
-        ap_rprintf(r,"          <ORDER_NUM>%s</ORDER_NUM>\n", handle_special_chars(gbp,ptr_recvbuf->order_no));
+        ap_rprintf(r,"		<ORDER_NUM>%s</ORDER_NUM>\n", handle_special_chars(gbp,ptr_recvbuf->order_no));
     gbp->count += ORD_NUM_LEN;
 
 
         memset(ptr_recvbuf->ship_method_change,'\0', SHIP_METH_CHANGE_LEN+1);
     memcpy(ptr_recvbuf->ship_method_change, rtnbuf + gbp->count, SHIP_METH_CHANGE_LEN);
-        ap_rprintf(r,"          <CHANGE_SHIP_METHOD>%s</CHANGE_SHIP_METHOD>\n", handle_special_chars(gbp,ptr_recvbuf->ship_method_change));
+        ap_rprintf(r,"		<CHANGE_SHIP_METHOD>%s</CHANGE_SHIP_METHOD>\n", handle_special_chars(gbp,ptr_recvbuf->ship_method_change));
     gbp->count += SHIP_METH_CHANGE_LEN;
 
         memset(ptr_recvbuf->linkshare_flag,'\0', LINKSHARE_FLAG_LEN+1);
     memcpy(ptr_recvbuf->linkshare_flag, rtnbuf + gbp->count, LINKSHARE_FLAG_LEN);
-        ap_rprintf(r,"          <LINKSHARE_FLAG>%s</LINKSHARE_FLAG>\n", handle_special_chars(gbp,ptr_recvbuf->linkshare_flag));
+        ap_rprintf(r,"		<LINKSHARE_FLAG>%s</LINKSHARE_FLAG>\n", handle_special_chars(gbp,ptr_recvbuf->linkshare_flag));
     gbp->count += LINKSHARE_FLAG_LEN;
 
         memset(ptr_recvbuf->linkshare_id,'\0', LINKSHARE_ID_LEN+1);
     memcpy(ptr_recvbuf->linkshare_id, rtnbuf + gbp->count, LINKSHARE_ID_LEN);
-        ap_rprintf(r,"          <LINKSHARE_ID>%s</LINKSHARE_ID>\n", handle_special_chars(gbp,ptr_recvbuf->linkshare_id));
+        ap_rprintf(r,"		<LINKSHARE_ID>%s</LINKSHARE_ID>\n", handle_special_chars(gbp,ptr_recvbuf->linkshare_id));
     gbp->count += LINKSHARE_ID_LEN;
 
         memset(ptr_recvbuf->linkshare_zip,'\0', LINKSHARE_ZIP_LEN+1);
     memcpy(ptr_recvbuf->linkshare_zip, rtnbuf + gbp->count, LINKSHARE_ZIP_LEN);
-        ap_rprintf(r,"          <LINKSHARE_ZIP>%s</LINKSHARE_ZIP>\n", handle_special_chars(gbp,ptr_recvbuf->linkshare_zip));
+        ap_rprintf(r,"		<LINKSHARE_ZIP>%s</LINKSHARE_ZIP>\n", handle_special_chars(gbp,ptr_recvbuf->linkshare_zip));
     gbp->count += LINKSHARE_ZIP_LEN;
 
         memset(ptr_recvbuf->linkshare_date_out,'\0', LINKSHARE_DATE_OUT_LEN+1);
     memcpy(ptr_recvbuf->linkshare_date_out, rtnbuf + gbp->count, LINKSHARE_DATE_OUT_LEN);
-        ap_rprintf(r,"          <LINKSHARE_DATE_OUT>%s</LINKSHARE_DATE_OUT>\n", handle_special_chars(gbp,ptr_recvbuf->linkshare_date_out));
+        ap_rprintf(r,"		<LINKSHARE_DATE_OUT>%s</LINKSHARE_DATE_OUT>\n", handle_special_chars(gbp,ptr_recvbuf->linkshare_date_out));
     gbp->count += LINKSHARE_DATE_OUT_LEN;
 
         memset(ptr_recvbuf->linkshare_time_out,'\0', LINKSHARE_TIME_OUT_LEN+1);
     memcpy(ptr_recvbuf->linkshare_time_out, rtnbuf + gbp->count, LINKSHARE_TIME_OUT_LEN);
-        ap_rprintf(r,"          <LINKSHARE_TIME_OUT>%s</LINKSHARE_TIME_OUT>\n", handle_special_chars(gbp,ptr_recvbuf->linkshare_time_out));
+        ap_rprintf(r,"		<LINKSHARE_TIME_OUT>%s</LINKSHARE_TIME_OUT>\n", handle_special_chars(gbp,ptr_recvbuf->linkshare_time_out));
     gbp->count += LINKSHARE_TIME_OUT_LEN;
 
         memset(ptr_recvbuf->shipto_num,'\0', SHIPTO_NO_LEN+1);
     memcpy(ptr_recvbuf->shipto_num, rtnbuf + gbp->count, SHIPTO_NO_LEN);
-        ap_rprintf(r,"          <SHIPTO_NUM>%s</SHIPTO_NUM>\n", handle_special_chars(gbp,ptr_recvbuf->shipto_num));
+        ap_rprintf(r,"		<SHIPTO_NUM>%s</SHIPTO_NUM>\n", handle_special_chars(gbp,ptr_recvbuf->shipto_num));
     gbp->count += SHIPTO_NO_LEN;
 
         memset(ptr_recvbuf->net_dol,'\0', NET_DOL_LEN+1);
     memcpy(ptr_recvbuf->net_dol, rtnbuf + gbp->count, NET_DOL_LEN);
-        ap_rprintf(r,"          <NET_DOL>%s</NET_DOL>\n", handle_special_chars(gbp,ptr_recvbuf->net_dol));
+        ap_rprintf(r,"		<NET_DOL>%s</NET_DOL>\n", handle_special_chars(gbp,ptr_recvbuf->net_dol));
     gbp->count += NET_DOL_LEN;
 
         memset(ptr_recvbuf->gift_dol,'\0', GIFT_DOL_LEN+1);
     memcpy(ptr_recvbuf->gift_dol, rtnbuf + gbp->count, GIFT_DOL_LEN);
-        ap_rprintf(r,"          <GIFT_DOL>%s</GIFT_DOL>\n", handle_special_chars(gbp,ptr_recvbuf->gift_dol));
+        ap_rprintf(r,"		<GIFT_DOL>%s</GIFT_DOL>\n", handle_special_chars(gbp,ptr_recvbuf->gift_dol));
     gbp->count += GIFT_DOL_LEN;
 
         for(gbp->i = 0; gbp->i < SHIPTO_COUNT; gbp->i++)
@@ -1605,7 +1646,7 @@ int wo01_ParceRecvStr(wo01_recv *ptr_recvbuf, char *rtnbuf, request_rec *r, stru
                 memset(ptr_recvbuf->shipto[gbp->i].shipto_sm_code,'\0', SHIPTO_SM_CODE_LEN+1);
                 memcpy(ptr_recvbuf->shipto[gbp->i].shipto_sm_code, rtnbuf + gbp->count, SHIPTO_SM_CODE_LEN);
                 gbp->count += SHIPTO_SM_CODE_LEN;
-            sprintf(ptr_recvbuf->shipto[gbp->i].shipto_sm_code,"%s",
+                sprintf(ptr_recvbuf->shipto[gbp->i].shipto_sm_code,"%s",
                                      rtrim(ptr_recvbuf->shipto[gbp->i].shipto_sm_code,SHIPTO_SM_CODE_LEN+1,gbp));
 
                 memset(ptr_recvbuf->shipto[gbp->i].shipto_sm_desc,'\0', SHIPTO_SM_DESC_LEN+1);
@@ -1618,44 +1659,44 @@ int wo01_ParceRecvStr(wo01_recv *ptr_recvbuf, char *rtnbuf, request_rec *r, stru
 
                 if((strlen(ptr_recvbuf->shipto[gbp->i].shipto_sm_code)) > 0)
                 {
-                        ap_rprintf(r,"          <SHIPTO_DETAILS>\n");
-                        ap_rprintf(r,"                  <SHIPTO_SHIPTO_NUM>%s</SHIPTO_SHIPTO_NUM>\n", handle_special_chars(gbp,ptr_recvbuf->shipto[gbp->i].shipto_st_num));
-                        ap_rprintf(r,"                  <SHIPTO_EDP>%s</SHIPTO_EDP>\n", handle_special_chars(gbp,ptr_recvbuf->shipto[gbp->i].shipto_edp));
-                        ap_rprintf(r,"                  <SHIPTO_SM_CODE>%s</SHIPTO_SM_CODE>\n", handle_special_chars(gbp,ptr_recvbuf->shipto[gbp->i].shipto_sm_code));
-                        ap_rprintf(r,"                  <SHIPTO_SHIP_METHOD_DESC>%s</SHIPTO_SHIP_METHOD_DESC>\n", handle_special_chars(gbp,ptr_recvbuf->shipto[gbp->i].shipto_sm_desc));
-                        ap_rprintf(r,"                  <SHIPTO_SM_CHANGE>%s</SHIPTO_SM_CHANGE>\n", handle_special_chars(gbp,ptr_recvbuf->shipto[gbp->i].shipto_sm_change));
-                        ap_rprintf(r,"          </SHIPTO_DETAILS>\n");
+                        ap_rprintf(r,"		<SHIPTO_DETAILS>\n");
+                        ap_rprintf(r,"			<SHIPTO_SHIPTO_NUM>%s</SHIPTO_SHIPTO_NUM>\n", handle_special_chars(gbp,ptr_recvbuf->shipto[gbp->i].shipto_st_num));
+                        ap_rprintf(r,"			<SHIPTO_EDP>%s</SHIPTO_EDP>\n", handle_special_chars(gbp,ptr_recvbuf->shipto[gbp->i].shipto_edp));
+                        ap_rprintf(r,"			<SHIPTO_SM_CODE>%s</SHIPTO_SM_CODE>\n", handle_special_chars(gbp,ptr_recvbuf->shipto[gbp->i].shipto_sm_code));
+                        ap_rprintf(r,"			<SHIPTO_SHIP_METHOD_DESC>%s</SHIPTO_SHIP_METHOD_DESC>\n", handle_special_chars(gbp,ptr_recvbuf->shipto[gbp->i].shipto_sm_desc));
+                        ap_rprintf(r,"			<SHIPTO_SM_CHANGE>%s</SHIPTO_SM_CHANGE>\n", handle_special_chars(gbp,ptr_recvbuf->shipto[gbp->i].shipto_sm_change));
+                        ap_rprintf(r,"		</SHIPTO_DETAILS>\n");
                 }
         }
 
         memset(ptr_recvbuf->flooz_pm,'\0', FLOOZ_PM_LEN+1);
     memcpy(ptr_recvbuf->flooz_pm, rtnbuf + gbp->count, FLOOZ_PM_LEN);
-        ap_rprintf(r,"          <FLOOZ_PM_FLAG>%s</FLOOZ_PM_FLAG>\n", handle_special_chars(gbp,ptr_recvbuf->flooz_pm));
+        ap_rprintf(r,"		<FLOOZ_PM_FLAG>%s</FLOOZ_PM_FLAG>\n", handle_special_chars(gbp,ptr_recvbuf->flooz_pm));
     gbp->count += FLOOZ_PM_LEN;
 
         memset(ptr_recvbuf->cust_edp,'\0', CUST_EDP_LEN+1);
     memcpy(ptr_recvbuf->cust_edp, rtnbuf + gbp->count, CUST_EDP_LEN);
-        ap_rprintf(r,"          <CUST_EDP>%s</CUST_EDP>\n", handle_special_chars(gbp,ptr_recvbuf->cust_edp));
+        ap_rprintf(r,"		<CUST_EDP>%s</CUST_EDP>\n", handle_special_chars(gbp,ptr_recvbuf->cust_edp));
     gbp->count += CUST_EDP_LEN;
 
     memset(ptr_recvbuf->gift_coup_type,'\0', GIFT_COUP_TYPE_LEN+1);
     memcpy(ptr_recvbuf->gift_coup_type, rtnbuf + gbp->count, GIFT_COUP_TYPE_LEN);
-        ap_rprintf(r,"          <GIFT_COUPON_TYPE>%s</GIFT_COUPON_TYPE>\n", handle_special_chars(gbp,ptr_recvbuf->gift_coup_type));
+        ap_rprintf(r,"		<GIFT_COUPON_TYPE>%s</GIFT_COUPON_TYPE>\n", handle_special_chars(gbp,ptr_recvbuf->gift_coup_type));
     gbp->count += GIFT_COUP_TYPE_LEN;
 
         memset(ptr_recvbuf->gift_wrap_dol,'\0', GIFT_WRAP_DOL_LEN+1);
     memcpy(ptr_recvbuf->gift_wrap_dol, rtnbuf + gbp->count, GIFT_WRAP_DOL_LEN);
-        ap_rprintf(r,"          <GIFT_WRAP_DOL>%s</GIFT_WRAP_DOL>\n", handle_special_chars(gbp,ptr_recvbuf->gift_wrap_dol));
+        ap_rprintf(r,"		<GIFT_WRAP_DOL>%s</GIFT_WRAP_DOL>\n", handle_special_chars(gbp,ptr_recvbuf->gift_wrap_dol));
     gbp->count += GIFT_WRAP_DOL_LEN;
 
         memset(ptr_recvbuf->pty_payer_flag,'\0', PTY_PAYER_FLAG+1);
     memcpy(ptr_recvbuf->pty_payer_flag, rtnbuf + gbp->count, PTY_PAYER_FLAG);
-        ap_rprintf(r,"          <THIRD_PTY_PAYER_FLAG>%s</THIRD_PTY_PAYER_FLAG>\n", handle_special_chars(gbp,ptr_recvbuf->pty_payer_flag));
+        ap_rprintf(r,"		<THIRD_PTY_PAYER_FLAG>%s</THIRD_PTY_PAYER_FLAG>\n", handle_special_chars(gbp,ptr_recvbuf->pty_payer_flag));
     gbp->count += PTY_PAYER_FLAG;
 
-        memset(ptr_recvbuf->ai_count,'\0', AI_COUNT_LEN+1);
+memset(ptr_recvbuf->ai_count,'\0', AI_COUNT_LEN+1);
         memcpy(ptr_recvbuf->ai_count, rtnbuf + gbp->count, AI_COUNT_LEN);
-        ap_rprintf(r,"      <NUM_OF_AUTO_INSERT_ITEMS>%s</NUM_OF_AUTO_INSERT_ITEMS>\n", handle_special_chars(gbp,ptr_recvbuf->ai_count));
+        ap_rprintf(r,"		<NUM_OF_AUTO_INSERT_ITEMS>%s</NUM_OF_AUTO_INSERT_ITEMS>\n", handle_special_chars(gbp,ptr_recvbuf->ai_count));
         gbp->count += AI_COUNT_LEN;
 
         for(gbp->k = 0; gbp->k < AUTO_INSERT_COUNT; gbp->k++)
@@ -1665,7 +1706,7 @@ int wo01_ParceRecvStr(wo01_recv *ptr_recvbuf, char *rtnbuf, request_rec *r, stru
                 gbp->count += AI_ITEM_NO_LEN;
 
                 memset(ptr_recvbuf->auto_insert[gbp->k].ai_item_qty,'\0', AI_ITEM_QTY_LEN+1);
-        memcpy(ptr_recvbuf->auto_insert[gbp->k].ai_item_qty, rtnbuf + gbp->count, AI_ITEM_QTY_LEN);
+                memcpy(ptr_recvbuf->auto_insert[gbp->k].ai_item_qty, rtnbuf + gbp->count, AI_ITEM_QTY_LEN);
                 gbp->count += AI_ITEM_QTY_LEN;
 
                 memset(ptr_recvbuf->auto_insert[gbp->k].ai_item_price,'\0', AI_ITEM_PRICE_LEN+1);
@@ -1673,32 +1714,27 @@ int wo01_ParceRecvStr(wo01_recv *ptr_recvbuf, char *rtnbuf, request_rec *r, stru
                 gbp->count += AI_ITEM_PRICE_LEN;
 
                 memset(ptr_recvbuf->auto_insert[gbp->k].ai_item_st_num,'\0', AI_ITEM_ST_NUM_LEN+1);
-        memcpy(ptr_recvbuf->auto_insert[gbp->k].ai_item_st_num, rtnbuf + gbp->count, AI_ITEM_ST_NUM_LEN);
+                memcpy(ptr_recvbuf->auto_insert[gbp->k].ai_item_st_num, rtnbuf + gbp->count, AI_ITEM_ST_NUM_LEN);
                 gbp->count += AI_ITEM_ST_NUM_LEN;
 
+                if(atoi(ptr_recvbuf->auto_insert[gbp->k].ai_item_qty) > 0)
+                {
+                   ap_rprintf(r,"		<AUTO_INSERT_ITEM_NO>%s</AUTO_INSERT_ITEM_NO>\n", handle_special_chars(gbp,ptr_recvbuf->auto_insert[gbp->k].ai_item_no));
+                   ap_rprintf(r,"		<AUTO_INSERT_QTY>%s</AUTO_INSERT_QTY>\n", handle_special_chars(gbp,ptr_recvbuf->auto_insert[gbp->k].ai_item_qty));
+                   ap_rprintf(r,"		<AUTO_INSERT_PRICE>%s</AUTO_INSERT_PRICE>\n", handle_special_chars(gbp,ptr_recvbuf->auto_insert[gbp->k].ai_item_price));
+                   ap_rprintf(r,"		<AUTO_INSERT_SHIPTO_NUM>%s</AUTO_INSERT_SHIPTO_NUM>\n", handle_special_chars(gbp,ptr_recvbuf->auto_insert[gbp->k].ai_item_st_num));
+                }
+
         }
 
 
-    gbp->j = atoi(ptr_recvbuf->ai_count);
-
-        if(gbp->j > (int)AUTO_INSERT_COUNT)
-           gbp->j = (int)AUTO_INSERT_COUNT;
-         
-    for(gbp->k = 0; gbp->k < gbp->j; gbp->k++)
-        {
-       ap_rprintf(r,"      <AUTO_INSERT_ITEM_NO>%s</AUTO_INSERT_ITEM_NO>\n", handle_special_chars(gbp,ptr_recvbuf->auto_insert[gbp->k].ai_item_no));
-       ap_rprintf(r,"      <AUTO_INSERT_QTY>%s</AUTO_INSERT_QTY>\n", handle_special_chars(gbp,ptr_recvbuf->auto_insert[gbp->k].ai_item_qty));
-       ap_rprintf(r,"      <AUTO_INSERT_PRICE>%s</AUTO_INSERT_PRICE>\n", handle_special_chars(gbp,ptr_recvbuf->auto_insert[gbp->k].ai_item_price));
-       ap_rprintf(r,"      <AUTO_INSERT_SHIPTO_NUM>%s</AUTO_INSERT_SHIPTO_NUM>\n", handle_special_chars(gbp,ptr_recvbuf->auto_insert[gbp->k].ai_item_st_num));
-        }
-
-        ap_rprintf(r,"  %s>\n", gbp->metag);
+        ap_rprintf(r,"	%s>\n", gbp->metag);
         ap_rprintf(r,"%s\n", pt_message);
-        ap_rprintf(r,"  %s>\n", gbp->rstag);
+        ap_rprintf(r,"	%s>\n", gbp->rstag);
 
         reparse_customer_data(r,gbp);
 
-        ap_rprintf(r,"  %s>\n", gbp->rsetag); 
+        ap_rprintf(r,"	%s>\n", gbp->rsetag); 
         ap_rprintf(r,"%s02>\n", gbp->wo_betag);   
 
     return(0);

@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 
+<!DOCTYPE tt0011 PUBLIC "-//Smith-Gardner//DTD XML 1.0//EN" "../xml-dtd/tt0011.dtd">
+                     
 <!-- SOURCE INPUT -->
 
 <tt0011 id="tt0011">
@@ -10,6 +12,7 @@
 		<COMPANY>01</COMPANY>
 		<DIVISION>01</DIVISION>
 		<UID>1999050509273240</UID>
+        <ACTION_FLAG></ACTION_FLAG>
 		<SRCC></SRCC>
 		<SRCT></SRCT>
 

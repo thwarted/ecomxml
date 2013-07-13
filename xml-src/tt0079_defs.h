@@ -11,7 +11,7 @@
 #define  tt0079_DIVISION_LEN           2
 #define  tt0079_USER_ID_LEN            16
 #define  tt0079_IP_ADDR_LEN            16
-#define  tt0079_FILLER_LEN				25
+#define  tt0079_FILLER_LEN                              25
 
 #define  tt0079_COUP_RVW_FLAG_LEN      2
 
@@ -21,12 +21,12 @@
 #define  tt0079_REC_ID_LEN             4
 #define  tt0079_USER_ID_LEN            16
 #define  tt0079_SUCCESS_FLAG_LEN        1
-#define  tt0079_ERR_LEN				80
-#define  tt0079_SEND_FILLER_LEN			45
+#define  tt0079_ERR_LEN                         80
+#define  tt0079_SEND_FILLER_LEN                 45
 
 #define  tt0079_COUP_RVW_FLAG_LEN      2
 
-#define  tt0079_COUPON_DATA_COUNT		18
+#define  tt0079_COUPON_DATA_COUNT               18
 
 #define  tt0079_COUP_RVW_CO_NUM_LEN       4
 #define  tt0079_COUP_RVW_CO_AMOUNT_LEN    10
@@ -42,7 +42,7 @@ typedef struct
     char division[tt0079_DIVISION_LEN+1];
     char userid[tt0079_USER_ID_LEN+1];
     char ip_address[tt0079_IP_ADDR_LEN+1];
-	char filler[tt0079_FILLER_LEN+1];
+        char filler[tt0079_FILLER_LEN+1];
     char coup_rvw_flag[tt0079_COUP_RVW_FLAG_LEN+1];
 
 } tt0079_st_send;
@@ -64,8 +64,8 @@ typedef struct
     char record_id[tt0079_REC_ID_LEN+1];
     char userid[tt0079_USER_ID_LEN+1];
     char success[tt0079_SUCCESS_FLAG_LEN+1];
-	char err_message[tt0079_ERR_LEN+1];
-	char filler[tt0079_SEND_FILLER_LEN+1];
+        char err_message[tt0079_ERR_LEN+1];
+        char filler[tt0079_SEND_FILLER_LEN+1];
 
     char coup_rvw_flag[tt0079_COUP_RVW_FLAG_LEN+1];
 

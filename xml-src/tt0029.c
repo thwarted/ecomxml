@@ -171,11 +171,8 @@ int tt0029_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_bu
 
 int tt0029_CatSendStr(struct global_struct *gbp, char *sz_sendbufcat, tt0029_st_send *ptr_sendbuf)
 {
-
-//    FILE *fp;
-
     gbp->j = sprintf(sz_sendbufcat,
-            "%-4.4s%-4.4s%-2.2s%-2.2s%-16.16s%-16.16s%-25.25s%-20.20s%-4.4s%-1.1s%-3.3s%-1.1s%-1.1s%-1.1s"
+            "%-4.4s%-4.4s%-2.2s%-2.2s%-16.16s%-16.16s%-25.25s%-20.20s%-6.6s%-1.1s%-3.3s%-1.1s%-1.1s%-1.1s"
                         "%-1.1s%-1.1s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s"
                         "%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s"
                         "%-1.1s%-1.1s%-16.16s%-2.2s%-9.9s%-16.16s%-4.4s",
@@ -223,27 +220,6 @@ int tt0029_CatSendStr(struct global_struct *gbp, char *sz_sendbufcat, tt0029_st_
                         ptr_sendbuf->wl_no,
                         ptr_sendbuf->wl_line_no);
 
-// BEGIN - RAVI Debug
-
-//fp = fopen("/tmp/xml_debug.log", "w");
-//fprintf(fp, "request_id = %s\n", ptr_sendbuf->request_id);
-//fprintf(fp, "record_id = %s\n", ptr_sendbuf->record_id);
-//fprintf(fp, "company = %s\n", ptr_sendbuf->company);
-//fprintf(fp, "division = %s\n", ptr_sendbuf->division);
-//fprintf(fp, "userid = %s\n", ptr_sendbuf->userid);
-//fprintf(fp, "ip_address = %s\n", ptr_sendbuf->ip_address);
-//fprintf(fp, "filler = %s\n", ptr_sendbuf->filler);
-//fprintf(fp, "item_no = %s\n", ptr_sendbuf->item_num);
-//fprintf(fp, "qty = %s\n", ptr_sendbuf->item_qty);
-//fprintf(fp, "pred_flag = %s\n", ptr_sendbuf->pred_flag);
-//fprintf(fp, "shipto_num = %s\n", ptr_sendbuf->shipto_num);
-//fprintf(fp, "SENDBUFCAT = %s\n", sz_sendbufcat);
-
-//fclose(fp);
-
-// End - RAVI Debug
-
-
     return(gbp->j);
 }
 
@@ -267,7 +243,7 @@ int tt0029_ParceRecvStr(tt0029_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
 */
         ap_rprintf(r,"%s0030 %s\"tt0030\">\n", gbp->tt_btag, gbp->bitag);
         ap_rprintf(r,"%s\n", sga_message);
-        ap_rprintf(r,"  %s>\n", gbp->mtag);
+        ap_rprintf(r,"	%s>\n", gbp->mtag);
 
 
     memset(ptr_recvbuf->request_id,'\0', tt0029_REQ_ID_LEN+1);
@@ -459,13 +435,13 @@ int tt0029_ParceRecvStr(tt0029_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
         ap_rprintf(r,"		<ITEM_LINE_NUMBER>%s</ITEM_LINE_NUMBER>\n", handle_special_chars(gbp,ptr_recvbuf->item_line_number));
     gbp->count += tt0029_ITEM_LINE_NUMBER_LEN;
 
-        ap_rprintf(r,"  %s>\n", gbp->metag);
+        ap_rprintf(r,"	%s>\n", gbp->metag);
         ap_rprintf(r,"%s\n", pt_message);
-        ap_rprintf(r,"  %s>\n", gbp->rstag);
+        ap_rprintf(r,"	%s>\n", gbp->rstag);
 
         reparse_customer_data(r,gbp);
 
-        ap_rprintf(r,"  %s>\n", gbp->rsetag);
+        ap_rprintf(r,"	%s>\n", gbp->rsetag);
         ap_rprintf(r,"%s0030>\n", gbp->tt_betag);
 
 

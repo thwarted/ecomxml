@@ -1,7 +1,7 @@
 /* wo01_defs.h  ORDER RECAP TRANSACTION*/
 
 #define  wo01_LAN_SEND_BUF_LEN        96078 //96069 //19605  //19589  //19569 //19553 //19233 //19208  
-#define  wo01_LAN_RECV_BUF_LEN        19503 //19479 //9975 //9974 //9965 //2539 //2359  //2355 //1095 //1050  
+#define  wo01_LAN_RECV_BUF_LEN        19493 //19488 //9984  //9975 //9974 //9965 //2539 //2359  //2355 //1095 //1050  
 
 // Sending and Receiving Header Definitions
 #define   NUMBER_OF_RECORDS 300
@@ -229,12 +229,12 @@
 #define  R40_POST_LEN                       7
 #define  R40_ASSOC_LINE_LEN                     3
 #define  R40_ASSOC_TYPE_LEN                     1
-#define  R40_FILLER2_LEN                        153
 #define  R40_OVERIDE_PRICE_LEN          1
 #define  R40_SALES_LEN                          1
 #define  R40_RET_FLAG_LEN                       1
 #define  R40_POVRD_LEN                          2
 #define  R40_FILLER3_LEN                        5
+#define  R40_FILLER2_LEN                        153
 
 // 41 Record Defines
 
@@ -531,12 +531,12 @@ typedef struct
         char add_postage[R40_POST_LEN+1];
         char assoc_prod_num[R40_ASSOC_LINE_LEN+1];
         char assoc_type[R40_ASSOC_TYPE_LEN+1];
-        char filler2[R40_FILLER2_LEN+1];
         char overide_price[R40_OVERIDE_PRICE_LEN+1];
         char club_sales_type[R40_SALES_LEN+1];
         char return_flag[R40_RET_FLAG_LEN+1];
         char povrd_reason[R40_POVRD_LEN+1];
         char filler3[R40_FILLER3_LEN+1];
+        char filler2[R40_FILLER2_LEN+1];
     
 } wo01_rec40;
 
@@ -580,49 +580,50 @@ typedef struct
 
 // Reply from MACS
 
-#define  USER_ID_LEN                16
-#define  SUCCESS_FLAG_LEN           1
-#define  REJECT_REASON_LEN          80
+#define  USER_ID_LEN                            16
+#define  SUCCESS_FLAG_LEN                       1
+#define  REJECT_REASON_LEN                      80
 
-#define  PRODUCT_DOL_LEN            12 //9
-#define  DISC_DOL_LEN               12 //9
-#define  TAX_DOL_LEN                12 //9
-#define  POSTAGE_DOL_LEN            12 //9
-#define  TOTAL_DOL_LEN              12 //9
-#define  PAY_METH_LEN               20
-#define  SHIP_METH_LEN              80
-#define  ORD_NUM_LEN                8
-#define  SHIP_METH_CHANGE_LEN       1
-#define  LINKSHARE_FLAG_LEN         1
-#define  LINKSHARE_ID_LEN           64
-#define  LINKSHARE_ZIP_LEN          10
-#define  LINKSHARE_DATE_OUT_LEN     8
-#define  LINKSHARE_TIME_OUT_LEN     6
-#define  SHIPTO_NO_LEN              2
-#define  NET_DOL_LEN                12 //9
-#define  GIFT_DOL_LEN               12 //9
+#define  PRODUCT_DOL_LEN                        12
+#define  DISC_DOL_LEN                           12
+#define  TAX_DOL_LEN                            12  
+#define  POSTAGE_DOL_LEN                        12
+#define  INSURANCE_DOL_LEN                      12
+#define  TOTAL_DOL_LEN                          12
+#define  PAY_METH_LEN                           20
+#define  SHIP_METH_LEN                          80
+#define  ORD_NUM_LEN                            8
+#define  SHIP_METH_CHANGE_LEN                   1
+#define  LINKSHARE_FLAG_LEN                     1
+#define  LINKSHARE_ID_LEN                       64
+#define  LINKSHARE_ZIP_LEN                      10
+#define  LINKSHARE_DATE_OUT_LEN                 11
+#define  LINKSHARE_TIME_OUT_LEN                 8
+#define  SHIPTO_NO_LEN                          2
+#define  NET_DOL_LEN                            12
+#define  GIFT_DOL_LEN                           12
 
-#define  SHIPTO_COUNT               99
+#define  SHIPTO_COUNT                           99
 
-#define  SHIPTO_ST_NO_LEN           2
-#define  SHIPTO_EDP_LEN             9
-#define  SHIPTO_SM_CODE_LEN         2
-#define  SHIPTO_SM_DESC_LEN         80
-#define  SHIPTO_SM_CHANGE_LEN       1
+#define  SHIPTO_ST_NO_LEN                       2
+#define  SHIPTO_EDP_LEN                         9
+#define  SHIPTO_SM_CODE_LEN                     2
+#define  SHIPTO_SM_DESC_LEN                     80
+#define  SHIPTO_SM_CHANGE_LEN                   1
 
-#define  FLOOZ_PM_LEN               1
-#define  CUST_EDP_LEN               9
-#define  GIFT_COUP_TYPE_LEN         1
-#define  GIFT_WRAP_DOL_LEN          12 //9
-#define  PTY_PAYER_FLAG             1
-#define  AI_COUNT_LEN               3
+#define  FLOOZ_PM_LEN                           1
+#define  CUST_EDP_LEN                           9
+#define  GIFT_COUP_TYPE_LEN                     1
+#define  GIFT_WRAP_DOL_LEN                      12
+#define  PTY_PAYER_FLAG                         1
+#define  AI_COUNT_LEN                           3
 
-#define  AUTO_INSERT_COUNT          250
-#define  AI_ITEM_NO_LEN             20
-#define  AI_ITEM_QTY_LEN            4
-#define  AI_ITEM_PRICE_LEN          12
-#define  AI_ITEM_ST_NUM_LEN         2
-#define  WFILLER1_LEN               206
+#define  AUTO_INSERT_COUNT                      250
+#define  AI_ITEM_NO_LEN                         20
+#define  AI_ITEM_QTY_LEN                        4
+#define  AI_ITEM_PRICE_LEN                      12
+#define  AI_ITEM_ST_NUM_LEN                     2
+#define  WFILLER1_LEN                           206
 
 typedef struct
 {
@@ -643,11 +644,10 @@ typedef struct
 
 } auto_insert_array;
 
-
 typedef struct
 {
     char request_id[REQ_ID_LEN+1];
-        char tran_id[TRAN_ID_LEN+1];
+    char tran_id[TRAN_ID_LEN+1];
     char user_id[USER_ID_LEN+1];
     char success_flag[SUCCESS_FLAG_LEN+1];
     char reject_reason[REJECT_REASON_LEN+1];
@@ -656,6 +656,7 @@ typedef struct
     char discount_dol[DISC_DOL_LEN+1];
     char tax_dol[TAX_DOL_LEN+1];
     char postage_dol[POSTAGE_DOL_LEN+1];
+    char insurance_dol[INSURANCE_DOL_LEN+1];
     char total_dol[TOTAL_DOL_LEN+1];
     char pay_method[PAY_METH_LEN+1];
     char ship_method[SHIP_METH_LEN+1];
@@ -671,11 +672,11 @@ typedef struct
         char gift_dol[GIFT_DOL_LEN+1];
         shipto_array shipto[SHIPTO_COUNT];
         char flooz_pm[FLOOZ_PM_LEN+1];
-        char cust_edp[CUST_EDP_LEN+1];
-        char gift_coup_type[GIFT_COUP_TYPE_LEN+1];
+        char cust_edp[10];
+    char gift_coup_type[GIFT_COUP_TYPE_LEN+1];
         char gift_wrap_dol[GIFT_WRAP_DOL_LEN+1];
         char pty_payer_flag[PTY_PAYER_FLAG+1];
-        char ai_count[AI_COUNT_LEN+1];
+    char ai_count[AI_COUNT_LEN+1];
         auto_insert_array auto_insert[AUTO_INSERT_COUNT];
         char filler1[WFILLER1_LEN+1];
 

@@ -6,9 +6,9 @@
 #ifdef WIN32
 
 #ifdef _EXPORTING
-	#define SGA_DECLSPEC      __declspec(dllexport)
+        #define SGA_DECLSPEC      __declspec(dllexport)
 #else
-	#define SGA_DECLSPEC      __declspec(dllimport)
+        #define SGA_DECLSPEC      __declspec(dllimport)
 #endif
 
 #include <windows.h>
@@ -55,10 +55,10 @@
 
 #ifdef WIN32
 
-#define NO_FLAGS_SET		0
+#define NO_FLAGS_SET            0
 
-#define USE_SHUTDOWN		1
-#define DONT_USE_SHUTDOWN	0
+#define USE_SHUTDOWN            1
+#define DONT_USE_SHUTDOWN       0
  
 //SGA_DECLSPEC SOCKET FAR PASCAL 
 //sga_connect(const char FAR *hostname, const char FAR *service, const char FAR *progname, int *err_no);
@@ -67,9 +67,9 @@
 //SGA_DECLSPEC int FAR PASCAL sga_recv(SOCKET s, char FAR *buf, int len);
 
 SOCKET FAR PASCAL sga_connect(const char FAR *hostname, const char FAR *service, 
-		const char FAR *progname, int *err_no, request_rec *, struct global_struct*);
+                const char FAR *progname, int *err_no, request_rec *, struct global_struct*);
 int FAR PASCAL sga_close(SOCKET s, int shutdown_switch, request_rec *r, 
-														struct global_struct*);
+                                                                                                                struct global_struct*);
 
 int FAR PASCAL sga_send(SOCKET s, const char FAR *buf, int len, request_rec *, struct global_struct*);
 int FAR PASCAL sga_recv_old(SOCKET s, char FAR *buf, int len, request_rec *, struct global_struct*);
@@ -102,14 +102,14 @@ char *get_sock_error_code(struct global_struct*);
 #define INVALID_SOCKET -1
 #define _MAX_PATH PATH_MAX 
 
-#define NO_FLAGS_SET		0
+#define NO_FLAGS_SET            0
 
-#define USE_SHUTDOWN		1
-#define DONT_USE_SHUTDOWN	0
+#define USE_SHUTDOWN            1
+#define DONT_USE_SHUTDOWN       0
  
 
 SOCKET sga_connect(const char *hostname, const char *service, 
-		const char *progname, int *err_no, request_rec *, struct global_struct*);
+                const char *progname, int *err_no, request_rec *, struct global_struct*);
 int sga_close(SOCKET s, int shutdown_switch, request_rec *, struct global_struct*);
 int sga_send(SOCKET s, const char *buf, int len, request_rec *, struct global_struct*);
 int sga_recv(SOCKET s, char *buf, int len, request_rec *, struct global_struct*);

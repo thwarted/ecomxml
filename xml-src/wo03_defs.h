@@ -1,7 +1,7 @@
 /* wo03_defs.h  CATALOG REQUEST TRANSACTION*/
 
 #define  wo03_LAN_SEND_BUF_LEN        19269  //19253  //19233 //19208  
-#define  wo03_LAN_RECV_BUF_LEN        1108 //1099  //1095 //1050
+#define  wo03_LAN_RECV_BUF_LEN        1117   //1108 //1099  //1095 //1050
 
 // Header Definitions
 
@@ -193,11 +193,12 @@ typedef struct
 #define  SUCCESS_FLAG_LEN                   1
 #define  REJECT_REASON_LEN          80
 
-#define  PRODUCT_DOL_LEN                        12 //9
-#define  DISC_DOL_LEN                       12 //9
-#define  TAX_DOL_LEN                        12 //9
-#define  POSTAGE_DOL_LEN                        12 //9
-#define  TOTAL_DOL_LEN                          12 //9
+#define  PRODUCT_DOL_LEN                        9
+#define  DISC_DOL_LEN                       9
+#define  TAX_DOL_LEN                        9
+#define  POSTAGE_DOL_LEN                        9
+#define  INSURANCE_DOL_LEN          9
+#define  TOTAL_DOL_LEN                          9
 #define  PAY_METH_LEN                       20
 //#define  SHIP_METH_LEN                    20
 #define  ORD_NUM_LEN                8
@@ -208,8 +209,8 @@ typedef struct
 #define  LINKSHARE_DATE_OUT_LEN         8
 #define  LINKSHARE_TIME_OUT_LEN         6
 #define  SHIPTO_NO_LEN                      2
-#define  NET_DOL_LEN                            12 //9
-#define  GIFT_DOL_LEN                           12 //9
+#define  NET_DOL_LEN                            9
+#define  GIFT_DOL_LEN                           9
 
 #define  wo03_SHIPTO_COUNT                              20
 
@@ -245,6 +246,7 @@ typedef struct
     char discount_dol[DISC_DOL_LEN+1];
     char tax_dol[TAX_DOL_LEN+1];
     char postage_dol[POSTAGE_DOL_LEN+1];
+    char insurance_dol[INSURANCE_DOL_LEN+1];
     char total_dol[TOTAL_DOL_LEN+1];
     char pay_method[PAY_METH_LEN+1];
     char ship_method[SHIP_METH_LEN+1];

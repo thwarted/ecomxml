@@ -19,20 +19,20 @@ OSDIR=$(SRCDIR)/os/unix
 INCDIR=$(SRCDIR)/include
 INCLUDES0=-I$(OSDIR) -I$(INCDIR)
 SHELL=/bin/sh
-OS=Linux
+OS=Solaris 270
 CC=gcc
 CPP=gcc -E
 TARGET=httpd
 OPTIM=
-CFLAGS1= -DLINUX=2 -DUSE_HSREGEX -DUSE_EXPAT -I$(SRCDIR)/lib/expat-lite -DNO_DL_NEEDED
+CFLAGS1= -DSOLARIS2=270 -DUSE_EXPAT -I$(SRCDIR)/lib/expat-lite -DNO_DL_NEEDED
 INCLUDES1=
 LIBS_SHLIB=
 LDFLAGS1=
-MFLAGS_STATIC=--no-print-directory
-REGLIB=regex/libregex.a
+MFLAGS_STATIC=
+REGLIB=
 EXPATLIB=lib/expat-lite/libexpat.a
 RANLIB=ranlib
-LIBS1=  -lm -lcrypt
+LIBS1=  -lsocket -lnsl
 ##
 ##  (End of automatically generated section)
 ##
@@ -94,11 +94,11 @@ depend:
 OBJS=$(SGOBJS)
 
 SGOBJS=\
-	mod_sgxml.o \
-     hashtable.o sgparse.o Sgsock.o tt0001.o tt0003.o tt0005.o tt0007.o tt0009.o tt0011.o tt0013.o tt0015.o tt0017.o tt0019.o tt0021.o tt0023.o tt0025.o tt0027.o tt0029.o tt0031.o tt0033.o tt0035.o tt0037.o tt0039.o tt0041.o tt0043.o tt0045.o tt0047.o tt0049.o tt0051.o tt0053.o tt0055.o tt0057.o tt0059.o tt0061.o tt0063.o tt0065.o tt0067.o tt0069.o tt0071.o tt0073.o tt0075.o tt0077.o tt0079.o tt0081.o tt0083.o tt0085.o tt0087.o tt0089.o tt0091.o tt0093.o tt0095.o tt0105.o tt0107.o tt0109.o tt0111.o tt0113.o tt0115.o tt0117.o tt0123.o xml.o wo01.o wo03.o xmlparse.o xmlrole.o xmltok.o
+     mod_sgxml.o \
+     hashtable.o sgparse.o sgsock.o tt0001.o tt0003.o tt0005.o tt0007.o tt0009.o tt0011.o tt0013.o tt0015.o tt0017.o tt0019.o tt0021.o tt0023.o tt0025.o tt0027.o tt0029.o tt0031.o tt0033.o tt0035.o tt0037.o tt0039.o tt0041.o tt0043.o tt0045.o tt0047.o tt0049.o tt0051.o tt0053.o tt0055.o tt0057.o tt0059.o tt0061.o tt0063.o tt0065.o tt0067.o tt0069.o tt0071.o tt0073.o tt0075.o tt0077.o tt0079.o tt0081.o tt0083.o tt0085.o tt0087.o tt0089.o tt0091.o tt0093.o tt0095.o tt0105.o tt0107.o tt0109.o tt0111.o tt0113.o tt0115.o tt0117.o tt0119.o tt0121.o tt0123.o tt0125.o tt0127.o tt0129.o tt0131.o xml.o wo01.o xmlparse.o xmlrole.o xmltok.o
 SGOBJS_PIC=\
-	mod_sgxml.lo \
-     hashtable.lo sgparse.lo Sgsock.lo tt0001.lo tt0003.lo tt0005.lo tt0007.lo tt0009.lo tt0011.lo tt0013.lo tt0015.lo tt0017.lo tt0019.lo tt0021.lo tt0023.lo tt0025.lo tt0027.lo tt0029.lo tt0031.lo tt0033.lo tt0035.lo tt0037.lo tt0039.lo tt0041.lo tt0043.lo tt0045.lo tt0047.lo tt0049.lo tt0051.lo tt0053.lo tt0055.lo tt0057.lo tt0059.lo tt0061.lo tt0063.lo tt0065.lo tt0067.lo tt0069.lo tt0071.lo tt0073.lo tt0075.lo tt0077.lo tt0079.lo tt0081.lo tt0083.lo tt0085.lo tt0087.lo tt0089.lo tt0091.lo tt0093.lo tt0095.lo tt0105.lo tt0107.lo tt0109.lo tt0111.lo tt0113.lo tt0115.lo tt0117.lo tt0123.lo xml.lo wo01.lo wo03.lo xmlparse.lo xmlrole.lo xmltok.lo
+     mod_sgxml.lo \
+     hashtable.lo sgparse.lo sgsock.lo tt0001.lo tt0003.lo tt0005.lo tt0007.lo tt0009.lo tt0011.lo tt0013.lo tt0015.lo tt0017.lo tt0019.lo tt0021.lo tt0023.lo tt0025.lo tt0027.lo tt0029.lo tt0031.lo tt0033.lo tt0035.lo tt0037.lo tt0039.lo tt0041.lo tt0043.lo tt0045.lo tt0047.lo tt0049.lo tt0051.lo tt0053.lo tt0055.lo tt0057.lo tt0059.lo tt0061.lo tt0063.lo tt0065.lo tt0067.lo tt0069.lo tt0071.lo tt0073.lo tt0075.lo tt0077.lo tt0079.lo tt0081.lo tt0083.lo tt0085.lo tt0087.lo tt0089.lo tt0091.lo tt0093.lo tt0095.lo tt0105.lo tt0107.lo tt0109.lo tt0111.lo tt0113.lo tt0115.lo tt0117.lo tt0119.lo tt0121.lo tt0123.lo tt0125.lo tt0127.lo tt0129.lo tt0131.lo xml.lo wo01.lo xmlparse.lo xmlrole.lo xmltok.lo
 
 libsgxml.a: $(SGOBJS)
 	rm -f $@
@@ -174,7 +174,7 @@ sgparse.o: sgparse.c $(INCDIR)/httpd.h \
  $(INCDIR)/http_main.h $(INCDIR)/ap_md5.h \
  $(INCDIR)/multithread.h $(INCDIR)/http_log.h \
  $(INCDIR)/util_date.h
-Sgsock.o: Sgsock.c sgsock.h $(INCDIR)/httpd.h \
+sgsock.o: sgsock.c sgsock.h $(INCDIR)/httpd.h \
  $(INCDIR)/ap_config.h $(INCDIR)/ap_mmn.h \
  $(INCDIR)/ap_config_auto.h $(OSDIR)/os.h \
  $(INCDIR)/ap_ctype.h $(INCDIR)/hsregex.h \
@@ -734,7 +734,67 @@ tt0117.o: tt0117.c tt0117_defs.h $(INCDIR)/httpd.h \
  $(INCDIR)/http_main.h $(INCDIR)/ap_md5.h \
  $(INCDIR)/multithread.h $(INCDIR)/http_log.h \
  $(INCDIR)/util_date.h
+tt0119.o: tt0119.c tt0119_defs.h $(INCDIR)/httpd.h \
+ $(INCDIR)/ap_config.h $(INCDIR)/ap_mmn.h \
+ $(INCDIR)/ap_config_auto.h $(OSDIR)/os.h \
+ $(INCDIR)/ap_ctype.h $(INCDIR)/hsregex.h \
+ $(INCDIR)/alloc.h $(INCDIR)/buff.h $(INCDIR)/ap.h \
+ $(INCDIR)/util_uri.h $(INCDIR)/http_config.h \
+ $(INCDIR)/http_protocol.h $(INCDIR)/explain.h \
+ $(INCDIR)/http_main.h $(INCDIR)/ap_md5.h \
+ $(INCDIR)/multithread.h $(INCDIR)/http_log.h \
+ $(INCDIR)/util_date.h
+tt0121.o: tt0121.c tt0121_defs.h $(INCDIR)/httpd.h \
+ $(INCDIR)/ap_config.h $(INCDIR)/ap_mmn.h \
+ $(INCDIR)/ap_config_auto.h $(OSDIR)/os.h \
+ $(INCDIR)/ap_ctype.h $(INCDIR)/hsregex.h \
+ $(INCDIR)/alloc.h $(INCDIR)/buff.h $(INCDIR)/ap.h \
+ $(INCDIR)/util_uri.h $(INCDIR)/http_config.h \
+ $(INCDIR)/http_protocol.h $(INCDIR)/explain.h \
+ $(INCDIR)/http_main.h $(INCDIR)/ap_md5.h \
+ $(INCDIR)/multithread.h $(INCDIR)/http_log.h \
+ $(INCDIR)/util_date.h
 tt0123.o: tt0123.c tt0123_defs.h $(INCDIR)/httpd.h \
+ $(INCDIR)/ap_config.h $(INCDIR)/ap_mmn.h \
+ $(INCDIR)/ap_config_auto.h $(OSDIR)/os.h \
+ $(INCDIR)/ap_ctype.h $(INCDIR)/hsregex.h \
+ $(INCDIR)/alloc.h $(INCDIR)/buff.h $(INCDIR)/ap.h \
+ $(INCDIR)/util_uri.h $(INCDIR)/http_config.h \
+ $(INCDIR)/http_protocol.h $(INCDIR)/explain.h \
+ $(INCDIR)/http_main.h $(INCDIR)/ap_md5.h \
+ $(INCDIR)/multithread.h $(INCDIR)/http_log.h \
+ $(INCDIR)/util_date.h
+tt0125.o: tt0125.c tt0125_defs.h $(INCDIR)/httpd.h \
+ $(INCDIR)/ap_config.h $(INCDIR)/ap_mmn.h \
+ $(INCDIR)/ap_config_auto.h $(OSDIR)/os.h \
+ $(INCDIR)/ap_ctype.h $(INCDIR)/hsregex.h \
+ $(INCDIR)/alloc.h $(INCDIR)/buff.h $(INCDIR)/ap.h \
+ $(INCDIR)/util_uri.h $(INCDIR)/http_config.h \
+ $(INCDIR)/http_protocol.h $(INCDIR)/explain.h \
+ $(INCDIR)/http_main.h $(INCDIR)/ap_md5.h \
+ $(INCDIR)/multithread.h $(INCDIR)/http_log.h \
+ $(INCDIR)/util_date.h
+tt0127.o: tt0127.c tt0127_defs.h $(INCDIR)/httpd.h \
+ $(INCDIR)/ap_config.h $(INCDIR)/ap_mmn.h \
+ $(INCDIR)/ap_config_auto.h $(OSDIR)/os.h \
+ $(INCDIR)/ap_ctype.h $(INCDIR)/hsregex.h \
+ $(INCDIR)/alloc.h $(INCDIR)/buff.h $(INCDIR)/ap.h \
+ $(INCDIR)/util_uri.h $(INCDIR)/http_config.h \
+ $(INCDIR)/http_protocol.h $(INCDIR)/explain.h \
+ $(INCDIR)/http_main.h $(INCDIR)/ap_md5.h \
+ $(INCDIR)/multithread.h $(INCDIR)/http_log.h \
+ $(INCDIR)/util_date.h
+tt0129.o: tt0129.c tt0129_defs.h $(INCDIR)/httpd.h \
+ $(INCDIR)/ap_config.h $(INCDIR)/ap_mmn.h \
+ $(INCDIR)/ap_config_auto.h $(OSDIR)/os.h \
+ $(INCDIR)/ap_ctype.h $(INCDIR)/hsregex.h \
+ $(INCDIR)/alloc.h $(INCDIR)/buff.h $(INCDIR)/ap.h \
+ $(INCDIR)/util_uri.h $(INCDIR)/http_config.h \
+ $(INCDIR)/http_protocol.h $(INCDIR)/explain.h \
+ $(INCDIR)/http_main.h $(INCDIR)/ap_md5.h \
+ $(INCDIR)/multithread.h $(INCDIR)/http_log.h \
+ $(INCDIR)/util_date.h
+tt0131.o: tt0131.c tt0131_defs.h $(INCDIR)/httpd.h \
  $(INCDIR)/ap_config.h $(INCDIR)/ap_mmn.h \
  $(INCDIR)/ap_config_auto.h $(OSDIR)/os.h \
  $(INCDIR)/ap_ctype.h $(INCDIR)/hsregex.h \
@@ -755,16 +815,6 @@ xml.o: xml.c $(INCDIR)/httpd.h \
  $(INCDIR)/multithread.h $(INCDIR)/http_log.h \
  $(INCDIR)/util_date.h
 wo01.o: wo01.c wo01_defs.h $(INCDIR)/httpd.h \
- $(INCDIR)/ap_config.h $(INCDIR)/ap_mmn.h \
- $(INCDIR)/ap_config_auto.h $(OSDIR)/os.h \
- $(INCDIR)/ap_ctype.h $(INCDIR)/hsregex.h \
- $(INCDIR)/alloc.h $(INCDIR)/buff.h $(INCDIR)/ap.h \
- $(INCDIR)/util_uri.h $(INCDIR)/http_config.h \
- $(INCDIR)/http_protocol.h $(INCDIR)/explain.h \
- $(INCDIR)/http_main.h $(INCDIR)/ap_md5.h \
- $(INCDIR)/multithread.h $(INCDIR)/http_log.h \
- $(INCDIR)/util_date.h
-wo03.o: wo03.c wo03_defs.h $(INCDIR)/httpd.h \
  $(INCDIR)/ap_config.h $(INCDIR)/ap_mmn.h \
  $(INCDIR)/ap_config_auto.h $(OSDIR)/os.h \
  $(INCDIR)/ap_ctype.h $(INCDIR)/hsregex.h \

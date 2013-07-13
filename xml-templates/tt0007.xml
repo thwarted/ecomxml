@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 
+<!DOCTYPE tt0007 PUBLIC "-//Smith-Gardner//DTD XML 1.0//EN" "../xml-dtd/tt0007.dtd">
+
 <!-- ORDER REVIEW -->
 
 <tt0007 id="tt0007">
@@ -12,7 +14,9 @@
 		<UID></UID>
 		<ORD_NUM>W0001073</ORD_NUM>
 		<PAGE_NO></PAGE_NO>
-		<CUST_EDP></CUST_EDP>
+		<ENCRYPT_CUST_EDP></ENCRYPT_CUST_EDP>
+		<PURCH_ORD_NO></PURCH_ORD_NO>
+		<SEARCH_TYPE></SEARCH_TYPE>
 
 	</sg_data_to_macs>
 

@@ -42,25 +42,25 @@ extern char theuserid[17];                     /* User ID, if one exists */
 
 /* From parser.c */
 
-extern char	*rtrim(char *, int, struct global_struct *);
+extern char     *rtrim(char *, int, struct global_struct *);
 extern char    *handle_special_chars(struct global_struct *, char *);
 
-extern int	getpath(struct global_struct *);
-extern void	GetInf(struct global_struct *);
+extern int      getpath(struct global_struct *);
+extern void     GetInf(struct global_struct *);
 
-extern int	isempty(char *, int);
+//extern int    isempty(char *, int);
 
 /* End Of SGA Original Code Defs, vars, etc. */
 /***************************************************/
 /* These files, vars, etc. are for use with rxp.c and associated code...*/
 
-extern int	handle_sga_xml_data(char *, request_rec *, struct global_struct *);
-extern int	setup_transaction_type(int, request_rec *, struct global_struct *, char *);
-extern int	fill_working_struct(struct global_struct *, char *);
-extern int	initialize_tag_data(struct global_struct *);
-extern int	XML_Error(char *, char *, char *, char *, request_rec *, struct global_struct *);
-extern void	reparse_customer_data(request_rec *, struct global_struct *);
-extern int		XML_Expat_Error(char *, char *, char *, char *, request_rec *, struct global_struct *);
+extern int      handle_sga_xml_data(char *, request_rec *, struct global_struct *);
+extern int      setup_transaction_type(int, request_rec *, struct global_struct *, char *);
+extern int      fill_working_struct(struct global_struct *, char *);
+extern int      initialize_tag_data(struct global_struct *);
+extern int      XML_Error(char *, char *, char *, char *, request_rec *, struct global_struct *);
+extern void     reparse_customer_data(request_rec *, struct global_struct *);
+extern int              XML_Expat_Error(char *, char *, char *, char *, request_rec *, struct global_struct *);
 
 extern int     get_tag_from_seq(int, char *, char *, struct global_struct *);
 extern void    set_tag_name(char *, char *, int);

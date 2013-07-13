@@ -41,10 +41,10 @@
 #include <io.h>
 */
 extern int handle_sga_xml_data(char *, request_rec *, struct global_struct *);
-extern void	XML_Error_Trailer(request_rec *, struct global_struct *);
+extern void     XML_Error_Trailer(request_rec *, struct global_struct *);
 
 // EXPAT STUFF  ################################################
-/*	int Eventcnt = 0;
+/*      int Eventcnt = 0;
 
 
 void
@@ -67,9 +67,9 @@ printcurrent(XML_Parser p) {
 void
 start_hndl(void *data, const char *el, const char **attr) {
 
-	printf("\n%4d: Start tag %s - ", Eventcnt++, el);
+        printf("\n%4d: Start tag %s - ", Eventcnt++, el);
 
-	printcurrent((XML_Parser) data);
+        printcurrent((XML_Parser) data);
 }  // End of start_hndl
 
 
@@ -100,35 +100,35 @@ int sgparse(char *stdout_buffer, request_rec *r, struct global_struct *);
 
 int sgparse(char *stdout_buffer, request_rec *r, struct global_struct *gbp)
 {
-//	static int first = 0;
-//	int sga_xml = -1;
-//	struct global_struct gb;
-//	int len;
-//	XML_Parser Xp;
-//	char linenumber[100];
-//	int i=0;
-	// setting up of the variables 
-	gbp->XML_ERROR_HEADER = -1;  
-	gbp->this_transaction = 0;
-	
-//	first++;
-//ap_rprintf(r,"BEFORE EXPAT = %s",stdout_buffer);	
+//      static int first = 0;
+//      int sga_xml = -1;
+//      struct global_struct gb;
+//      int len;
+//      XML_Parser Xp;
+//      char linenumber[100];
+//      int i=0;
+        // setting up of the variables 
+        gbp->XML_ERROR_HEADER = -1;  
+        gbp->this_transaction = 0;
+        
+//      first++;
+//ap_rprintf(r,"BEFORE EXPAT = %s",stdout_buffer);      
 /*
 #ifdef WIN32
-	printf("The request : %s  PID = %d : COUNT = %d\n",r->the_request,
-					_getpid(),first);
+        printf("The request : %s  PID = %d : COUNT = %d\n",r->the_request,
+                                        _getpid(),first);
 #else
-	printf("The request : %s  PID = %d : COUNT = %d\n",r->the_request,
-					getpid(),first);
+        printf("The request : %s  PID = %d : COUNT = %d\n",r->the_request,
+                                        getpid(),first);
 #endif
-*/			
+*/                      
 //Call Expat  (XML Parser)
 
   gbp->Xp = XML_ParserCreate(NULL);
   if (! gbp->Xp) {
     //printf("Couldn't allocate memory for xml parser\n");
 
-	XML_Expat_Error("XML Parser", "Couldn't allocate memory for XML parser", "validation","XML Parser Error",r,gbp);
+        XML_Expat_Error("XML Parser", "Couldn't allocate memory for XML parser", "validation","XML Parser Error",r,gbp);
     return 0;
   }
 
@@ -141,9 +141,9 @@ int sgparse(char *stdout_buffer, request_rec *r, struct global_struct *gbp)
 //    len = strlen(stdout_buffer);
 
     if (! XML_Parse(gbp->Xp, stdout_buffer, strlen(stdout_buffer), 1)) {
-	sprintf(gbp->linenumber,"line number %d", XML_GetCurrentLineNumber(gbp->Xp));
-	XML_Expat_Error("XML Parser Error at", (char *)gbp->linenumber , 
-		(char *)XML_ErrorString(XML_GetErrorCode(gbp->Xp)) ,"XML Syntax Error",r,gbp);
+        sprintf(gbp->linenumber,"line number %d", XML_GetCurrentLineNumber(gbp->Xp));
+        XML_Expat_Error("XML Parser Error at", (char *)gbp->linenumber , 
+                (char *)XML_ErrorString(XML_GetErrorCode(gbp->Xp)) ,"XML Syntax Error",r,gbp);
 
       return 0;
     }
@@ -152,20 +152,20 @@ int sgparse(char *stdout_buffer, request_rec *r, struct global_struct *gbp)
 
 //End of Expat handling
 
-	gbp->reqdata="a b c d e f g h i j k l m n o p q r s t u v w x y z";	
+        gbp->reqdata="a b c d e f g h i j k l m n o p q r s t u v w x y z";     
 
-//SG parse	
-//	ap_rprintf(r,"Going into Handle_SGA_XML_Data");
-//	sga_xml = handle_sga_xml_data(stdout_buffer, r,gbp);   // sending "request" i.e. 0 argument 	
-	handle_sga_xml_data(stdout_buffer, r,gbp);   // sending "request" i.e. 0 argument 	
+//SG parse      
+//      ap_rprintf(r,"Going into Handle_SGA_XML_Data");
+//      sga_xml = handle_sga_xml_data(stdout_buffer, r,gbp);   // sending "request" i.e. 0 argument     
+        handle_sga_xml_data(stdout_buffer, r,gbp);   // sending "request" i.e. 0 argument       
 
-	if(gbp->XML_ERROR_HEADER == 0)
-		XML_Error_Trailer(r, gbp);
+        if(gbp->XML_ERROR_HEADER == 0)
+                XML_Error_Trailer(r, gbp);
 
-	//ap_rprintf(r,"RXP_MAIN : 12 : count = %d\n", first );
+        //ap_rprintf(r,"RXP_MAIN : 12 : count = %d\n", first );
 #ifdef WIN32
-	
-	return 0;
+        
+        return 0;
 #endif
 }
 

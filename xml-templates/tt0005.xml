@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 
+<!DOCTYPE tt0005 PUBLIC "-//Smith_Gardner//DTD XML 1.0//EN" "../xml-dtd/tt0005.dtd">
+
 <!-- ALL ORDERS -->
 
 <tt0005 id="tt0005">
@@ -9,9 +11,11 @@
 
 		<COMPANY>01</COMPANY>
 		<DIVISION>01</DIVISION>
-		<UID></UID>
-		<CUST_EDP>464</CUST_EDP>
+		<UID>2000112115331509</UID>
+		<ENCRYPT_CUST_EDP>72183058477148401</ENCRYPT_CUST_EDP>
 		<PAGE_NUM></PAGE_NUM>
+		<START_DATE></START_DATE>
+		<END_DATE></END_DATE>
 
 	</sg_data_to_macs>
 
