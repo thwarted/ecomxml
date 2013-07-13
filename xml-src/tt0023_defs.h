@@ -2,7 +2,7 @@
 
 
 #define  tt0023_LAN_SEND_BUF_LEN      99 //98
-#define  tt0023_LAN_RECV_BUF_LEN      1386 //1385 //1382 //1376 //1250
+#define  tt0023_LAN_RECV_BUF_LEN      1566 //1386 //1385 
 
 /* Web to MACS Buffer  */
 
@@ -36,6 +36,7 @@
 #define tt0023_CUSTOMIZE_COUNT         20
 
 #define  tt0023_CUSTOMIZE_LEN          60
+#define  tt0023_COMP_EDP_LEN           9
 
 
 #define  tt0023_ITEM_LINE_NUMBER_LEN    3
@@ -63,6 +64,7 @@ typedef struct
 typedef struct
 {
     char customization_line[tt0023_CUSTOMIZE_LEN + 1];
+	char comp_edp_no[tt0023_COMP_EDP_LEN+1];
 
 } tt0023_customize_array;
 

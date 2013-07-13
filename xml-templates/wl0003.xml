@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<wl0003 id="wl0003">
+
+<!-- THIS IS THE ACTUAL DATA REQUIRED FOR TRANSACTION COMPLETION -->
+	<sg_data_to_macs>
+
+		<TRANSACTION_ID>0003</TRANSACTION_ID>
+		<COMPANY>01</COMPANY>
+		<DIVISION>01</DIVISION>		<UID></UID>
+		<WL_COMPANY></WL_COMPANY>
+		<WL_DIVISION></WL_DIVISION>
+		<WL_ID></WL_ID>
+		<ITEM_NUM></ITEM_NUM>
+		<LINE_NUM></LINE_NUM>
+		<CUSTOM_FLAG></CUSTOM_FLAG>
+		<KIT_FLAG></KIT_FLAG>
+
+	</sg_data_to_macs>
+
+<!-- THIS IS ANY ADDITIONAL TRANSACTION DATA -->
+	<user_data_for_return_with_response>
+
+		<a>ASDF</a>
+		<b>GHJK</b>
+		<c>HJKL</c>
+		<d>1234</d>
+		<e></e>
+		<f></f>
+		<g></g>
+		<h></h>
+		<i></i>
+		<j></j>
+		<k></k>
+		<l></l>
+		<m></m>
+		<n></n>
+		<o></o>
+		<p></p>
+		<q></q>
+		<r></r>
+		<s></s>
+		<t></t>
+		<u></u>
+		<v></v>
+		<w></w>
+		<x></x>
+		<y></y>
+		<z></z>
+
+	</user_data_for_return_with_response>
+
+</wl0003>

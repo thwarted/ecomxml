@@ -94,6 +94,8 @@ int tt0019_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_bu
     strncpy(gbp->sendbuf0019->cc_exp_mm, gbp->tagname, 2);
 
         get_tag_data("TRANSACTION_AMT",  gbp->sendbuf0019->transaction_amt,gbp,stdout_buffer);
+        get_tag_data("BL_BIRTH_DATE",    gbp->sendbuf0019->birthday,gbp,stdout_buffer);
+        get_tag_data("SV_BAL_INQ",    gbp->sendbuf0019->sv_bal_inq,gbp,stdout_buffer);
 
 
     if((tt0019_CatSendStr(gbp, gbp->sendbufcat, gbp->sendbuf0019)) == tt0019_LAN_SEND_BUF_LEN)
@@ -167,7 +169,7 @@ int tt0019_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_bu
 int tt0019_CatSendStr(struct global_struct *gbp, char *sz_sendbufcat, tt0019_st_send *ptr_sendbuf)
 {
     gbp->j = sprintf(sz_sendbufcat,
-            "%-4.4s%-4.4s%-2.2s%-2.2s%-16.16s%-16.16s%-25.25s%09d%-2.2s%-20.20s%-2.2s%-2.2s%08.2f",
+            "%-4.4s%-4.4s%-2.2s%-2.2s%-16.16s%-16.16s%-25.25s%09d%-2.2s%-20.20s%-2.2s%-2.2s%08.2f%-8.8s%-1.1s",
             ptr_sendbuf->request_id,
             ptr_sendbuf->record_id,
             ptr_sendbuf->company,
@@ -180,7 +182,9 @@ int tt0019_CatSendStr(struct global_struct *gbp, char *sz_sendbufcat, tt0019_st_
             ptr_sendbuf->cc_num,
             ptr_sendbuf->cc_exp_yy,
             ptr_sendbuf->cc_exp_mm,
-            atof(ptr_sendbuf->transaction_amt));
+            atof(ptr_sendbuf->transaction_amt),
+			ptr_sendbuf->birthday,
+			ptr_sendbuf->sv_bal_inq);
 
     return(gbp->j);
 }
@@ -247,6 +251,31 @@ int tt0019_ParceRecvStr(tt0019_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
         ap_rprintf(r,"		<AUTH_ACTION>%s</AUTH_ACTION>\n", handle_special_chars(gbp,ptr_recvbuf->auth_action));
     gbp->count += tt0019_AUTH_ACTION_LEN;
 
+	memset(ptr_recvbuf->avs_code, '\0', tt0019_AVS_CODE_LEN + 1);
+    memcpy(ptr_recvbuf->avs_code, sz_recvbufcat + gbp->count, tt0019_AVS_CODE_LEN);
+        ap_rprintf(r,"		<AVS_CODE>%s</AVS_CODE>\n", handle_special_chars(gbp,ptr_recvbuf->avs_code));
+    gbp->count += tt0019_AVS_CODE_LEN;
+
+
+	memset(ptr_recvbuf->cc_resp_code, '\0', tt0019_CC_RESP_CODE_LEN + 1);
+    memcpy(ptr_recvbuf->cc_resp_code, sz_recvbufcat + gbp->count, tt0019_CC_RESP_CODE_LEN);
+        ap_rprintf(r,"		<CC_RESP_CODE>%s</CC_RESP_CODE>\n", handle_special_chars(gbp,ptr_recvbuf->cc_resp_code));
+    gbp->count += tt0019_CC_RESP_CODE_LEN;
+
+	memset(ptr_recvbuf->bml_account, '\0', tt0019_BML_ACCT_LEN + 1);
+    memcpy(ptr_recvbuf->bml_account, sz_recvbufcat + gbp->count, tt0019_BML_ACCT_LEN);
+        ap_rprintf(r,"		<BML_ACCOUNT>%s</BML_ACCOUNT>\n", handle_special_chars(gbp,ptr_recvbuf->bml_account));
+    gbp->count += tt0019_BML_ACCT_LEN;
+
+	memset(ptr_recvbuf->bml_reg_date, '\0', tt0019_BML_DATE_LEN + 1);
+    memcpy(ptr_recvbuf->bml_reg_date, sz_recvbufcat + gbp->count, tt0019_BML_DATE_LEN);
+        ap_rprintf(r,"		<BML_REG_DATE>%s</BML_REG_DATE>\n", handle_special_chars(gbp,ptr_recvbuf->bml_reg_date));
+    gbp->count += tt0019_BML_DATE_LEN;
+
+	memset(ptr_recvbuf->sv_bal_amt, '\0', tt0019_SV_AMT_LEN + 1);
+    memcpy(ptr_recvbuf->sv_bal_amt, sz_recvbufcat + gbp->count, tt0019_SV_AMT_LEN);
+        ap_rprintf(r,"		<SV_BALANCE>%s</SV_BALANCE>\n", handle_special_chars(gbp,ptr_recvbuf->sv_bal_amt));
+    gbp->count += tt0019_SV_AMT_LEN;
 
         ap_rprintf(r,"	%s>\n", gbp->metag);
         ap_rprintf(r,"%s\n", pt_message);

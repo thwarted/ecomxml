@@ -172,7 +172,7 @@ int tt0029_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_bu
 int tt0029_CatSendStr(struct global_struct *gbp, char *sz_sendbufcat, tt0029_st_send *ptr_sendbuf)
 {
     gbp->j = sprintf(sz_sendbufcat,
-            "%-4.4s%-4.4s%-2.2s%-2.2s%-16.16s%-16.16s%-25.25s%-20.20s%-6.6s%-1.1s%-3.3s%-1.1s%-1.1s%-1.1s"
+            "%-4.4s%-4.4s%-2.2s%-2.2s%-16.16s%-16.16s%-25.25s%-20.20s%-4.4s%-1.1s%-3.3s%-1.1s%-1.1s%-1.1s"
                         "%-1.1s%-1.1s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s"
                         "%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s"
                         "%-1.1s%-1.1s%-16.16s%-2.2s%-9.9s%-16.16s%-4.4s",

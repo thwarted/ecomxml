@@ -10,7 +10,7 @@
 	   <DIVISION>01</DIVISION>
 
     	 <R10>
-     	   <R10_SEQ>01</R10_SEQ>
+     	   <R10_SEQ>001</R10_SEQ>
            <R10_REC_TYPE>10</R10_REC_TYPE>
 	   <R10_SOURCE></R10_SOURCE>
 	   <R10_MAIL_DATE></R10_MAIL_DATE>
@@ -39,7 +39,7 @@
 
 
 	<R13>
-           <R13_SEQ>02</R13_SEQ>
+           <R13_SEQ>002</R13_SEQ>
            <R13_REC_TYPE>13</R13_REC_TYPE>
            <R13_EMAIL_ADDR></R13_EMAIL_ADDR>
            <R13_NET_PASSWORD>TEST</R13_NET_PASSWORD>
@@ -50,7 +50,7 @@
 	</R13>
 
         <R15>
-           <R15_SEQ>03</R15_SEQ>
+           <R15_SEQ>003</R15_SEQ>
            <R15_REC_TYPE>15</R15_REC_TYPE>
 	   <R15_REMIT_AMT></R15_REMIT_AMT>
            <R15_FUTURE_DATE></R15_FUTURE_DATE>
@@ -89,7 +89,7 @@
 	</R15>
 
 	<R16>
-	    <R16_1_SEQ>04</R16_1_SEQ>
+	    <R16_1_SEQ>004</R16_1_SEQ>
 	    <R16_1_REC_TYPE>16</R16_1_REC_TYPE>
 	    <R16_1_ORD_COMMENT1> this is a test comment1</R16_1_ORD_COMMENT1>
 	    <R16_1_ORD_COMMENT2> this is a test comment2</R16_1_ORD_COMMENT2>
@@ -100,7 +100,7 @@
 	</R16>
 
 	<R17>
-	    <R17_SEQ>05</R17_SEQ>
+	    <R17_SEQ>005</R17_SEQ>
 	    <R17_REC_TYPE>17</R17_REC_TYPE>
 	    <R17_1_COUPON_NUM>789373223</R17_1_COUPON_NUM>
 	    <R17_1_PERCENT_OFF></R17_1_PERCENT_OFF>
@@ -108,7 +108,7 @@
 	</R17>
 
 	<R40_1>
-           <R40_1_SEQ>06</R40_1_SEQ>
+           <R40_1_SEQ>006</R40_1_SEQ>
            <R40_1_REC_TYPE>40</R40_1_REC_TYPE>
            <R40_1_ITEM_QTY>0010</R40_1_ITEM_QTY>
            <R40_1_ITEM_EDP></R40_1_ITEM_EDP>

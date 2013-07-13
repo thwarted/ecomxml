@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- MULTIPLE OCCURENCE RECORD IN AN ORDER -->
+
+	<R43_1>
+           <R43_1_SEQ></R43_1_SEQ>
+           <R43_1_REC_TYPE></R43_1_REC_TYPE>
+           <R43_1_SERIAL_NUM></R43_1_SERIAL_NUM>
+	</R43_1>
+
+	<R43_2>
+           <R43_2_SEQ></R43_2_SEQ>
+           <R43_2_REC_TYPE></R43_2_REC_TYPE>
+           <R43_2_SERIAL_NUM></R43_2_SERIAL_NUM>
+	</R43_2>

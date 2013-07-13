@@ -24,20 +24,22 @@
 #include <sys/types.h>
 #include <sys/file.h>
 #include <sys/time.h>
+
 #ifdef SOLARIS2
 #include <netinet/in_systm.h>
 #endif
+
+#ifdef HPUX
+#include <netinet/in_systm.h>
 #include <netdb.h>
 #include <netinet/ip.h>
-/*
 #include <netinet/in_systm.h>
 #include <netinet/in.h>
 #include <netinet/ip.h>
 #include <netinet/ip_icmp.h>
 #include <netdb.h>
-
 #include <arpa/inet.h>
-*/
+#endif
 
 #endif
 

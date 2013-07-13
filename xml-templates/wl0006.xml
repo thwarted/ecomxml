@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+
+<wl0006 id="wl0006">
+
+<!-- THIS IS THE ACTUAL DATA REQUIRED FOR TRANSACTION COMPLETION -->
+	<sg_data_to_macs>
+
+		<TRANSACTION_ID>0006</TRANSACTION_ID>
+		<COMPANY>01</COMPANY>
+		<DIVISION>01</DIVISION>
+		<UID></UID>
+		<WL_COMPANY></WL_COMPANY>
+		<WL_DIVISION></WL_DIVISION>
+		<WL_ID></WL_ID>
+		<WL_PROFILE></WL_PROFILE>
+		<EMAIL_1></EMAIL_1>
+		<EMAIL_2></EMAIL_2>
+		<EMAIL_3></EMAIL_3>
+		<EMAIL_4></EMAIL_4>
+		<EMAIL_5></EMAIL_5>
+		<EMAIL_6></EMAIL_6>
+		<EMAIL_7></EMAIL_7>
+		<EMAIL_8></EMAIL_8>
+		<EMAIL_9></EMAIL_9>
+		<EMAIL_10></EMAIL_10>
+		<EMAIL_11></EMAIL_11>
+		<EMAIL_12></EMAIL_12>
+		<EMAIL_13></EMAIL_13>
+		<EMAIL_14></EMAIL_14>
+		<EMAIL_15></EMAIL_15>
+		<EMAIL_16></EMAIL_16>
+		<EMAIL_17></EMAIL_17>
+		<EMAIL_18></EMAIL_18>
+		<EMAIL_19></EMAIL_19>
+		<EMAIL_20></EMAIL_20>
+		<EMAIL_21></EMAIL_21>
+		<EMAIL_22></EMAIL_22>
+		<EMAIL_23></EMAIL_23>
+		<EMAIL_24></EMAIL_24>
+		<EMAIL_25></EMAIL_25>
+		<EMAIL_26></EMAIL_26>
+		<EMAIL_27></EMAIL_27>
+		<EMAIL_28></EMAIL_28>
+		<EMAIL_29></EMAIL_29>
+		<EMAIL_30></EMAIL_30>		<EMAIL_31></EMAIL_31>
+		<EMAIL_32></EMAIL_32>
+		<EMAIL_33></EMAIL_33>
+		<EMAIL_34></EMAIL_34>
+		<EMAIL_35></EMAIL_35>
+		<EMAIL_36></EMAIL_36>
+		<EMAIL_37></EMAIL_37>
+		<EMAIL_38></EMAIL_38>
+		<EMAIL_39></EMAIL_39>
+		<EMAIL_40></EMAIL_40>		<EMAIL_41></EMAIL_41>
+		<EMAIL_42></EMAIL_42>
+		<EMAIL_43></EMAIL_43>
+		<EMAIL_44></EMAIL_44>
+		<EMAIL_45></EMAIL_45>
+		<EMAIL_46></EMAIL_46>
+		<EMAIL_47></EMAIL_47>
+		<EMAIL_48></EMAIL_48>
+		<EMAIL_49></EMAIL_49>
+		<EMAIL_50></EMAIL_50>
+	</sg_data_to_macs>
+
+<!-- THIS IS ANY ADDITIONAL TRANSACTION DATA -->
+	<user_data_for_return_with_response>
+
+		<a>ASDF</a>
+		<b>GHJK</b>
+		<c>HJKL</c>
+		<d>1234</d>
+		<e></e>
+		<f></f>
+		<g></g>
+		<h></h>
+		<i></i>
+		<j></j>
+		<k></k>
+		<l></l>
+		<m></m>
+		<n></n>
+		<o></o>
+		<p></p>
+		<q></q>
+		<r></r>
+		<s></s>
+		<t></t>
+		<u></u>
+		<v></v>
+		<w></w>
+		<x></x>
+		<y></y>
+		<z></z>
+
+	</user_data_for_return_with_response>
+
+</wl0006>

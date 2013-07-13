@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!-- SINGLE OCCURENCE RECORD IN AN ORDER -->
+
+	<R20>
+           <R20_SEQ></R20_SEQ>
+           <R20_REC_TYPE></R20_REC_TYPE>
+           <R20_CC_TYPE></R20_CC_TYPE>
+           <R20_CC_CARD_NUM></R20_CC_CARD_NUM>
+           <R20_CC_EXP_YEAR></R20_CC_EXP_YEAR>
+           <R20_CC_EXP_MONTH></R20_CC_EXP_MONTH>
+           <R20_CC_AUTH_CODE></R20_CC_AUTH_CODE>
+           <R20_CC_AUTH_FLAG></R20_CC_AUTH_FLAG>
+           <R20_CC_SEC_CODE></R20_CC_SEC_CODE>
+           <R20_CC_AUTH_AMT></R20_CC_AUTH_AMT>
+           <R20_AVS_CODE></R20_AVS_CODE>
+           <R20_CC_RESP_CODE></R20_CC_RESP_CODE>
+           <R20_SW_ISSUE_NUM></R20_SW_ISSUE_NUM>
+           <R20_SW_START_YY></R20_SW_START_YY>
+           <R20_SW_START_MM></R20_SW_START_MM>
+           <R20_BML_CUST_FLAG></R20_BML_CUST_FLAG>
+           <R20_BML_REG_DATE></R20_BML_REG_DATE>
+	</R20>

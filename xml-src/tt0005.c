@@ -194,6 +194,7 @@ int tt0005_ParceRecvStr(tt0005_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
 {
     // Place the individual variables into target fields
         gbp->count = 0;
+		gbp->k = 0;
         ap_rprintf(r,"%s\n", xml_vers_message);
 
 #ifdef XSL
@@ -251,74 +252,72 @@ int tt0005_ParceRecvStr(tt0005_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
      
     // Build data from array
 
-        gbp->k = atoi(ptr_recvbuf->valid_ord);
+		gbp->k = atoi(remove_comma(ptr_recvbuf->valid_ord, tt0005_ORD_LEN, gbp));
         if(gbp->k > (int)tt0005_ORDER_COUNT)
-                gbp->k = (int)tt0005_ORDER_COUNT;
-
+           gbp->k = (int)tt0005_ORDER_COUNT;
 
     for(gbp->i = 0; gbp->i < gbp->k; gbp->i++) 
         {
-        memset(ptr_recvbuf->order[gbp->i].ord_num, '\0', tt0005_ORD_NO_LEN + 1);
-        memcpy(ptr_recvbuf->order[gbp->i].ord_num, sz_recvbufcat + gbp->count, tt0005_ORD_NO_LEN);
-        gbp->count += tt0005_ORD_NO_LEN;
+			memset(ptr_recvbuf->order[gbp->i].ord_num, '\0', tt0005_ORD_NO_LEN + 1);
+			memcpy(ptr_recvbuf->order[gbp->i].ord_num, sz_recvbufcat + gbp->count, tt0005_ORD_NO_LEN);
+			gbp->count += tt0005_ORD_NO_LEN;
 
-                memset(ptr_recvbuf->order[gbp->i].mail_date, '\0', tt0005_MAIL_DATE_LEN + 1);
-        memcpy(ptr_recvbuf->order[gbp->i].mail_date, sz_recvbufcat + gbp->count, tt0005_MAIL_DATE_LEN);
-        gbp->count += tt0005_MAIL_DATE_LEN;
+			memset(ptr_recvbuf->order[gbp->i].mail_date, '\0', tt0005_MAIL_DATE_LEN + 1);
+			memcpy(ptr_recvbuf->order[gbp->i].mail_date, sz_recvbufcat + gbp->count, tt0005_MAIL_DATE_LEN);
+			gbp->count += tt0005_MAIL_DATE_LEN;
 
-        memset(ptr_recvbuf->order[gbp->i].po_num, '\0', tt0005_PO_NO_LEN + 1);
-        memcpy(ptr_recvbuf->order[gbp->i].po_num, sz_recvbufcat + gbp->count, tt0005_PO_NO_LEN);
-        gbp->count += tt0005_PO_NO_LEN;
+			memset(ptr_recvbuf->order[gbp->i].po_num, '\0', tt0005_PO_NO_LEN + 1);
+			memcpy(ptr_recvbuf->order[gbp->i].po_num, sz_recvbufcat + gbp->count, tt0005_PO_NO_LEN);
+			gbp->count += tt0005_PO_NO_LEN;
 
-        memset(ptr_recvbuf->order[gbp->i].num_items, '\0', tt0005_NUM_OF_ITM_LEN + 1);
-                memcpy(ptr_recvbuf->order[gbp->i].num_items, sz_recvbufcat + gbp->count, tt0005_NUM_OF_ITM_LEN);
-        gbp->count += tt0005_NUM_OF_ITM_LEN;
+			memset(ptr_recvbuf->order[gbp->i].num_items, '\0', tt0005_NUM_OF_ITM_LEN + 1);
+			memcpy(ptr_recvbuf->order[gbp->i].num_items, sz_recvbufcat + gbp->count, tt0005_NUM_OF_ITM_LEN);
+			gbp->count += tt0005_NUM_OF_ITM_LEN;
 
-        memset(ptr_recvbuf->order[gbp->i].ship_date, '\0', tt0005_SHIP_DATE_LEN + 1);
-                memcpy(ptr_recvbuf->order[gbp->i].ship_date, sz_recvbufcat + gbp->count, tt0005_SHIP_DATE_LEN);
-        gbp->count += tt0005_SHIP_DATE_LEN;
+			memset(ptr_recvbuf->order[gbp->i].ship_date, '\0', tt0005_SHIP_DATE_LEN + 1);
+			memcpy(ptr_recvbuf->order[gbp->i].ship_date, sz_recvbufcat + gbp->count, tt0005_SHIP_DATE_LEN);
+			gbp->count += tt0005_SHIP_DATE_LEN;
 
-        memset(ptr_recvbuf->order[gbp->i].num_shipments, '\0', tt0005_NUM_OF_SHIPMENTS_LEN + 1);
-                memcpy(ptr_recvbuf->order[gbp->i].num_shipments, sz_recvbufcat + gbp->count, tt0005_NUM_OF_SHIPMENTS_LEN);
-        gbp->count += tt0005_NUM_OF_SHIPMENTS_LEN;
+			memset(ptr_recvbuf->order[gbp->i].num_shipments, '\0', tt0005_NUM_OF_SHIPMENTS_LEN + 1);
+			memcpy(ptr_recvbuf->order[gbp->i].num_shipments, sz_recvbufcat + gbp->count, tt0005_NUM_OF_SHIPMENTS_LEN);
+			gbp->count += tt0005_NUM_OF_SHIPMENTS_LEN;
 
-        memset(ptr_recvbuf->order[gbp->i].ord_status, '\0', tt0005_STATUS_LEN + 1);
-        memcpy(ptr_recvbuf->order[gbp->i].ord_status,    sz_recvbufcat + gbp->count, tt0005_STATUS_LEN);
-        gbp->count += tt0005_STATUS_LEN;
+			memset(ptr_recvbuf->order[gbp->i].ord_status, '\0', tt0005_STATUS_LEN + 1);
+			memcpy(ptr_recvbuf->order[gbp->i].ord_status,    sz_recvbufcat + gbp->count, tt0005_STATUS_LEN);
+			gbp->count += tt0005_STATUS_LEN;
 
-        memset(ptr_recvbuf->order[gbp->i].pty_flag, '\0', tt0005_PTY_FLAG_LEN + 1);
-        memcpy(ptr_recvbuf->order[gbp->i].pty_flag,      sz_recvbufcat + gbp->count, tt0005_PTY_FLAG_LEN);
-        gbp->count += tt0005_PTY_FLAG_LEN;
+			memset(ptr_recvbuf->order[gbp->i].pty_flag, '\0', tt0005_PTY_FLAG_LEN + 1);
+			memcpy(ptr_recvbuf->order[gbp->i].pty_flag,      sz_recvbufcat + gbp->count, tt0005_PTY_FLAG_LEN);
+			gbp->count += tt0005_PTY_FLAG_LEN;
 
+			ap_rprintf(r,"		<ORDER_DETAILS>\n");
+			ap_rprintf(r,"			<SHORT_ORD_NUM>%s</SHORT_ORD_NUM>\n", handle_special_chars(gbp,ptr_recvbuf->order[gbp->i].ord_num));
+			ap_rprintf(r,"			<DATE_ORD_PLACED>%s</DATE_ORD_PLACED>\n", handle_special_chars(gbp,ptr_recvbuf->order[gbp->i].mail_date));
+			ap_rprintf(r,"			<PO_FOR_DROP_SHIP>%s</PO_FOR_DROP_SHIP>\n", handle_special_chars(gbp,ptr_recvbuf->order[gbp->i].po_num));
+			ap_rprintf(r,"			<NUM_OF_PROD>%s</NUM_OF_PROD>\n", handle_special_chars(gbp,ptr_recvbuf->order[gbp->i].num_items));
+			ap_rprintf(r,"			<LAST_SHIP_DATE>%s</LAST_SHIP_DATE>\n", handle_special_chars(gbp,ptr_recvbuf->order[gbp->i].ship_date));
+			ap_rprintf(r,"			<NUM_OF_SHIPMENTS>%s</NUM_OF_SHIPMENTS>\n", handle_special_chars(gbp,ptr_recvbuf->order[gbp->i].num_shipments));
+			ap_rprintf(r,"			<ORD_STATUS>%s</ORD_STATUS>\n", handle_special_chars(gbp,ptr_recvbuf->order[gbp->i].ord_status));
+			ap_rprintf(r,"			<THIRD_PTY_FLAG>%s</THIRD_PTY_FLAG>\n", handle_special_chars(gbp,ptr_recvbuf->order[gbp->i].pty_flag));
+			ap_rprintf(r,"		</ORDER_DETAILS>\n");
 
-                if((ptr_recvbuf->order[gbp->i].ord_num[0]) != ' ' &&
-                        (ptr_recvbuf->order[gbp->i].ord_num[1]) != ' ' &&
-                        (ptr_recvbuf->order[gbp->i].ord_num[2]) != ' ' &&
-                        (ptr_recvbuf->order[gbp->i].ord_num[3]) != ' ' &&
-                        (ptr_recvbuf->order[gbp->i].ord_num[4]) != ' ' &&
-                        (ptr_recvbuf->order[gbp->i].ord_num[5]) != ' ')
-                {
-                        ap_rprintf(r,"		<ORDER_DETAILS>\n");
-                        ap_rprintf(r,"			<SHORT_ORD_NUM>%s</SHORT_ORD_NUM>\n", handle_special_chars(gbp,ptr_recvbuf->order[gbp->i].ord_num));
-                        ap_rprintf(r,"			<DATE_ORD_PLACED>%s</DATE_ORD_PLACED>\n", handle_special_chars(gbp,ptr_recvbuf->order[gbp->i].mail_date));
-                        ap_rprintf(r,"			<PO_FOR_DROP_SHIP>%s</PO_FOR_DROP_SHIP>\n", handle_special_chars(gbp,ptr_recvbuf->order[gbp->i].po_num));
-                        ap_rprintf(r,"			<NUM_OF_PROD>%s</NUM_OF_PROD>\n", handle_special_chars(gbp,ptr_recvbuf->order[gbp->i].num_items));
-                        ap_rprintf(r,"			<LAST_SHIP_DATE>%s</LAST_SHIP_DATE>\n", handle_special_chars(gbp,ptr_recvbuf->order[gbp->i].ship_date));
-                        ap_rprintf(r,"			<NUM_OF_SHIPMENTS>%s</NUM_OF_SHIPMENTS>\n", handle_special_chars(gbp,ptr_recvbuf->order[gbp->i].num_shipments));
-                        ap_rprintf(r,"			<ORD_STATUS>%s</ORD_STATUS>\n", handle_special_chars(gbp,ptr_recvbuf->order[gbp->i].ord_status));
-                        ap_rprintf(r,"			<THIRD_PTY_FLAG>%s</THIRD_PTY_FLAG>\n", handle_special_chars(gbp,ptr_recvbuf->order[gbp->i].pty_flag));
-                        ap_rprintf(r,"		</ORDER_DETAILS>\n");
-                }
+		 }
 
-    }
+        memset(ptr_recvbuf->start_date, '\0', tt0005_DATE_LEN + 1);
+                memcpy(ptr_recvbuf->start_date, sz_recvbufcat + gbp->count, tt0005_DATE_LEN);
+        gbp->count += tt0005_DATE_LEN;
 
-        memset(ptr_recvbuf->first_date, '\0', tt0005_FIRST_DATE_LEN + 1);
-                memcpy(ptr_recvbuf->first_date, sz_recvbufcat + gbp->count, tt0005_FIRST_DATE_LEN);
-        gbp->count += tt0005_FIRST_DATE_LEN;
+        memset(ptr_recvbuf->end_date, '\0', tt0005_DATE_LEN + 1);
+                memcpy(ptr_recvbuf->end_date, sz_recvbufcat + gbp->count, tt0005_DATE_LEN);
+        gbp->count += tt0005_DATE_LEN;
 
-        memset(ptr_recvbuf->last_date, '\0', tt0005_LAST_DATE_LEN + 1);
-                memcpy(ptr_recvbuf->last_date, sz_recvbufcat + gbp->count, tt0005_LAST_DATE_LEN);
-        gbp->count += tt0005_LAST_DATE_LEN;
+        memset(ptr_recvbuf->first_date, '\0', tt0005_DATE_LEN + 1);
+                memcpy(ptr_recvbuf->first_date, sz_recvbufcat + gbp->count, tt0005_DATE_LEN);
+        gbp->count += tt0005_DATE_LEN;
+
+        memset(ptr_recvbuf->last_date, '\0', tt0005_DATE_LEN + 1);
+                memcpy(ptr_recvbuf->last_date, sz_recvbufcat + gbp->count, tt0005_DATE_LEN);
+        gbp->count += tt0005_DATE_LEN;
 
         memset(ptr_recvbuf->tot_orders, '\0', tt0005_TOT_ORDERS_LEN + 1);
         memcpy(ptr_recvbuf->tot_orders,  sz_recvbufcat + gbp->count, tt0005_TOT_ORDERS_LEN);
@@ -331,30 +330,6 @@ int tt0005_ParceRecvStr(tt0005_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
         memset(ptr_recvbuf->avg_dollars, '\0', tt0005_AVG_DOLLARS_LEN + 1);
         memcpy(ptr_recvbuf->avg_dollars,         sz_recvbufcat + gbp->count, tt0005_AVG_DOLLARS_LEN);
         gbp->count += tt0005_AVG_DOLLARS_LEN;
-
-        memset(ptr_recvbuf->start_year, '\0', tt0005_START_YEAR_LEN + 1);
-        memcpy(ptr_recvbuf->start_year,  sz_recvbufcat + gbp->count, tt0005_START_YEAR_LEN);
-        gbp->count += tt0005_START_YEAR_LEN;
-
-        memset(ptr_recvbuf->start_month, '\0', tt0005_START_MONTH_LEN + 1);
-        memcpy(ptr_recvbuf->start_month,         sz_recvbufcat + gbp->count, tt0005_START_MONTH_LEN);
-        gbp->count += tt0005_START_MONTH_LEN;
-
-        memset(ptr_recvbuf->start_day, '\0', tt0005_START_DAY_LEN + 1);
-        memcpy(ptr_recvbuf->start_day,   sz_recvbufcat + gbp->count, tt0005_START_DAY_LEN);
-        gbp->count += tt0005_START_DAY_LEN;
-
-        memset(ptr_recvbuf->end_year, '\0', tt0005_END_YEAR_LEN + 1);
-        memcpy(ptr_recvbuf->end_year,    sz_recvbufcat + gbp->count, tt0005_END_YEAR_LEN);
-        gbp->count += tt0005_END_YEAR_LEN;
-
-        memset(ptr_recvbuf->end_month, '\0', tt0005_END_MONTH_LEN + 1);
-        memcpy(ptr_recvbuf->end_month,   sz_recvbufcat + gbp->count, tt0005_END_MONTH_LEN);
-        gbp->count += tt0005_END_MONTH_LEN;
-
-        memset(ptr_recvbuf->end_day, '\0', tt0005_END_DAY_LEN + 1);
-        memcpy(ptr_recvbuf->end_day,     sz_recvbufcat + gbp->count, tt0005_END_DAY_LEN);
-        gbp->count += tt0005_END_DAY_LEN;
 
         ap_rprintf(r,"	%s>\n", gbp->metag);
         ap_rprintf(r,"%s\n", pt_message);

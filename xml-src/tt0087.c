@@ -86,6 +86,9 @@ int tt0087_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_bu
         {
                 sprintf(gbp->tagname, "CUSTOM_ITEM_%d", gbp->i+1);
                 get_tag_data(gbp->tagname, gbp->sendbuf0087->custom_items[gbp->i].custom_item,gbp,stdout_buffer);
+				sprintf(gbp->tagname, "CUSTOMIZATION_COMP_EDP_%d", gbp->i+1);
+                get_tag_data(gbp->tagname, gbp->sendbuf0087->custom_items[gbp->i].comp_edp_no,gbp,stdout_buffer);
+
         }
         
         get_tag_data("SHIPTO_NUM", gbp->sendbuf0087->shipto_num,gbp,stdout_buffer);
@@ -170,8 +173,8 @@ int tt0087_CatSendStr(struct global_struct *gbp, char *sz_sendbufcat, tt0087_st_
 {
     gbp->j = sprintf(sz_sendbufcat,
             "%-4.4s%-4.4s%-2.2s%-2.2s%-16.16s%-16.16s%-25.25s%-20.20s"
-                        "%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s"
-                        "%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s%-60.60s"
+                        "%-60.60s%-9.9s%-60.60s%-9.9s%-60.60s%-9.9s%-60.60s%-9.9s%-60.60s%-9.9s%-60.60s%-9.9s%-60.60s%-9.9s%-60.60s%-9.9s%-60.60s%-9.9s"
+                        "%-60.60s%-9.9s%-60.60s%-9.9s%-60.60s%-9.9s%-60.60s%-9.9s%-60.60s%-9.9s%-60.60s%-9.9s%-60.60s%-9.9s%-60.60s%-9.9s%-60.60s%-9.9s%-60.60s%-9.9s%-60.60s%-9.9s"
                         "%-2.2s%-2.2s%-3.3s%-3.3s%-1.1s%-1.1s%-1.1s",
             ptr_sendbuf->request_id,
             ptr_sendbuf->record_id,
@@ -182,25 +185,45 @@ int tt0087_CatSendStr(struct global_struct *gbp, char *sz_sendbufcat, tt0087_st_
                         ptr_sendbuf->filler,
             ptr_sendbuf->item_num,
             ptr_sendbuf->custom_items[0].custom_item,
+			ptr_sendbuf->custom_items[0].comp_edp_no,
                         ptr_sendbuf->custom_items[1].custom_item,
+						ptr_sendbuf->custom_items[1].comp_edp_no,
                         ptr_sendbuf->custom_items[2].custom_item,
+						ptr_sendbuf->custom_items[2].comp_edp_no,
                         ptr_sendbuf->custom_items[3].custom_item,
+						ptr_sendbuf->custom_items[3].comp_edp_no,
                         ptr_sendbuf->custom_items[4].custom_item,
+						ptr_sendbuf->custom_items[4].comp_edp_no,
                         ptr_sendbuf->custom_items[5].custom_item,
+						ptr_sendbuf->custom_items[5].comp_edp_no,
                         ptr_sendbuf->custom_items[6].custom_item,
+						ptr_sendbuf->custom_items[6].comp_edp_no,
                         ptr_sendbuf->custom_items[7].custom_item,
+						ptr_sendbuf->custom_items[7].comp_edp_no,
                         ptr_sendbuf->custom_items[8].custom_item,
-                        ptr_sendbuf->custom_items[9].custom_item,       
+						ptr_sendbuf->custom_items[8].comp_edp_no,
+                        ptr_sendbuf->custom_items[9].custom_item,   
+						ptr_sendbuf->custom_items[9].comp_edp_no,
                         ptr_sendbuf->custom_items[10].custom_item,
+						ptr_sendbuf->custom_items[10].comp_edp_no,
                         ptr_sendbuf->custom_items[11].custom_item,
+						ptr_sendbuf->custom_items[11].comp_edp_no,
                         ptr_sendbuf->custom_items[12].custom_item,
+						ptr_sendbuf->custom_items[12].comp_edp_no,
                         ptr_sendbuf->custom_items[13].custom_item,
+						ptr_sendbuf->custom_items[13].comp_edp_no,
                         ptr_sendbuf->custom_items[14].custom_item,
+						ptr_sendbuf->custom_items[14].comp_edp_no,
                         ptr_sendbuf->custom_items[15].custom_item,
+						ptr_sendbuf->custom_items[15].comp_edp_no,
                         ptr_sendbuf->custom_items[16].custom_item,
+						ptr_sendbuf->custom_items[16].comp_edp_no,
                         ptr_sendbuf->custom_items[17].custom_item,
+						ptr_sendbuf->custom_items[17].comp_edp_no,
                         ptr_sendbuf->custom_items[18].custom_item,
+						ptr_sendbuf->custom_items[18].comp_edp_no,
                         ptr_sendbuf->custom_items[19].custom_item,
+						ptr_sendbuf->custom_items[19].comp_edp_no,
                         ptr_sendbuf->shipto_num,
                         ptr_sendbuf->page_no,
                         ptr_sendbuf->item_line_number,

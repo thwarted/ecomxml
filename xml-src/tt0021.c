@@ -77,6 +77,7 @@ int tt0021_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_bu
         get_tag_data("COMPANY", gbp->sendbuf0021->company,gbp,stdout_buffer);
         get_tag_data("DIVISION", gbp->sendbuf0021->division,gbp,stdout_buffer);
         get_tag_data("UID",  gbp->sendbuf0021->userid,gbp,stdout_buffer);
+        get_tag_data("DESC_FLAG",  gbp->sendbuf0021->desc_flag,gbp,stdout_buffer);
 
     // Get all of the item numbers.
 
@@ -163,7 +164,7 @@ int tt0021_CatSendStr(struct global_struct *gbp, char *sz_sendbufcat, tt0021_st_
                         "%-20.20s%04d%-20.20s%04d%-20.20s%04d%-20.20s%04d%-20.20s%04d"
                         "%-20.20s%04d%-20.20s%04d%-20.20s%04d%-20.20s%04d%-20.20s%04d"
                         "%-20.20s%04d%-20.20s%04d%-20.20s%04d%-20.20s%04d%-20.20s%04d"
-                        "%-20.20s%04d%-20.20s%04d%-20.20s%04d%-20.20s%04d%-20.20s%04d",
+                        "%-20.20s%04d%-20.20s%04d%-20.20s%04d%-20.20s%04d%-20.20s%04d%-1.1s",
             ptr_sendbuf->request_id,
             ptr_sendbuf->record_id,
             ptr_sendbuf->company,
@@ -210,7 +211,8 @@ int tt0021_CatSendStr(struct global_struct *gbp, char *sz_sendbufcat, tt0021_st_
             ptr_sendbuf->item_num[18],
                         atoi(ptr_sendbuf->item_qty[18]),
             ptr_sendbuf->item_num[19],
-                        atoi(ptr_sendbuf->item_qty[19]));
+                        atoi(ptr_sendbuf->item_qty[19]),
+            ptr_sendbuf->desc_flag);
 
     return(gbp->j);
 }

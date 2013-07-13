@@ -1,7 +1,7 @@
 /* tt0079_defs.h Coupon Review */
 
 #define  tt0079_LAN_SEND_BUF_LEN        71 
-#define  tt0079_LAN_RECV_BUF_LEN        422  
+#define  tt0079_LAN_RECV_BUF_LEN        512  
 
 /* Web to MACS Buffer  */
 
@@ -28,7 +28,7 @@
 
 #define  tt0079_COUPON_DATA_COUNT               18
 
-#define  tt0079_COUP_RVW_CO_NUM_LEN       4
+#define  tt0079_COUP_RVW_CO_NUM_LEN       9
 #define  tt0079_COUP_RVW_CO_AMOUNT_LEN    10
 #define  tt0079_COUP_RVW_CO_TYPE_LEN      1 
 

@@ -2,75 +2,76 @@
 
 /* Web to MACS Buffer   and   MACS to Web Buffer  */
 
-#define  tt0041_LAN_SEND_BUF_LEN        815 //788    
+#define  tt0041_LAN_SEND_BUF_LEN        819 //815 //788    
 #define  tt0041_LAN_RECV_BUF_LEN        926 //800 
 
-#define  tt0041_REQ_ID_LEN             4
-#define  tt0041_REC_ID_LEN             4
-#define  tt0041_COMPANY_LEN            2
-#define  tt0041_DIVISION_LEN           2
-#define  tt0041_USER_ID_LEN            16
-#define  tt0041_IP_ADDR_LEN                      16
-#define  tt0041_FILLER_LEN                      25
+#define  tt0041_REQ_ID_LEN              4
+#define  tt0041_REC_ID_LEN              4
+#define  tt0041_COMPANY_LEN             2
+#define  tt0041_DIVISION_LEN            2
+#define  tt0041_USER_ID_LEN             16
+#define  tt0041_IP_ADDR_LEN             16
+#define  tt0041_FILLER_LEN              25
 
-#define  tt0041_PAY_METH_LEN                     2
-#define  tt0041_FN_LEN                   16
-#define  tt0041_MI_LEN                           1
-#define  tt0041_LN_LEN                   16
-#define  tt0041_TITLE_LEN                        2
-#define  tt0041_COMP_LEN                             30
-#define  tt0041_JAP_LEN                          1
-#define  tt0041_REF_LEN                      30
-#define  tt0041_STREET_LEN                       30
-#define  tt0041_CITY_LEN                         30
-#define  tt0041_STATE_LEN                            2
-#define  tt0041_ZIP_LEN                      14
-#define  tt0041_COUNTRY_LEN                      4
-#define  tt0041_PHONE_LEN                            14
-#define  tt0041_PROMO_LEN                            1
-#define  tt0041_RENT_LEN                             1
-#define  tt0041_REMIT_LEN                            8
-#define  tt0041_FO_LEN                           8
-#define  tt0041_PO_LEN                       20
-#define  tt0041_HOLD_COMP_LEN                    1
-#define  tt0041_EXP_ORD_LEN                      1
-#define  tt0041_BACKORD_LEN                      1
-#define  tt0041_POST_ORD_LEN                     1
-#define  tt0041_INSUR_LEN                            1
-#define  tt0041_UP_FRT_LEN                       1
-#define  tt0041_OVERPAYMENT_LEN          1
-#define  tt0041_STAND_ORD_LEN                    1
-#define  tt0041_GENDER_LEN                       1
-#define  tt0041_SHIP_METH_LEN                    2
-#define  tt0041_DEMOGRAPH_LEN                    50
-#define  tt0041_FAX_LEN                      14
-#define  tt0041_ORD_XREF_LEN                     24
-#define  tt0041_CUST_TYPE_LEN                    2
-#define  tt0041_INSTAL_LEN                       1
-#define  tt0041_DISC_LEN                             1
-#define  tt0041_BIRTHDAY_LEN                     8
-#define  tt0041_PASSWORD_LEN                     16
-#define  tt0041_EMAIL_LEN                            50
-#define  tt0041_CC_TYPE_LEN                      2
-#define  tt0041_CC_NUM_LEN                       20
-#define  tt0041_CC_EXP_LEN                       2
-#define  tt0041_SHIPTO_NO_LEN                    2
-#define  tt0041_SHIPTO_FN_LEN                    16
-#define  tt0041_SHIPTO_MI_LEN                    1
-#define  tt0041_SHIPTO_LN_LEN                    16
-#define  tt0041_SHIPTO_TITLE_LEN                 2
-#define  tt0041_SHIPTO_COMP_LEN          30
-#define  tt0041_SHIPTO_JAP_LEN       1
-#define  tt0041_SHIPTO_REF_LEN           30
-#define  tt0041_SHIPTO_STREET_LEN                30
-#define  tt0041_SHIPTO_CITY_LEN          30
-#define  tt0041_SHIPTO_STATE_LEN                 2
-#define  tt0041_SHIPTO_ZIP_LEN           14
-#define  tt0041_SHIPTO_COUNTRY_LEN       4
-#define  tt0041_SHIPTO_PHONE_LEN                 14 
+#define  tt0041_PAY_METH_LEN            2
+#define  tt0041_FN_LEN                  16
+#define  tt0041_MI_LEN                  1
+#define  tt0041_LN_LEN                  16
+#define  tt0041_TITLE_LEN               2
+#define  tt0041_COMP_LEN                30
+#define  tt0041_JAP_LEN                 1
+#define  tt0041_REF_LEN                 30
+#define  tt0041_STREET_LEN              30
+#define  tt0041_CITY_LEN                30
+#define  tt0041_STATE_LEN               2
+#define  tt0041_ZIP_LEN                 14
+#define  tt0041_COUNTRY_LEN             4
+#define  tt0041_PHONE_LEN               14
+#define  tt0041_PROMO_LEN               1
+#define  tt0041_RENT_LEN                1
+#define  tt0041_REMIT_LEN               8
+#define  tt0041_FO_LEN                  8
+#define  tt0041_PO_LEN                  20
+#define  tt0041_HOLD_COMP_LEN           1
+#define  tt0041_EXP_ORD_LEN             1
+#define  tt0041_BACKORD_LEN             1
+#define  tt0041_POST_ORD_LEN            1
+#define  tt0041_INSUR_LEN               1
+#define  tt0041_UP_FRT_LEN              1
+#define  tt0041_OVERPAYMENT_LEN         1
+#define  tt0041_STAND_ORD_LEN           1
+#define  tt0041_GENDER_LEN              1
+#define  tt0041_SHIP_METH_LEN           2
+#define  tt0041_DEMOGRAPH_LEN           50
+#define  tt0041_FAX_LEN                 14
+#define  tt0041_ORD_XREF_LEN            24
+#define  tt0041_CUST_TYPE_LEN           2
+#define  tt0041_INSTAL_LEN              1
+#define  tt0041_DISC_LEN                1
+#define  tt0041_BIRTHDAY_LEN            8
+#define  tt0041_PASSWORD_LEN            16
+#define  tt0041_EMAIL_LEN               50
+#define  tt0041_CC_TYPE_LEN             2
+#define  tt0041_CC_NUM_LEN              20
+#define  tt0041_CC_EXP_LEN              2
+#define  tt0041_SHIPTO_NO_LEN           2
+#define  tt0041_SHIPTO_FN_LEN           16
+#define  tt0041_SHIPTO_MI_LEN           1
+#define  tt0041_SHIPTO_LN_LEN           16
+#define  tt0041_SHIPTO_TITLE_LEN        2
+#define  tt0041_SHIPTO_COMP_LEN         30
+#define  tt0041_SHIPTO_JAP_LEN          1
+#define  tt0041_SHIPTO_REF_LEN          30
+#define  tt0041_SHIPTO_STREET_LEN       30
+#define  tt0041_SHIPTO_CITY_LEN         30
+#define  tt0041_SHIPTO_STATE_LEN        2
+#define  tt0041_SHIPTO_ZIP_LEN          14
+#define  tt0041_SHIPTO_COUNTRY_LEN      4
+#define  tt0041_SHIPTO_PHONE_LEN        14 
+#define  tt0041_CC_SEC_CODE_LEN         4
 #define  tt0041_SUCCESS_FLAG_LEN        1
-#define  tt0041_ERR_LEN                         80
-#define  tt0041_SEND_FILLER_LEN                 45
+#define  tt0041_ERR_LEN                 80
+#define  tt0041_SEND_FILLER_LEN         45
 
 
 
@@ -142,6 +143,7 @@ typedef struct
         char shipto_zipcode[tt0041_SHIPTO_ZIP_LEN+1];
         char shipto_country[tt0041_SHIPTO_COUNTRY_LEN+1];
         char shipto_phone[tt0041_SHIPTO_PHONE_LEN+1];
+		char cc_sec_code[tt0041_CC_SEC_CODE_LEN+1];
         
 } tt0041_st_send;
 

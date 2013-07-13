@@ -247,6 +247,10 @@ int tt0023_ParceRecvStr(tt0023_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
         memset(ptr_recvbuf->customization[gbp->i].customization_line, '\0', tt0023_CUSTOMIZE_LEN +1);
                 memcpy(ptr_recvbuf->customization[gbp->i].customization_line, sz_recvbufcat + gbp->count, tt0023_CUSTOMIZE_LEN);
         gbp->count += tt0023_CUSTOMIZE_LEN;
+
+		memset(ptr_recvbuf->customization[gbp->i].comp_edp_no, '\0', tt0023_COMP_EDP_LEN +1);
+                memcpy(ptr_recvbuf->customization[gbp->i].comp_edp_no, sz_recvbufcat + gbp->count, tt0023_COMP_EDP_LEN);
+        gbp->count += tt0023_COMP_EDP_LEN;
     }
 
         gbp->k = atoi(ptr_recvbuf->last_customization);
@@ -257,6 +261,7 @@ int tt0023_ParceRecvStr(tt0023_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
         {
                 ap_rprintf(r,"		<CUSTOMIZATION_DATA>\n");
                 ap_rprintf(r,"			<CUSTOMIZATION_LINES>%s</CUSTOMIZATION_LINES>\n", handle_special_chars(gbp,ptr_recvbuf->customization[gbp->i].customization_line));
+				ap_rprintf(r,"			<CUSTOMIZATION_COMP_EDP>%s</CUSTOMIZATION_COMP_EDP>\n", handle_special_chars(gbp,ptr_recvbuf->customization[gbp->i].comp_edp_no));
                 ap_rprintf(r,"		</CUSTOMIZATION_DATA>\n");
         }
 

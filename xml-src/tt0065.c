@@ -172,6 +172,7 @@ int tt0065_ParceRecvStr(tt0065_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
                                           struct global_struct *gbp)
 {
         gbp->count = 0;
+		gbp->k = 0;     //  k is being used ad the ptr counter
 
         ap_rprintf(r,"%s\n", xml_vers_message);
 
@@ -190,12 +191,12 @@ int tt0065_ParceRecvStr(tt0065_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
         ap_rprintf(r,"%s\n", sga_message);
         ap_rprintf(r,"	%s>\n", gbp->mtag);
 
-
+    		
     memset(ptr_recvbuf->request_id,'\0', tt0065_REQ_ID_LEN+1);
     memcpy(ptr_recvbuf->request_id, sz_recvbufcat + gbp->k, tt0065_REQ_ID_LEN);
         ap_rprintf(r,"		<REQUEST_ID>%s</REQUEST_ID>\n", handle_special_chars(gbp,ptr_recvbuf->request_id));
     gbp->k += tt0065_REQ_ID_LEN;
-
+	
     memset(ptr_recvbuf->record_id,'\0', tt0065_REC_ID_LEN+1);
     memcpy(ptr_recvbuf->record_id, sz_recvbufcat + gbp->k, tt0065_REC_ID_LEN );
     gbp->k += tt0065_REC_ID_LEN;
@@ -232,13 +233,18 @@ int tt0065_ParceRecvStr(tt0065_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
                 memcpy(ptr_recvbuf->gc[gbp->i].gc_amt, sz_recvbufcat + gbp->k, tt0065_GC_AMT_LEN);
                 gbp->k += tt0065_GC_AMT_LEN;
 
+				memset(ptr_recvbuf->gc[gbp->i].gc_partial_flag,'\0', tt0065_FLAG_LEN+1);
+                memcpy(ptr_recvbuf->gc[gbp->i].gc_partial_flag, sz_recvbufcat + gbp->k, tt0065_FLAG_LEN);
+                gbp->k += tt0065_FLAG_LEN;
+
                 if((strlen(ptr_recvbuf->gc[gbp->i].gc_num)) > 0) 
                 {
                         ap_rprintf(r,"		<GC_DETAIL>\n");
                         ap_rprintf(r,"			<GC_NUM>%s</GC_NUM>\n", handle_special_chars(gbp,ptr_recvbuf->gc[gbp->i].gc_num));
                         ap_rprintf(r,"			<GC_AMT>%s</GC_AMT>\n", handle_special_chars(gbp,ptr_recvbuf->gc[gbp->i].gc_amt));
                         ap_rprintf(r,"			<GC_CHK_DIG>%s</GC_CHK_DIG>\n", handle_special_chars(gbp,ptr_recvbuf->gc[gbp->i].gc_chk_dig));
-                        ap_rprintf(r,"		</GC_DETAIL>\n");
+                        ap_rprintf(r,"			<GC_PARTIAL_FLAG>%s</GC_PARTIAL_FLAG>\n", handle_special_chars(gbp,ptr_recvbuf->gc[gbp->i].gc_partial_flag));
+						ap_rprintf(r,"		</GC_DETAIL>\n");
                 }
     }
 

@@ -85,6 +85,7 @@ int tt0093_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_bu
         get_tag_data("HDR_CC_EXP", gbp->sendbuf0093->hdr_cc_exp,gbp,stdout_buffer);
         get_tag_data("HDR_CO", gbp->sendbuf0093->hdr_co,gbp,stdout_buffer);
         get_tag_data("HDR_DIV", gbp->sendbuf0093->hdr_div,gbp,stdout_buffer);
+		get_tag_data("HDR_CC_SEC_CODE",gbp->sendbuf0093->hdr_cc_sec_code,gbp,stdout_buffer);
 
         for(gbp->i = 0; gbp->i < tt0093_STAND_ORD_DETAIL; gbp->i++)
         {
@@ -203,7 +204,7 @@ int tt0093_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_bu
 int tt0093_CatSendStr(struct global_struct *gbp, char *sendbufcat, tt0093_st_send *sendbuf)
 {
     gbp->j = sprintf(sendbufcat,
-            "%-4.4s%-4.4s%-2.2s%-2.2s%-16.16s%-16.16s%-25.25s%-1.1s%-9.9s%-20.20s%-2.2s%-20.20s%-4.4s%-2.2s%-2.2s",
+            "%-4.4s%-4.4s%-2.2s%-2.2s%-16.16s%-16.16s%-25.25s%-1.1s%-9.9s%-20.20s%-2.2s%-20.20s%-4.4s%-2.2s%-2.2s%-4.4s%-96.96s",
             sendbuf->request_id,
             sendbuf->record_id,
             sendbuf->company,
@@ -218,7 +219,9 @@ int tt0093_CatSendStr(struct global_struct *gbp, char *sendbufcat, tt0093_st_sen
                         sendbuf->hdr_cc_no,
                         sendbuf->hdr_cc_exp,
                         sendbuf->hdr_co,
-                        sendbuf->hdr_div
+                        sendbuf->hdr_div,
+						sendbuf->hdr_cc_sec_code,
+						sendbuf->hdr_filler
                         );
 
         for(gbp->i=0; gbp->i < tt0093_STAND_ORD_DETAIL; gbp->i++)

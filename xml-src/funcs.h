@@ -1,8 +1,14 @@
 #include "httpd.h"
+
 #ifndef GBSTRUCT_INCL
+
 #define GBSTRUCT_INCL
+
 #include "gbstruct.h"
+
 #endif
+
+
 
 int     tt0001_start(struct global_struct *);
 int     tt0001_end(request_rec *, struct global_struct *, char *);
@@ -148,6 +154,9 @@ int     tt0093_end(request_rec *, struct global_struct *, char *);
 int     tt0095_start(struct global_struct *);
 int     tt0095_end(request_rec *, struct global_struct *, char *);
 
+int     tt0103_start(struct global_struct *);
+int     tt0103_end(request_rec *, struct global_struct *, char *);
+
 int     tt0105_start(struct global_struct *);
 int     tt0105_end(request_rec *, struct global_struct *, char *);
 
@@ -190,12 +199,112 @@ int     tt0129_end(request_rec *, struct global_struct *, char *);
 int     tt0131_start(struct global_struct *);
 int     tt0131_end(request_rec *, struct global_struct *, char *);
 
+int     tt0133_start(struct global_struct *);
+int     tt0133_end(request_rec *, struct global_struct *, char *);
+
+int     tt0135_start(struct global_struct *);
+int     tt0135_end(request_rec *, struct global_struct *, char *);
+
+int     tt0137_start(struct global_struct *);
+int     tt0137_end(request_rec *, struct global_struct *, char *);
+
 int     wo01_start(struct global_struct *);
 int     wo01_end(request_rec *, struct global_struct *, char *);
 
-// Removed wo03 since it does the same thing as wo01
 
-//int wo03_start(struct global_struct *);
-//int wo03_end(request_rec *, struct global_struct *, char *);
+// Bridal registry transactions
+
+int     ft0001_start(struct global_struct *);
+int     ft0001_end(request_rec *, struct global_struct *, char *);
+
+int     ft0002_start(struct global_struct *);
+int     ft0002_end(request_rec *, struct global_struct *, char *);
+
+int     ft0006_start(struct global_struct *);
+int     ft0006_end(request_rec *, struct global_struct *, char *);
+
+int     ft0007_start(struct global_struct *);
+int     ft0007_end(request_rec *, struct global_struct *, char *);
+
+int     ft0008_start(struct global_struct *);
+int     ft0008_end(request_rec *, struct global_struct *, char *);
+
+int     ft0010_start(struct global_struct *);
+int     ft0010_end(request_rec *, struct global_struct *, char *);
+
+int     ft0020_start(struct global_struct *);
+int     ft0020_end(request_rec *, struct global_struct *, char *);
+
+int     ft0022_start(struct global_struct *);
+int     ft0022_end(request_rec *, struct global_struct *, char *);
+
+int     ft0023_start(struct global_struct *);
+int     ft0023_end(request_rec *, struct global_struct *, char *);
+
+int     ft0024_start(struct global_struct *);
+int     ft0024_end(request_rec *, struct global_struct *, char *);
+
+int     ft0025_start(struct global_struct *);
+int     ft0025_end(request_rec *, struct global_struct *, char *);
+
+int     ft0030_start(struct global_struct *);
+int     ft0030_end(request_rec *, struct global_struct *, char *);
+
+int     ft0037_start(struct global_struct *);
+int     ft0037_end(request_rec *, struct global_struct *, char *);
+
+int     ft0070_start(struct global_struct *);
+int     ft0070_end(request_rec *, struct global_struct *, char *);
+
+int     ft0071_start(struct global_struct *);
+int     ft0071_end(request_rec *, struct global_struct *, char *);
+
+int     ft0073_start(struct global_struct *);
+int     ft0073_end(request_rec *, struct global_struct *, char *);
+
+int     ft0074_start(struct global_struct *);
+int     ft0074_end(request_rec *, struct global_struct *, char *);
+
+int     ft0075_start(struct global_struct *);
+int     ft0075_end(request_rec *, struct global_struct *, char *);
+
+int     ft0089_start(struct global_struct *);
+int     ft0089_end(request_rec *, struct global_struct *, char *);
+
+int     ft0127_start(struct global_struct *);
+int     ft0127_end(request_rec *, struct global_struct *, char *);
+
+
+// wishlist transactions
+
+int     wl0003_start(struct global_struct *);
+int     wl0003_end(request_rec *, struct global_struct *, char *);
+
+int     wl0005_start(struct global_struct *);
+int     wl0005_end(request_rec *, struct global_struct *, char *);
+
+int     wl0006_start(struct global_struct *);
+int     wl0006_end(request_rec *, struct global_struct *, char *);
+
+int     wl0007_start(struct global_struct *);
+int     wl0007_end(request_rec *, struct global_struct *, char *);
+
+int     wl0008_start(struct global_struct *);
+int     wl0008_end(request_rec *, struct global_struct *, char *);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

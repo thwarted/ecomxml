@@ -156,7 +156,7 @@ int tt0081_CatSendStr(struct global_struct *gbp, char *sendbufcat, tt0081_st_sen
 {
     gbp->j = sprintf(sendbufcat,
             "%-4.4s%-4.4s%-2.2s%-2.2s%-16.16s%-16.16s%-25.25s%-2.2s"
-                        "%-4.4s%-4.4s%-4.4s%-4.4s%-4.4s%-4.4s%-4.4s%-4.4s%-4.4s%-4.4s%-4.4s%-4.4s%-4.4s%-4.4s%-4.4s%-4.4s%-4.4s%-4.4s",
+                        "%-9.9s%-9.9s%-9.9s%-9.9s%-9.9s%-9.9s%-9.9s%-9.9s%-9.9s%-9.9s%-9.9s%-9.9s%-9.9s%-9.9s%-9.9s%-9.9s%-9.9s%-9.9s",
 
             sendbuf->request_id,
             sendbuf->record_id,

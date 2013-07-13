@@ -194,7 +194,7 @@ int tt0007_ParceRecvStr(tt0007_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
 */
         ap_rprintf(r,"%s0008 %s\"tt0008\">\n", gbp->tt_btag, gbp->bitag);
         ap_rprintf(r,"%s\n", sga_message);
-        ap_rprintf(r,"	%s>\n", gbp->mtag);
+        ap_rprintf(r,"  %s>\n", gbp->mtag);
 
     memset(ptr_recvbuf->request_id, '\0', tt0007_REQ_ID_LEN + 1);
     memcpy(ptr_recvbuf->request_id, sz_recvbufcat + gbp->count, tt0007_REQ_ID_LEN);
@@ -298,6 +298,11 @@ int tt0007_ParceRecvStr(tt0007_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
         ap_rprintf(r,"		<PURCH_ORD_NO>%s</PURCH_ORD_NO>\n", handle_special_chars(gbp,ptr_recvbuf->purchase_ord_num));
     gbp->count += tt0007_PO_NUM_LEN;
 
+memset(ptr_recvbuf->status, '\0', tt0007_STATUS_LEN + 1);
+    memcpy(ptr_recvbuf->status, sz_recvbufcat + gbp->count, tt0007_STATUS_LEN);
+        ap_rprintf(r,"		<ORDER_STATUS>%s</ORDER_STATUS>\n", handle_special_chars(gbp,ptr_recvbuf->status));
+    gbp->count += tt0007_STATUS_LEN;
+
     memset(ptr_recvbuf->filler1, '\0', tt0007_FILLER1_LEN + 1);
     memcpy(ptr_recvbuf->filler1, sz_recvbufcat + gbp->count, tt0007_FILLER1_LEN);
     gbp->count += tt0007_FILLER1_LEN;
@@ -345,10 +350,10 @@ int tt0007_ParceRecvStr(tt0007_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
                 ap_rprintf(r,"			<NUM_OF_LINE_ITEMS>%s</NUM_OF_LINE_ITEMS>\n", handle_special_chars(gbp,ptr_recvbuf->line_item_num));
                 gbp->count += tt0007_LINE_ITM_LEN;
 
-                memset(ptr_recvbuf->status, '\0', tt0007_STATUS_LEN + 1);
-                memcpy(ptr_recvbuf->status, sz_recvbufcat + gbp->count, tt0007_STATUS_LEN);
-                ap_rprintf(r,"			<STATUS_OF_ORD_LEVEL>%s</STATUS_OF_ORD_LEVEL>\n", handle_special_chars(gbp,ptr_recvbuf->status));
-                gbp->count += tt0007_STATUS_LEN;
+                memset(ptr_recvbuf->lvl_status, '\0', tt0007_LVL_STATUS_LEN + 1);
+                memcpy(ptr_recvbuf->lvl_status, sz_recvbufcat + gbp->count, tt0007_LVL_STATUS_LEN);
+                ap_rprintf(r,"			<STATUS_OF_ORD_LEVEL>%s</STATUS_OF_ORD_LEVEL>\n", handle_special_chars(gbp,ptr_recvbuf->lvl_status));
+                gbp->count += tt0007_LVL_STATUS_LEN;
 
                 memset(ptr_recvbuf->ship_method, '\0', tt0007_SHIP_METH_LEN + 1);
                 memcpy(ptr_recvbuf->ship_method, sz_recvbufcat + gbp->count, tt0007_SHIP_METH_LEN);
@@ -618,16 +623,17 @@ int tt0007_ParceRecvStr(tt0007_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
                 ap_rprintf(r,"		<SI_ZIP>%s</SI_ZIP>\n", handle_special_chars(gbp,ptr_recvbuf->si_zip));
                 gbp->count += tt0007_SI_ZIP_LEN;
         
-        ap_rprintf(r,"	%s>\n", gbp->metag);
+        ap_rprintf(r,"  %s>\n", gbp->metag);
         ap_rprintf(r,"%s\n", pt_message);
-        ap_rprintf(r,"	%s>\n", gbp->rstag);
+        ap_rprintf(r,"  %s>\n", gbp->rstag);
 
         reparse_customer_data(r,gbp);
 
-        ap_rprintf(r,"	%s>\n", gbp->rsetag);
+        ap_rprintf(r,"  %s>\n", gbp->rsetag);
         ap_rprintf(r,"%s0008>\n", gbp->tt_betag);
 
     return 0;
 }
+
 
 

@@ -1,8 +1,7 @@
 /* tt0019_defs.h  Online CC Authorization */
 
-#define  tt0019_LAN_SEND_BUF_LEN      112 //85
-#define  tt0019_LAN_RECV_BUF_LEN      165 //40
-
+#define  tt0019_LAN_SEND_BUF_LEN      121 
+#define  tt0019_LAN_RECV_BUF_LEN      210
 /* Web to MACS Buffer  */
 
 #define  tt0019_REQ_ID_LEN             4
@@ -20,6 +19,8 @@
 #define  tt0019_CC_EXP_YEAR_LEN        2
 #define  tt0019_CC_EXP_MONTH_LEN       2
 #define  tt0019_TRANS_AMT_LEN          8
+#define  tt0019_BIRTHDAY_LEN           8
+#define  tt0019_FLAG_LEN               1
 
 /* MACS to Web Buffer  */
 
@@ -33,6 +34,11 @@
 
 #define  tt0019_AUTH_CODE_LEN          6
 #define  tt0019_AUTH_ACTION_LEN        1
+#define  tt0019_AVS_CODE_LEN		   2
+#define  tt0019_CC_RESP_CODE_LEN	   4
+#define  tt0019_BML_ACCT_LEN		   16
+#define  tt0019_BML_DATE_LEN		   8
+#define  tt0019_SV_AMT_LEN		       10
 
 
 typedef struct
@@ -50,6 +56,8 @@ typedef struct
     char cc_exp_yy[tt0019_CC_EXP_YEAR_LEN+1];
     char cc_exp_mm[tt0019_CC_EXP_MONTH_LEN+1];
     char transaction_amt[tt0019_TRANS_AMT_LEN+1];
+	char birthday[tt0019_BIRTHDAY_LEN+1];
+	char sv_bal_inq[tt0019_FLAG_LEN+1];
 
 } tt0019_st_send;
 
@@ -64,5 +72,10 @@ typedef struct
 
     char auth_code[tt0019_AUTH_CODE_LEN+1];
     char auth_action[tt0019_AUTH_ACTION_LEN+1];
+	char avs_code[tt0019_AVS_CODE_LEN+1];
+	char cc_resp_code[tt0019_CC_RESP_CODE_LEN+1];
+	char bml_account[tt0019_BML_ACCT_LEN+1];
+	char bml_reg_date[tt0019_BML_DATE_LEN+1];
+	char sv_bal_amt[tt0019_SV_AMT_LEN+1];
 
 } tt0019_st_recv;

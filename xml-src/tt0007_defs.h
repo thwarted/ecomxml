@@ -2,7 +2,7 @@
 
 
 #define  tt0007_LAN_SEND_BUF_LEN        118   //110 //89 //88
-#define  tt0007_LAN_RECV_BUF_LEN        28534 //6128 //6125 //6000
+#define  tt0007_LAN_RECV_BUF_LEN        28672 //6128 //6125 //6000
 
 /* Web to MACS Buffer  */
 
@@ -33,21 +33,22 @@
 
 
 #define  tt0007_ORD_DATE_LEN           8
-#define  tt0007_DOL_LEN                9
+#define  tt0007_DOL_LEN                12 //9
 #define  tt0007_PAY_METH_LEN           20
 #define  tt0007_LEVEL_LEN              3
 #define  tt0007_PAGE_NO_LEN            3
 #define  tt0007_TOT_LEVEL_LEN          3
 #define  tt0007_ORDER_NO_LEN           8 
-#define  tt0007_FILLER1_LEN            41
+#define  tt0007_STATUS_LEN             20
+#define  tt0007_FILLER1_LEN            21
 
 #define  tt0007_ADDR_LEN               30
 #define  tt0007_LINE_ITM_LEN           3
-#define  tt0007_STATUS_LEN             20
+#define  tt0007_LVL_STATUS_LEN             20
 #define  tt0007_SHIP_METH_LEN          20
 #define  tt0007_SM_TYPE_LEN            1
 #define  tt0007_SHIP_DATE_LEN          8
-#define  tt0007_TRACK_LEN              20
+#define  tt0007_TRACK_LEN              40
 #define  tt0007_SUFFIX_LEN             4
 #define  tt0007_FILLER2_LEN            16
 
@@ -154,6 +155,7 @@ typedef struct
         char tot_levels[tt0007_LEVEL_LEN+1];
         char order_no[tt0007_ORD_NO_LEN+1];
         char purchase_ord_num[tt0007_PO_NUM_LEN+1];
+    char status[tt0007_STATUS_LEN+1];
     char filler1[tt0007_FILLER1_LEN+1];
 
     char addr_1[tt0007_ADDR_LEN+1];
@@ -164,7 +166,7 @@ typedef struct
     char addr_6[tt0007_ADDR_LEN+1];
     char addr_7[tt0007_ADDR_LEN+1];
     char line_item_num[tt0007_LINE_ITM_LEN+1];
-    char status[tt0007_STATUS_LEN+1];
+    char lvl_status[tt0007_LVL_STATUS_LEN+1];
     char ship_method[tt0007_SHIP_METH_LEN+1];
     char ship_method_type[tt0007_SM_TYPE_LEN+1];
     char ship_date[tt0007_SHIP_DATE_LEN+1];
@@ -214,3 +216,4 @@ typedef struct
         char si_zip[tt0007_SI_ZIP_LEN+1];
 
 } tt0007_st_recv;
+

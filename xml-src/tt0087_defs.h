@@ -2,8 +2,8 @@
 
 /* Web to MACS Buffer  */
 
-#define  tt0087_LAN_SEND_BUF_LEN       1302 //1301 //1298 //1291 //1264
-#define  tt0087_LAN_RECV_BUF_LEN       185  //101 //199 //195 //150
+#define  tt0087_LAN_SEND_BUF_LEN       1482 //1302 //1301 //1298
+#define  tt0087_LAN_RECV_BUF_LEN       185  //101 //199 
 
 #define  tt0087_REQ_ID_LEN             4
 #define  tt0087_REC_ID_LEN                 4
@@ -18,6 +18,7 @@
 #define  tt0087_CUSTOM_ITEM_COUNT          20
 
 #define  tt0087_CUSTOM_LEN                         60
+#define  tt0087_COMP_EDP_LEN						9
 
 #define  tt0087_SHIPTO_NO_LEN              2
 #define  tt0087_PAGE_NO_LEN                        2
@@ -45,6 +46,7 @@
 typedef struct
 {
     char custom_item[tt0087_CUSTOM_LEN+1];
+	char comp_edp_no[tt0087_COMP_EDP_LEN+1];
 
 } tt0087_custom_array;
 

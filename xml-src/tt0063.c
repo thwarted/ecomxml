@@ -76,14 +76,14 @@ int tt0063_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_bu
     strcpy(gbp->sendbuf0063->request_id, "XML");
     strcpy(gbp->sendbuf0063->record_id, "0063");
 
-        strcpy(gbp->sendbuf0063->ip_address, r->connection->remote_ip);
+    strcpy(gbp->sendbuf0063->ip_address, r->connection->remote_ip);
 
     get_tag_data("COMPANY", gbp->sendbuf0063->company,gbp,stdout_buffer);
-        get_tag_data("DIVISION", gbp->sendbuf0063->division,gbp,stdout_buffer);
+    get_tag_data("DIVISION", gbp->sendbuf0063->division,gbp,stdout_buffer);
     get_tag_data("UID", gbp->sendbuf0063->userid,gbp,stdout_buffer);
-
+	
         for(gbp->i = 0; gbp->i < tt0063_GC_COUNT; gbp->i++)
-        {
+	    {
                 sprintf(gbp->tagname, "GC_NUM_%d", gbp->i+1);
                 get_tag_data(gbp->tagname, gbp->sendbuf0063->gc[gbp->i].gc_num,gbp,stdout_buffer);
 
@@ -92,12 +92,12 @@ int tt0063_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_bu
 
                 sprintf(gbp->tagname, "GC_AMT_%d", gbp->i+1);
                 get_tag_data(gbp->tagname, gbp->sendbuf0063->gc[gbp->i].gc_amt,gbp,stdout_buffer);
-
+				
         }
 
     get_tag_data("GC_FLAG", gbp->sendbuf0063->gc_flag,gbp,stdout_buffer);
         
-
+       	  
         if(tt0063_CatSendStr(gbp, gbp->sendbufcat, gbp->sendbuf0063) == tt0063_LAN_SEND_BUF_LEN)
         {
                 if((gbp->sock = sga_connect(gbp->hphost, gbp->webport, gbp->webexec, &(gbp->rc),r,gbp)) == INVALID_SOCKET)
@@ -110,6 +110,7 @@ int tt0063_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_bu
                         return(-1);
                 }
 
+               
                 if((gbp->rc = sga_send(gbp->sock,  gbp->sendbufcat, tt0063_LAN_SEND_BUF_LEN,r,gbp)) == SOCKET_ERROR)
                 {
                         XML_Error("sga_send","failed to send","communications","-1",r,gbp);
@@ -120,6 +121,7 @@ int tt0063_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_bu
                         return(-1);
                 }
 
+				
                 if((gbp->rc = sga_recv(gbp->sock, gbp->recvbufcat, tt0063_LAN_RECV_BUF_LEN,r,gbp)) == SOCKET_ERROR)
                 {
                         XML_Error("sga_recv","failed to receive","communications","-1",r,gbp);
@@ -130,6 +132,7 @@ int tt0063_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_bu
                         return(-1);
                 }
 
+				
                 // Do an additional send and recieve for confirmation
                 if((gbp->rc = sga_send(gbp->sock, gbp->confirmbuf, 5,r,gbp)) == SOCKET_ERROR)
                 {
@@ -140,12 +143,13 @@ int tt0063_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_bu
                         free (gbp->recvbuf0063);
                         return(-1);
                 }
+
 /*
                 gbp->rc = sga_recv(sock, gbp->confirmbuf, 5);
 */
                 sga_close2(gbp->sock, (int)USE_SHUTDOWN,r,gbp);
 
-                tt0063_ParceRecvStr(gbp->recvbuf0063, gbp->recvbufcat,r,gbp);
+				tt0063_ParceRecvStr(gbp->recvbuf0063, gbp->recvbufcat,r,gbp);
                 free (gbp->sendbufcat);
                 free (gbp->recvbufcat);
                 free (gbp->sendbuf0063);
@@ -168,14 +172,16 @@ int tt0063_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_bu
 
 int tt0063_CatSendStr(struct global_struct *gbp, char *sz_sendbufcat, tt0063_st_send *ptr_sendbuf)
 {
-    gbp->j = sprintf(sz_sendbufcat,
+
+	gbp->j = sprintf(sz_sendbufcat,
             "%-4.4s%-4.4s%-2.2s%-2.2s%-16.16s%-16.16s%-25.25s"
-                        "%-8.8s%-1.1s%06d%-8.8s%-1.1s%06d%-8.8s%-1.1s%06d"
-                        "%-8.8s%-1.1s%06d%-8.8s%-1.1s%06d%-8.8s%-1.1s%06d"
-                        "%-8.8s%-1.1s%06d%-8.8s%-1.1s%06d%-8.8s%-1.1s%06d"
-                        "%-8.8s%-1.1s%06d%-8.8s%-1.1s%06d%-8.8s%-1.1s%06d"
-                        "%-8.8s%-1.1s%06d%-8.8s%-1.1s%06d%-8.8s%-1.1s%06d"
-                        "%-8.8s%-1.1s%06d%-8.8s%-1.1s%06d%-8.8s%-1.1s%06d%-2.2s",
+                        "%-8.8s%-1.1s%09d%-8.8s%-1.1s%09d%-8.8s%-1.1s%09d"
+                        "%-8.8s%-1.1s%09d%-8.8s%-1.1s%09d%-8.8s%-1.1s%09d"
+                        "%-8.8s%-1.1s%09d%-8.8s%-1.1s%09d%-8.8s%-1.1s%09d"
+                        "%-8.8s%-1.1s%09d%-8.8s%-1.1s%09d%-8.8s%-1.1s%09d"
+                        "%-8.8s%-1.1s%09d%-8.8s%-1.1s%09d%-8.8s%-1.1s%09d"
+                        "%-8.8s%-1.1s%09d%-8.8s%-1.1s%09d%-8.8s%-1.1s%09d"
+						"%-8.8s%-1.1s%09d%-8.8s%-1.1s%09d%-2.2s",
 
             ptr_sendbuf->request_id,
             ptr_sendbuf->record_id,
@@ -238,7 +244,14 @@ int tt0063_CatSendStr(struct global_struct *gbp, char *sz_sendbufcat, tt0063_st_
                         ptr_sendbuf->gc[17].gc_num,
                         ptr_sendbuf->gc[17].gc_chk_dig,
                         (int)((atof(ptr_sendbuf->gc[17].gc_amt))*100),
+						ptr_sendbuf->gc[18].gc_num,
+                        ptr_sendbuf->gc[18].gc_chk_dig,
+                        (int)((atof(ptr_sendbuf->gc[18].gc_amt))*100),
+						ptr_sendbuf->gc[19].gc_num,
+                        ptr_sendbuf->gc[19].gc_chk_dig,
+                        (int)((atof(ptr_sendbuf->gc[19].gc_amt))*100),
                         ptr_sendbuf->gc_flag);
+	
             
     return(gbp->j);
 }
@@ -247,7 +260,8 @@ int tt0063_CatSendStr(struct global_struct *gbp, char *sz_sendbufcat, tt0063_st_
 int tt0063_ParceRecvStr(tt0063_st_recv *ptr_recvbuf, char *sz_recvbufcat, request_rec *r,
                                           struct global_struct *gbp)
 {
-        gbp->count = 0;
+
+	    gbp->count = 0;
 
         ap_rprintf(r,"%s\n", xml_vers_message);
 
@@ -293,6 +307,7 @@ int tt0063_ParceRecvStr(tt0063_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
 
         gbp->count += tt0063_SEND_FILLER_LEN;
 
+		
         for (gbp->i = 0; gbp->i < tt0063_VALID_GC_COUNT; gbp->i++)
         {
                 memset(ptr_recvbuf->valid_gc[gbp->i].valid_gc_num,'\0', tt0063_VAL_GC_NO_LEN+1);
@@ -313,7 +328,7 @@ int tt0063_ParceRecvStr(tt0063_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
                 }
         }
 
-        for (gbp->i = 0; gbp->i < tt0063_INVALID_GC_COUNT; gbp->i++)
+		for (gbp->i = 0; gbp->i < tt0063_INVALID_GC_COUNT; gbp->i++)
         {
                 memset(ptr_recvbuf->invalid_gc[gbp->i].invalid_gc_num,'\0', tt0063_INVAL_GC_NO_LEN+1);
             memcpy(ptr_recvbuf->invalid_gc[gbp->i].invalid_gc_num, sz_recvbufcat + gbp->count, tt0063_INVAL_GC_NO_LEN);
@@ -338,7 +353,7 @@ int tt0063_ParceRecvStr(tt0063_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
                 }
         }
 
-        memset(ptr_recvbuf->gc_flag,'\0', tt0063_GC_FLAG_LEN+1);
+		memset(ptr_recvbuf->gc_flag,'\0', tt0063_GC_FLAG_LEN+1);
     memcpy(ptr_recvbuf->gc_flag, sz_recvbufcat + gbp->count, tt0063_GC_FLAG_LEN);
         ap_rprintf(r,"		<GC_FLAG>%s</GC_FLAG>\n", handle_special_chars(gbp,ptr_recvbuf->gc_flag));
     gbp->count += tt0063_GC_FLAG_LEN;

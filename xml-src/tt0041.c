@@ -142,6 +142,7 @@ int tt0041_lt_process(request_rec *r, struct global_struct *gbp, char *stdout_bu
         get_tag_data("SHIPTO_ZIPCODE", gbp->sendbuf0041->shipto_zipcode,gbp,stdout_buffer);
         get_tag_data("SHIPTO_COUNTRY", gbp->sendbuf0041->shipto_country,gbp,stdout_buffer);
         get_tag_data("SHIPTO_PHONE", gbp->sendbuf0041->shipto_phone,gbp,stdout_buffer);
+		get_tag_data("CC_SEC_CODE", gbp->sendbuf0041->cc_sec_code,gbp,stdout_buffer);
         
         
         if(tt0041_CatSendStr(gbp, gbp->sendbufcat, gbp->sendbuf0041) == tt0041_LAN_SEND_BUF_LEN)
@@ -219,7 +220,7 @@ int tt0041_CatSendStr(struct global_struct *gbp, char *sz_sendbufcat, tt0041_st_
                         "%-14.14s%-14.14s%-1.1s%-1.1s%08d%-8.8s%-20.20s%-1.1s%-1.1s%-1.1s%-1.1s%-1.1s"
                         "%-1.1s%-1.1s%-1.1s%-1.1s%-2.2s%-50.50s%-50.50s%-14.14s%-24.24s%-2.2s%-1.1s"
                         "%-1.1s%-1.1s%-8.8s%-16.16s%-50.50s%-20.20s%-2.2s%-2.2s%-16.16s%-1.1s%-16.16s"
-                        "%-2.2s%-30.30s%-1.1s%-30.30s%-30.30s%-30.30s%-30.30s%-2.2s%-14.14s%-4.4s%-14.14s",
+                        "%-2.2s%-30.30s%-1.1s%-30.30s%-30.30s%-30.30s%-30.30s%-2.2s%-14.14s%-4.4s%-14.14s%-4.4s",
             ptr_sendbuf->request_id,
             ptr_sendbuf->record_id,
             ptr_sendbuf->company,
@@ -285,7 +286,8 @@ int tt0041_CatSendStr(struct global_struct *gbp, char *sz_sendbufcat, tt0041_st_
                         ptr_sendbuf->shipto_state,
                         ptr_sendbuf->shipto_zipcode,
                         ptr_sendbuf->shipto_country,
-                        ptr_sendbuf->shipto_phone);
+                        ptr_sendbuf->shipto_phone,
+						ptr_sendbuf->cc_sec_code);
 
             
     return(gbp->j);

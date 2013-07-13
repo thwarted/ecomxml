@@ -39,6 +39,14 @@
 
 #endif
 
+#ifdef HPUX
+#include <unistd.h>
+#include <limits.h>
+
+#define  _MAX_PATH  PATH_MAX 
+#define _getcwd getcwd
+
+#endif
 
 /*************************************************************************/
 /*                                                                       */
@@ -87,7 +95,7 @@ int             XML_Expat_Error(char *, char *, char *, char *, request_rec *, s
 int     get_tag_from_seq(int, char *, char *, struct global_struct *);
 void    set_tag_name(char *, char *, int);
 int     get_tag_data(char *, char *, struct global_struct *, char *);
-
+char    *remove_comma(char *request, int req_len, struct global_struct *gbp);
 char    *xml_time(void);
 
 
@@ -111,6 +119,10 @@ char e1_message[] = "<!-- THIS IS AN ERROR MESSAGE INDICATING AN ERROR IN TRANSA
 char tt_tag[] = "tt";
 
 char wo_tag[] = "wo";
+
+char ft_tag[] = "ft";
+
+char wl_tag[] = "wl";
 
 char url_tag[] = "../xml-dtd/";
 
@@ -257,8 +269,13 @@ int getpath(struct global_struct *gbp)
     memset(gbp->rootpath,'\0', _MAX_PATH);
 
     /* Get the current working directory: */
+#ifdef WIN32
     if( _getcwd( gbp->buffer, _MAX_PATH ) == NULL )
         return(-1);
+/*#else
+    if( getcwd( gbp->buffer, _MAX_PATH ) == NULL )
+        return(-1);  */
+#endif
 
     gbp->req_len = strlen(gbp->buffer);
 
@@ -279,12 +296,21 @@ int getpath(struct global_struct *gbp)
 
     sprintf(gbp->rootpath,"%s/profiles",gbp->rootpath);
 #endif
+
+/*
 #ifdef SOLARIS2 
     if(gbp->rootpath[gbp->req_len-1] == '/') 
                 gbp->rootpath[gbp->req_len-1] = '\0';
 
     sprintf(gbp->rootpath,"%s/profiles",gbp->rootpath);
 #endif
+
+#ifdef HPUX 
+    if(gbp->rootpath[gbp->req_len-1] == '/') 
+                gbp->rootpath[gbp->req_len-1] = '\0';
+
+    sprintf(gbp->rootpath,"%s/profiles",gbp->rootpath);
+#endif  */
 
     free(gbp->buffer);
 
@@ -317,6 +343,9 @@ int len = 0;
     strcat(tmp, "/parsertmp");
 #endif
 #ifdef SOLARIS2
+    strcat(tmp, "/parsertmp");
+#endif
+#ifdef HPUX
     strcat(tmp, "/parsertmp");
 #endif
 
@@ -363,7 +392,11 @@ void GetInf(struct global_struct *gbp)                                          
 
 #ifdef WIN32
     sprintf(gbp->filename, "%s\\customer.inf", gbp->rootpath);
+#else
+    sprintf(gbp->filename, "/usr/local/apache/profiles/customer.inf");
 #endif
+
+/*
 #ifdef LINUX
     //sprintf(filename, "%s/customer.inf", gbp->rootpath);
         sprintf(gbp->filename, "/usr/local/apache/profiles/customer.inf");
@@ -372,7 +405,11 @@ void GetInf(struct global_struct *gbp)                                          
     //sprintf(filename, "%s/customer.inf", gbp->rootpath);
         sprintf(gbp->filename, "/usr/local/apache/profiles/customer.inf");
 #endif
-//printf("%s filename\n", filename);
+#ifdef HPUX
+    //sprintf(filename, "%s/customer.inf", gbp->rootpath);
+        sprintf(gbp->filename, "/usr/local/apache/profiles/customer.inf");
+#endif
+//printf("%s filename\n", filename); */
     if( (gbp->infile = fopen(gbp->filename, "r" )) == NULL ) 
     {
         printf("The settings file could not be opened! %s\n",gbp->filename );
@@ -380,7 +417,7 @@ void GetInf(struct global_struct *gbp)                                          
     }
 
     memset(gbp->line,'\0',_MAX_PATH);
-    fgets(gbp->line, _MAX_PATH, gbp->infile);             /* First line, comments */
+    fgets(gbp->line, _MAX_PATH, gbp->infile);     /* First line, comments */
 
     memset(gbp->line,'\0',_MAX_PATH);
     fgets(gbp->line,80,gbp->infile);               /* WEBREQST EXEC */
@@ -413,6 +450,18 @@ void GetInf(struct global_struct *gbp)                                          
     memset(gbp->line,'\0', _MAX_PATH);
     fgets(gbp->line,80,gbp->infile);               /* Location of image files */
     sprintf(gbp->imageloc,"%s",rtrim(gbp->line, _MAX_PATH,gbp));
+
+    memset(gbp->line,'\0', _MAX_PATH);
+    fgets(gbp->line,80,gbp->infile);               /* EMALF not used */
+
+    memset(gbp->line,'\0', _MAX_PATH);
+    fgets(gbp->line,80,gbp->infile);               /* WISHLIST Port Name */
+    sprintf(gbp->wlport,"%s",rtrim(gbp->line,80,gbp));
+
+    memset(gbp->line,'\0', _MAX_PATH);
+    fgets(gbp->line,80,gbp->infile);               /* FVFREQST Port Name */
+    sprintf(gbp->fvfport,"%s",rtrim(gbp->line,80,gbp));
+
 
     fclose(gbp->infile);
 
@@ -480,10 +529,26 @@ int handle_sga_xml_data(char *stdout_buffer, request_rec *r, struct global_struc
         {
                 if((gbp->settag = strstr(stdout_buffer, "<wo")) == NULL)
                 {
-                        printf(" The tag is not set\n");
-                        fflush(stdout); 
-                        free (stdout_buffer);
-                        return(1);      /* An Error Occurred */
+					if((gbp->settag = strstr(stdout_buffer, "<ft")) == NULL)
+					{
+						if((gbp->settag = strstr(stdout_buffer, "<wl")) == NULL)
+						{
+	                        printf(" The tag is not set\n");
+			                fflush(stdout); 
+		                    free (stdout_buffer);
+				            return(1);      /* An Error Occurred */
+						}
+					    else
+						{
+							memset(gbp->tag, '\0', 5);
+							strncpy(gbp->tag, gbp->settag+1, 2);
+						}
+					}
+					else
+					{
+                        memset(gbp->tag, '\0', 5);
+                        strncpy(gbp->tag, gbp->settag+1, 2);
+					}
                 }
                 else
                 {
@@ -495,7 +560,7 @@ int handle_sga_xml_data(char *stdout_buffer, request_rec *r, struct global_struc
         {
                 memset(gbp->tag, '\0', 5);
                 strncpy(gbp->tag, gbp->settag+1, 2);
-        }
+        }  
 
 
         if((initialize_tag_data(gbp)) == -1)
@@ -518,8 +583,14 @@ int handle_sga_xml_data(char *stdout_buffer, request_rec *r, struct global_struc
         {
                 if((gbp->begin_tag = strstr(stdout_buffer, gbp->wo_btag)) == NULL)
                 {
-                        XML_Error("handle_sga_xml_data","failed transaction","no begin tag","-1",r,gbp);
-                        return(1);      /* An Error Occurred... this wasn't an SGA XML Document */
+					if((gbp->begin_tag = strstr(stdout_buffer, gbp->ft_btag)) == NULL)
+					{
+						if((gbp->begin_tag = strstr(stdout_buffer, gbp->ft_btag)) == NULL)
+						{
+		                    XML_Error("handle_sga_xml_data","failed transaction","no begin tag","-1",r,gbp);
+			                return(1);      /* An Error Occurred... this wasn't an SGA XML Document */
+						}
+					}
                 }
         }
         gbp->tt_ok = 0;
@@ -538,9 +609,16 @@ int handle_sga_xml_data(char *stdout_buffer, request_rec *r, struct global_struc
         if((gbp->end_tag = strstr(stdout_buffer, gbp->tt_betag)) == NULL)
         {
                 if((gbp->end_tag = strstr(stdout_buffer, gbp->wo_betag)) == NULL)
-                {//ap_rprintf(r,"%s###%s###%s",stdout_buffer, gbp->tt_betag,gbp->wo_betag);
-                        XML_Error("handle_sga_xml_data","failed transaction","no end tag ()","-1",r,gbp);
-                        return(1);      /* An Error Occurred... this wasn't an SGA XML Document */
+                {
+					if((gbp->end_tag = strstr(stdout_buffer, gbp->ft_betag)) == NULL)
+					{
+						if((gbp->end_tag = strstr(stdout_buffer, gbp->wl_betag)) == NULL)
+						{
+							//ap_rprintf(r,"%s###%s###%s",stdout_buffer, gbp->tt_betag,gbp->wo_betag);
+							XML_Error("handle_sga_xml_data","failed transaction","no end tag ()","-1",r,gbp);
+							return(1);      /* An Error Occurred... this wasn't an SGA XML Document */
+						}
+					}
                 }
         }
         gbp->tt_ok = 2;
@@ -646,7 +724,7 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
         switch(tttype)
         {
                 case 1:         
-                        if((strcmp(gbp->tag, "tt")) == 0)
+                        if((strcmp(gbp->tag, tt_tag)) == 0)
                         {
                                 if((tt0001_start(gbp)) != 0)
                                         return(-1);
@@ -666,8 +744,27 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                                         return(-3);
                                 return(1);
                         }
-                break;
+						else if((strcmp(gbp->tag, ft_tag)) == 0)
+						{
+                                if((ft0001_start(gbp)) != 0)
+                                        return(-1);
+                                if((fill_working_struct(gbp,stdout_buffer)) != 0)
+                                        return(-2);  
+                                if((ft0001_end(r,gbp,stdout_buffer)) != 0)
+                                        return(-3);
+                                return(1);
+                        }
 
+                break;
+                case 2:
+                        if((ft0002_start(gbp)) != 0)
+                            return(-1);
+                        if((fill_working_struct(gbp,stdout_buffer)) != 0)
+                            return(-2);
+                        if((ft0002_end(r,gbp,stdout_buffer)) != 0)
+                            return(-3);
+                        return(1);
+                break;
                 case 3:
                         if((strcmp(gbp->tag, tt_tag)) == 0)
                         {
@@ -679,36 +776,123 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                                         return(-3);
                                 return(1);
                         }
-                        /*else if((strcmp(gbp->tag, wo_tag)) == 0)
+                        else if((strcmp(gbp->tag, wl_tag)) == 0)
                         {
-                                if((wo03_start(gbp)) != 0)
+                                if((wl0003_start(gbp)) != 0)
                                         return(-1);
                                 if((fill_working_struct(gbp,stdout_buffer)) != 0)
-                                        return(-2);  
-                                if((wo03_end(r,gbp,stdout_buffer)) != 0)
+                                        return(-2);
+                                if((wl0003_end(r,gbp,stdout_buffer)) != 0)
                                         return(-3);
                                 return(1);
-                        } */
+                        }
+
                 break;
 
-                case 5:         
-                        if((tt0005_start(gbp)) != 0)
-                                return(-1);
-                        if((fill_working_struct(gbp,stdout_buffer)) != 0)
-                                return(-2);
-                        if((tt0005_end(r,gbp,stdout_buffer)) != 0)
-                                return(-3);
-                        return(1);
+                case 5:
+						if((strcmp(gbp->tag, tt_tag)) == 0)
+						{
+							    if((tt0005_start(gbp)) != 0)
+									return(-1);
+								if((fill_working_struct(gbp,stdout_buffer)) != 0)
+	                                return(-2);
+			                    if((tt0005_end(r,gbp,stdout_buffer)) != 0)
+				                    return(-3);
+						        return(1);
+						}
+						else if((strcmp(gbp->tag, wl_tag)) == 0)
+						{
+							    if((wl0005_start(gbp)) != 0)
+									return(-1);
+								if((fill_working_struct(gbp,stdout_buffer)) != 0)
+	                                return(-2);
+			                    if((wl0005_end(r,gbp,stdout_buffer)) != 0)
+				                    return(-3);
+						        return(1);
+						}
                 break;
 
-                case 7:                 
-                        if((tt0007_start(gbp)) != 0)
-                                return(-1);
-                        if((fill_working_struct(gbp,stdout_buffer)) != 0)
-                                return(-2);
-                        if((tt0007_end(r,gbp,stdout_buffer)) != 0)
-                                return(-3);
-                        return(1);
+                case 6:         
+						if((strcmp(gbp->tag, ft_tag)) == 0)
+						{
+								if((ft0006_start(gbp)) != 0)
+										return(-1);
+								if((fill_working_struct(gbp,stdout_buffer)) != 0)
+										return(-2);
+								if((ft0006_end(r,gbp,stdout_buffer)) != 0)
+										return(-3);
+								return(1);
+						}
+						else if((strcmp(gbp->tag, wl_tag)) == 0)
+						{
+								if((wl0006_start(gbp)) != 0)
+										return(-1);
+								if((fill_working_struct(gbp,stdout_buffer)) != 0)
+										return(-2);
+								if((wl0006_end(r,gbp,stdout_buffer)) != 0)
+										return(-3);
+								return(1);
+						}
+                break;
+
+                case 7:  
+                        if((strcmp(gbp->tag, tt_tag)) == 0)
+                        {
+					
+	                        if((tt0007_start(gbp)) != 0)
+		                            return(-1);
+			                if((fill_working_struct(gbp,stdout_buffer)) != 0)
+				                    return(-2);
+					        if((tt0007_end(r,gbp,stdout_buffer)) != 0)
+						            return(-3);
+							return(1);
+						}
+                        else if((strcmp(gbp->tag, ft_tag)) == 0)
+                        {
+					
+	                        if((ft0007_start(gbp)) != 0)
+		                            return(-1);
+			                if((fill_working_struct(gbp,stdout_buffer)) != 0)
+				                    return(-2);
+					        if((ft0007_end(r,gbp,stdout_buffer)) != 0)
+						            return(-3);
+							return(1);
+						}
+                        else if((strcmp(gbp->tag, wl_tag)) == 0)
+                        {
+					
+	                        if((wl0007_start(gbp)) != 0)
+		                            return(-1);
+			                if((fill_working_struct(gbp,stdout_buffer)) != 0)
+				                    return(-2);
+					        if((wl0007_end(r,gbp,stdout_buffer)) != 0)
+						            return(-3);
+							return(1);
+						}
+
+                break;
+
+                case 8:         
+                        if((strcmp(gbp->tag, ft_tag)) == 0)
+                        {
+							if((ft0008_start(gbp)) != 0)
+									return(-1);
+							if((fill_working_struct(gbp,stdout_buffer)) != 0)
+									return(-2);
+							if((ft0008_end(r,gbp,stdout_buffer)) != 0)
+									return(-3);
+							return(1);
+						}
+                        else if((strcmp(gbp->tag, wl_tag)) == 0)
+                        {
+							if((wl0008_start(gbp)) != 0)
+									return(-1);
+							if((fill_working_struct(gbp,stdout_buffer)) != 0)
+									return(-2);
+							if((wl0008_end(r,gbp,stdout_buffer)) != 0)
+									return(-3);
+							return(1);
+						}
                 break;
 
                 case 9:
@@ -720,6 +904,17 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                                 return(-3);
                         return(1);
                 break;
+
+                case 10:         
+                        if((ft0010_start(gbp)) != 0)
+                                return(-1);
+                        if((fill_working_struct(gbp,stdout_buffer)) != 0)
+                                return(-2);
+                        if((ft0010_end(r,gbp,stdout_buffer)) != 0)
+                                return(-3);
+                        return(1);
+                break;
+
 
                 case 11:                        
                         if((tt0011_start(gbp)) != 0)
@@ -771,6 +966,17 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                         return(1);
                 break;
 
+                case 20:         
+                        if((ft0020_start(gbp)) != 0)
+                                return(-1);
+                        if((fill_working_struct(gbp,stdout_buffer)) != 0)
+                                return(-2);
+                        if((ft0020_end(r,gbp,stdout_buffer)) != 0)
+                                return(-3);
+                        return(1);
+                break;
+
+
                 case 21:                        
                         if((tt0021_start(gbp)) != 0)
                                 return(-1);
@@ -781,24 +987,76 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                         return(1);
                 break;
 
-                case 23:                
-                        if((tt0023_start(gbp)) != 0)
+                case 22:                        
+                        if((ft0022_start(gbp)) != 0)
                                 return(-1);
                         if((fill_working_struct(gbp,stdout_buffer)) != 0)
                                 return(-2);
-                        if((tt0023_end(r,gbp,stdout_buffer)) != 0)
+                        if((ft0022_end(r,gbp,stdout_buffer)) != 0)
                                 return(-3);
                         return(1);
                 break;
 
-                case 25:                
-                        if((tt0025_start(gbp)) != 0)
+                case 23:  
+                        if((strcmp(gbp->tag, tt_tag)) == 0)
+                        {
+
+	                        if((tt0023_start(gbp)) != 0)
+		                            return(-1);
+			                if((fill_working_struct(gbp,stdout_buffer)) != 0)
+				                    return(-2);
+					        if((tt0023_end(r,gbp,stdout_buffer)) != 0)
+						            return(-3);
+							return(1);
+						}
+                        else if((strcmp(gbp->tag, ft_tag)) == 0)
+                        {
+
+	                        if((ft0023_start(gbp)) != 0)
+		                            return(-1);
+			                if((fill_working_struct(gbp,stdout_buffer)) != 0)
+				                    return(-2);
+					        if((ft0023_end(r,gbp,stdout_buffer)) != 0)
+						            return(-3);
+							return(1);
+						}
+
+                break;
+
+                case 24:                        
+                        if((ft0024_start(gbp)) != 0)
                                 return(-1);
                         if((fill_working_struct(gbp,stdout_buffer)) != 0)
                                 return(-2);
-                        if((tt0025_end(r,gbp,stdout_buffer)) != 0)
+                        if((ft0024_end(r,gbp,stdout_buffer)) != 0)
                                 return(-3);
                         return(1);
+                break;
+
+                case 25: 
+                        if((strcmp(gbp->tag, tt_tag)) == 0)
+                        {
+
+	                        if((tt0025_start(gbp)) != 0)
+		                            return(-1);
+			                if((fill_working_struct(gbp,stdout_buffer)) != 0)
+				                    return(-2);
+					        if((tt0025_end(r,gbp,stdout_buffer)) != 0)
+						            return(-3);
+							return(1);
+						}
+                        else if((strcmp(gbp->tag, ft_tag)) == 0)
+                        {
+
+	                        if((ft0025_start(gbp)) != 0)
+		                            return(-1);
+			                if((fill_working_struct(gbp,stdout_buffer)) != 0)
+				                    return(-2);
+					        if((ft0025_end(r,gbp,stdout_buffer)) != 0)
+						            return(-3);
+							return(1);
+						}
+
                 break;
 
                 case 27:
@@ -817,6 +1075,16 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                         if((fill_working_struct(gbp,stdout_buffer)) != 0)
                                 return(-2);
                         if((tt0029_end(r,gbp,stdout_buffer)) != 0)
+                                return(-3);
+                        return(1);
+                break;
+
+                case 30:                        
+                        if((ft0030_start(gbp)) != 0)
+                                return(-1);
+                        if((fill_working_struct(gbp,stdout_buffer)) != 0)
+                                return(-2);
+                        if((ft0030_end(r,gbp,stdout_buffer)) != 0)
                                 return(-3);
                         return(1);
                 break;
@@ -852,13 +1120,29 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                 break;
 
                 case 37:                
-                        if((tt0037_start(gbp)) != 0)
-                                return(-1);
-                        if((fill_working_struct(gbp,stdout_buffer)) != 0)
-                                return(-2);
-                        if((tt0037_end(r,gbp,stdout_buffer)) != 0)
-                                return(-3);
-                        return(1);
+                        if((strcmp(gbp->tag, tt_tag)) == 0)
+                        {
+
+	                        if((tt0037_start(gbp)) != 0)
+		                            return(-1);
+			                if((fill_working_struct(gbp,stdout_buffer)) != 0)
+				                    return(-2);
+					        if((tt0037_end(r,gbp,stdout_buffer)) != 0)
+						            return(-3);
+							return(1);
+						}
+                        else if((strcmp(gbp->tag, ft_tag)) == 0)
+                        {
+
+	                        if((ft0037_start(gbp)) != 0)
+		                            return(-1);
+			                if((fill_working_struct(gbp,stdout_buffer)) != 0)
+				                    return(-2);
+					        if((ft0037_end(r,gbp,stdout_buffer)) != 0)
+						            return(-3);
+							return(1);
+						}
+
                 break;
 
                 case 39:                        
@@ -1022,36 +1306,98 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                         return(1);
                 break;
 
-                case 71:                        
-                        if((tt0071_start(gbp)) != 0)
+                case 70:                        
+                        if((ft0070_start(gbp)) != 0)
                                 return(-1);
                         if((fill_working_struct(gbp,stdout_buffer)) != 0)
                                 return(-2);
-                        if((tt0071_end(r,gbp,stdout_buffer)) != 0)
+                        if((ft0070_end(r,gbp,stdout_buffer)) != 0)
                                 return(-3);
                         return(1);
+                break;
+
+                case 71:                        
+                        if((strcmp(gbp->tag, tt_tag)) == 0)
+                        {
+		                    if((tt0071_start(gbp)) != 0)
+	                                return(-1);
+			                if((fill_working_struct(gbp,stdout_buffer)) != 0)
+				                    return(-2);
+					        if((tt0071_end(r,gbp,stdout_buffer)) != 0)
+						            return(-3);
+							return(1);
+						}
+                        else if((strcmp(gbp->tag, ft_tag)) == 0)
+                        {
+		                    if((ft0071_start(gbp)) != 0)
+	                                return(-1);
+			                if((fill_working_struct(gbp,stdout_buffer)) != 0)
+				                    return(-2);
+					        if((ft0071_end(r,gbp,stdout_buffer)) != 0)
+						            return(-3);
+							return(1);
+						}
+
                 break;
 
                 case 73:                        
-                        if((tt0073_start(gbp)) != 0)
+                        if((strcmp(gbp->tag, tt_tag)) == 0)
+                        {
+		                    if((tt0073_start(gbp)) != 0)
+						            return(-1);
+					        if((fill_working_struct(gbp,stdout_buffer)) != 0)
+				                    return(-2);
+	                        if((tt0073_end(r,gbp,stdout_buffer)) != 0)
+		                            return(-3);
+			                return(1);
+						}
+                        else if((strcmp(gbp->tag, ft_tag)) == 0)
+                        {
+		                    if((ft0073_start(gbp)) != 0)
+						            return(-1);
+					        if((fill_working_struct(gbp,stdout_buffer)) != 0)
+				                    return(-2);
+	                        if((ft0073_end(r,gbp,stdout_buffer)) != 0)
+		                            return(-3);
+			                return(1);
+						}
+
+                break;
+
+                case 74:                        
+                        if((ft0074_start(gbp)) != 0)
                                 return(-1);
                         if((fill_working_struct(gbp,stdout_buffer)) != 0)
                                 return(-2);
-                        if((tt0073_end(r,gbp,stdout_buffer)) != 0)
+                        if((ft0074_end(r,gbp,stdout_buffer)) != 0)
                                 return(-3);
                         return(1);
                 break;
-
 
                 case 75:                        
-                        if((tt0075_start(gbp)) != 0)
-                                return(-1);
-                        if((fill_working_struct(gbp,stdout_buffer)) != 0)
-                                return(-2);
-                        if((tt0075_end(r,gbp,stdout_buffer)) != 0)
-                                return(-3);
-                        return(1);
+                        if((strcmp(gbp->tag, tt_tag)) == 0)
+                        {
+	                        if((tt0075_start(gbp)) != 0)
+		                            return(-1);
+			                if((fill_working_struct(gbp,stdout_buffer)) != 0)
+				                    return(-2);
+					        if((tt0075_end(r,gbp,stdout_buffer)) != 0)
+						            return(-3);
+							return(1);
+						}
+                        else if((strcmp(gbp->tag, ft_tag)) == 0)
+                        {
+	                        if((ft0075_start(gbp)) != 0)
+		                            return(-1);
+			                if((fill_working_struct(gbp,stdout_buffer)) != 0)
+				                    return(-2);
+					        if((ft0075_end(r,gbp,stdout_buffer)) != 0)
+						            return(-3);
+							return(1);
+						}
+
                 break;
+
                 case 77:                        
                         if((tt0077_start(gbp)) != 0)
                                 return(-1);
@@ -1061,6 +1407,7 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                                 return(-3);
                         return(1);
                 break;
+
                 case 79:                        
                         if((tt0079_start(gbp)) != 0)
                                 return(-1);
@@ -1080,6 +1427,7 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                                 return(-3);
                         return(1);
                 break;
+
                 case 83:                        
                         if((tt0083_start(gbp)) != 0)
                                 return(-1);
@@ -1112,14 +1460,28 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                         return(1);
                 break;
 
-                case 89:                        
-                        if((tt0089_start(gbp)) != 0)
-                                return(-1);
-                        if((fill_working_struct(gbp,stdout_buffer)) != 0)
-                                return(-2);
-                        if((tt0089_end(r,gbp,stdout_buffer)) != 0)
-                                return(-3);
-                        return(1);
+                case 89:
+                        if((strcmp(gbp->tag, tt_tag)) == 0)
+                        {
+                            if((tt0089_start(gbp)) != 0)
+                                    return(-1);
+                            if((fill_working_struct(gbp,stdout_buffer)) != 0)
+                                    return(-2);
+                            if((tt0089_end(r,gbp,stdout_buffer)) != 0)
+                                    return(-3);
+                            return(1);
+                        }
+                        else if((strcmp(gbp->tag, ft_tag)) == 0)
+                        {
+                            if((ft0089_start(gbp)) != 0)
+                                    return(-1);
+                            if((fill_working_struct(gbp,stdout_buffer)) != 0)
+                                    return(-2);
+                            if((ft0089_end(r,gbp,stdout_buffer)) != 0)
+                                    return(-3);
+                            return(1);
+                        }
+
                 break;
 
                 case 91:                        
@@ -1141,6 +1503,7 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                                 return(-3);
                         return(1);
                 break;
+
                 case 95:                        
                         if((tt0095_start(gbp)) != 0)
                                 return(-1);
@@ -1150,6 +1513,7 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                                 return(-3);
                         return(1);
                 break;
+
                 case 105:                       
                         if((tt0105_start(gbp)) != 0)
                                 return(-1);
@@ -1159,6 +1523,7 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                                 return(-3);
                         return(1);
                 break;
+
                 case 107:                       
                         if((tt0107_start(gbp)) != 0)
                                 return(-1);
@@ -1168,6 +1533,7 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                                 return(-3);
                         return(1);
                 break;
+
                 case 109:                       
                         if((tt0109_start(gbp)) != 0)
                                 return(-1);
@@ -1177,6 +1543,7 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                                 return(-3);
                         return(1);
                 break;
+
                 case 111:                       
                         if((tt0111_start(gbp)) != 0)
                                 return(-1);
@@ -1186,6 +1553,7 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                                 return(-3);
                         return(1);
                 break;
+
                 case 113:                       
                         if((tt0113_start(gbp)) != 0)
                                 return(-1);
@@ -1195,6 +1563,7 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                                 return(-3);
                         return(1);
                 break;
+
                 case 115:                       
                         if((tt0115_start(gbp)) != 0)
                                 return(-1);
@@ -1204,6 +1573,7 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                                 return(-3);
                         return(1);
                 break;
+
                 case 117:                       
                         if((tt0117_start(gbp)) != 0)
                                 return(-1);
@@ -1213,6 +1583,7 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                                 return(-3);
                         return(1);
                 break;
+
                 case 119:                       
                         if((tt0119_start(gbp)) != 0)
                                 return(-1);
@@ -1222,6 +1593,7 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                                 return(-3);
                         return(1);
                 break;
+
                 case 121:                       
                         if((tt0121_start(gbp)) != 0)
                                 return(-1);
@@ -1231,6 +1603,7 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                                 return(-3);
                         return(1);
                 break;
+
                 case 123:                       
                         if((tt0123_start(gbp)) != 0)
                                 return(-1);
@@ -1241,7 +1614,7 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                         return(1);
                 break;
 
-        case 125:                       
+                case 125:                       
                         if((tt0125_start(gbp)) != 0)
                                 return(-1);
                         if((fill_working_struct(gbp,stdout_buffer)) != 0)
@@ -1251,14 +1624,28 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                         return(1);
                 break;
 
-        case 127:                       
-                        if((tt0127_start(gbp)) != 0)
-                                return(-1);
-                        if((fill_working_struct(gbp,stdout_buffer)) != 0)
-                                return(-2);
-                        if((tt0127_end(r,gbp,stdout_buffer)) != 0)
-                                return(-3);
-                        return(1);
+                case 127:                       
+                        if((strcmp(gbp->tag, tt_tag)) == 0)
+                        {
+		                    if((tt0127_start(gbp)) != 0)
+	                                return(-1);
+			                if((fill_working_struct(gbp,stdout_buffer)) != 0)
+				                    return(-2);
+					        if((tt0127_end(r,gbp,stdout_buffer)) != 0)
+						            return(-3);
+							return(1);
+						}
+                        else if((strcmp(gbp->tag, ft_tag)) == 0)
+                        {
+		                    if((ft0127_start(gbp)) != 0)
+	                                return(-1);
+			                if((fill_working_struct(gbp,stdout_buffer)) != 0)
+				                    return(-2);
+					        if((ft0127_end(r,gbp,stdout_buffer)) != 0)
+						            return(-3);
+							return(1);
+						}
+
                 break;
 
                 case 129:                       
@@ -1277,6 +1664,36 @@ int setup_transaction_type(int tttype, request_rec *r, struct global_struct *gbp
                         if((fill_working_struct(gbp,stdout_buffer)) != 0)
                                 return(-2);
                         if((tt0131_end(r,gbp,stdout_buffer)) != 0)
+                                return(-3);
+                        return(1);
+                break;
+
+                case 133:
+                        if((tt0133_start(gbp)) != 0)
+                                return(-1);
+                        if((fill_working_struct(gbp,stdout_buffer)) != 0)
+                                return(-2);
+                        if((tt0133_end(r,gbp,stdout_buffer)) != 0)
+                                return(-3);
+                        return(1);
+                break;
+
+                 case 135:
+                        if((tt0135_start(gbp)) != 0)
+                                return(-1);
+                        if((fill_working_struct(gbp,stdout_buffer)) != 0)
+                                return(-2);
+                        if((tt0135_end(r,gbp,stdout_buffer)) != 0)
+                                return(-3);
+                        return(1);
+                break;
+
+                 case 137:
+                        if((tt0137_start(gbp)) != 0)
+                                return(-1);
+                        if((fill_working_struct(gbp,stdout_buffer)) != 0)
+                                return(-2);
+                        if((tt0137_end(r,gbp,stdout_buffer)) != 0)
                                 return(-3);
                         return(1);
                 break;
@@ -1328,14 +1745,14 @@ int get_tag_from_seq(int n_seq, char *sz_tag_name, char *stdout_buffer, struct g
 
         memset(gbp->sz_tag_name1, '\0', TAG_SIZE);
 
-        sprintf(gbp->sz_tag_name1, "_SEQ>%02d</", n_seq);
+        sprintf(gbp->sz_tag_name1, "_SEQ>%03d</", n_seq);
         gbp->pStart = strstr(stdout_buffer, gbp->sz_tag_name1);
         
         if(gbp->pStart == NULL)
                 return -1;
 
         else
-                gbp->pStart = gbp->pStart + 9;
+                gbp->pStart = gbp->pStart + 10;
                 strncpy(sz_tag_name, gbp->pStart, 3);
                 sz_tag_name[3] = '\0';
                 return 0;
@@ -1462,6 +1879,12 @@ int     initialize_tag_data(struct global_struct *gbp)
 
         sprintf(gbp->wo_btag, "<%s", wo_tag);
         sprintf(gbp->wo_betag, "</%s", wo_tag);
+
+        sprintf(gbp->ft_btag, "<%s", ft_tag);
+        sprintf(gbp->ft_betag, "</%s", ft_tag);
+
+        sprintf(gbp->wl_btag, "<%s", wl_tag);
+        sprintf(gbp->wl_betag, "</%s", wl_tag);
 
         sprintf(gbp->bitag, "id=");
 
@@ -1603,7 +2026,7 @@ int XML_Expat_Error(char *where, char *why, char *what, char *ecode, request_rec
                                                         gbp->tag, originator, label, sg_version, language);
         ap_rprintf(r,"                     \"%stt0000.dtd\">\n", url_tag);
 *///    ap_rprintf(r,"%s\n", e0_message);
-        ap_rprintf(r,"<ttwo0000 id=\"0000\" version=\"1.0\">\n");
+        ap_rprintf(r,"<fvf0000 id=\"0000\" version=\"1.0\">\n");
         ap_rprintf(r,"%s\n", e1_message);
         ap_rprintf(r,"<sg_data_from_macs id=\"0000\">\n");
 
@@ -1621,12 +2044,41 @@ int XML_Expat_Error(char *where, char *why, char *what, char *ecode, request_rec
 
         ap_rprintf(r,"</sg_data_from_macs>\n");
 
-        ap_rprintf(r,"</ttwo0000>\n");
+        ap_rprintf(r,"</fvf0000>\n");
 
 
         if(timebf != NULL)
                 free(timebf);
 
         return(-1);
+}
+
+
+char *remove_comma(char *request, int req_len, struct global_struct *gbp)
+{
+    gbp->x   = 0;
+    gbp->y   = 0;
+
+    gbp->tempreq = malloc(req_len+1);
+
+    if (gbp->tempreq == NULL) {
+        return 0;
+    }
+    memset(gbp->tempreq, '\0', req_len+1);
+    for (gbp->x=0; gbp->x < req_len; gbp->x++)
+    {
+        if (request[gbp->x] != ',')
+		{
+            gbp->tempreq[gbp->y] = request[gbp->x];
+            gbp->y++;
+        }
+    }
+    memset( request, '\0', req_len + 1 );
+    memcpy( request, gbp->tempreq, req_len );
+
+    free(gbp->tempreq);
+
+    return request;
+
 }
 

@@ -1,7 +1,7 @@
 /* tt0021_defs.h  Product Pricing */
 
 
-#define  tt0021_LAN_SEND_BUF_LEN        549 //522 
+#define  tt0021_LAN_SEND_BUF_LEN        550
 #define  tt0021_LAN_RECV_BUF_LEN        2215 //2175 //2000
 
 /* Web to MACS Buffer  */
@@ -38,6 +38,7 @@
 #define  tt0021_AVAIL_FLAG_LEN           1
 #define  tt0021_AVAIL_INV_LEN                    7
 #define  tt0021_ITM_QTY_LEN            5
+#define  tt0021_FLAG_LEN            1
 
 
 typedef struct
@@ -51,6 +52,7 @@ typedef struct
         char filler[tt0021_FILLER_LEN+1];
     char item_num[tt0021_ITEM_COUNT][tt0021_ITM_NO_LEN+1];
         char item_qty[tt0021_ITEM_COUNT][tt0021_QTY_LEN+1];
+	char desc_flag[tt0021_FLAG_LEN+1];
 
 } tt0021_st_send;
 

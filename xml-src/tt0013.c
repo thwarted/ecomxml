@@ -320,6 +320,10 @@ int tt0013_ParceRecvStr(tt0013_st_recv *ptr_recvbuf, char *sz_recvbufcat,request
         memcpy(ptr_recvbuf->item[gbp->i].price_ovrd_flag, sz_recvbufcat + gbp->count, tt0013_PRICE_OVRD_FLAG_LEN);
         gbp->count += tt0013_PRICE_OVRD_FLAG_LEN;
 
+		        memset(ptr_recvbuf->item[gbp->i].item_type, '\0', tt0013_ITEM_TYPE_LEN + 1);
+        memcpy(ptr_recvbuf->item[gbp->i].item_type, sz_recvbufcat + gbp->count, tt0013_ITEM_TYPE_LEN);
+        gbp->count += tt0013_ITEM_TYPE_LEN;
+
         }
 
 /* ... AND NOW WE OUTPUT THE ITEM DETAIL RECORDS */
@@ -343,6 +347,7 @@ int tt0013_ParceRecvStr(tt0013_st_recv *ptr_recvbuf, char *sz_recvbufcat,request
                 ap_rprintf(r,"			<GWRAP_AVAIL_INV>%s</GWRAP_AVAIL_INV>\n", handle_special_chars(gbp,ptr_recvbuf->item[gbp->i].gwrap_avail_inv));
                 ap_rprintf(r,"			<FRAME_QTY>%s</FRAME_QTY>\n", handle_special_chars(gbp,ptr_recvbuf->item[gbp->i].frame_qty));
                 ap_rprintf(r,"			<PRICE_OVRD_FLAG>%s</PRICE_OVRD_FLAG>\n", handle_special_chars(gbp,ptr_recvbuf->item[gbp->i].price_ovrd_flag));
+                ap_rprintf(r,"			<ITEM_TYPE>%s</ITEM_TYPE>\n", handle_special_chars(gbp,ptr_recvbuf->item[gbp->i].item_type));
 
                 ap_rprintf(r,"		</PRODUCT_DETAIL>\n");
     }

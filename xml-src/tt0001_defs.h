@@ -3,7 +3,7 @@
 /* Web to MACS Buffer  */
 
 #define  tt0001_LAN_SEND_BUF_LEN       1322 //1295
-#define  tt0001_LAN_RECV_BUF_LEN       11570 //11468 //12045 //12000
+#define  tt0001_LAN_RECV_BUF_LEN       11606 //11468 //12045 //12000
 
 #define  tt0001_REQ_ID_LEN             4
 #define  tt0001_REC_ID_LEN                     4
@@ -53,7 +53,7 @@
 
 #define  tt0001_MPB_COUNT                            9
 
-#define  tt0001_MPB_QTY_LEN            5
+#define  tt0001_MPB_QTY_LEN            9
 #define  tt0001_MPB_PRICE_LEN          10
 
 #define  tt0001_CUST_FLAG_LEN          1
@@ -200,4 +200,6 @@ typedef struct
 
         char gwrap_flag[tt0001_GWRAP_FLAG_LEN+1];
 } tt0001_st_recv;
+
+
 

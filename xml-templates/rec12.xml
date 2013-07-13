@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!-- SINGLE OCCURENCE RECORD IN AN ORDER -->
+
+	<R12>
+           <R12_SEQ></R12_SEQ>
+           <R12_REC_TYPE></R12_REC_TYPE>
+           <R12_FNAME></R12_FNAME>
+           <R12_MINITIAL></R12_MINITIAL>
+           <R12_LNAME></R12_LNAME>
+           <R12_TITLE></R12_TITLE>
+           <R12_COMPANY_NAME></R12_COMPANY_NAME>
+           <R12_ADDRESS_REF1></R12_ADDRESS_REF1>
+           <R12_ADDRESS_REF2></R12_ADDRESS_REF2>
+           <R12_STREET></R12_STREET>
+           <R12_CITY></R12_CITY>
+           <R12_STATE></R12_STATE>
+           <R12_ZIP_CODE></R12_ZIP_CODE>
+           <R12_PHONE></R12_PHONE>
+           <R12_COUNTRY_CODE></R12_COUNTRY_CODE>
+           <R12_OLD_CUST_NUM></R12_OLD_CUST_NUM>
+           <R12_FULL_CUST_NUM></R12_FULL_CUST_NUM>
+           <R12_XREF_TYPE></R12_XREF_TYPE>
+	</R12>

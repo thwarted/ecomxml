@@ -526,6 +526,11 @@ int tt0047_ParceRecvStr(tt0047_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
         ap_rprintf(r,"		<SHIP_METHOD_DESC>%s</SHIP_METHOD_DESC>\n", handle_special_chars(gbp,ptr_recvbuf->ship_method_desc));
     gbp->count += tt0047_SHIP_METHOD_DESC_LEN;
 
+	memset(ptr_recvbuf->cc_sec_code,'\0', tt0047_CC_SEC_CODE_LEN+1);
+    memcpy(ptr_recvbuf->cc_sec_code, sz_recvbufcat + gbp->count, tt0047_CC_SEC_CODE_LEN);
+        ap_rprintf(r,"		<CC_SEC_CODE>%s</CC_SEC_CODE>\n", handle_special_chars(gbp,ptr_recvbuf->cc_sec_code));
+    gbp->count += tt0047_CC_SEC_CODE_LEN;
+
 
         ap_rprintf(r,"	%s>\n", gbp->metag);
         ap_rprintf(r,"%s\n", pt_message);

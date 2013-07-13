@@ -57,6 +57,7 @@
 #include "tt0091_defs.h"
 #include "tt0093_defs.h"
 #include "tt0095_defs.h"
+#include "tt0103_defs.h"
 #include "tt0105_defs.h"
 #include "tt0107_defs.h"
 #include "tt0109_defs.h"
@@ -71,7 +72,40 @@
 #include "tt0127_defs.h"
 #include "tt0129_defs.h"
 #include "tt0131_defs.h"
+#include "tt0133_defs.h"
+#include "tt0135_defs.h"
+#include "tt0137_defs.h"
 
+// bridal registry transactions
+
+#include "ft0001_defs.h"
+#include "ft0002_defs.h"
+#include "ft0006_defs.h"
+#include "ft0007_defs.h"
+#include "ft0008_defs.h"
+#include "ft0010_defs.h"
+#include "ft0020_defs.h"
+#include "ft0022_defs.h"
+#include "ft0023_defs.h"
+#include "ft0024_defs.h"
+#include "ft0025_defs.h"
+#include "ft0030_defs.h"
+#include "ft0037_defs.h"
+#include "ft0070_defs.h"
+#include "ft0071_defs.h"
+#include "ft0073_defs.h"
+#include "ft0074_defs.h"
+#include "ft0075_defs.h"
+#include "ft0089_defs.h"
+#include "ft0127_defs.h"
+
+// wishlist transactions
+
+#include "wl0003_defs.h"
+#include "wl0005_defs.h"
+#include "wl0006_defs.h"
+#include "wl0007_defs.h"
+#include "wl0008_defs.h"
 
 /* This is where we define our global container for all transaction
    types... a structure that allows any transaction type to be held
@@ -98,6 +132,12 @@
 
 #define  TAG_SIZE            50
 #define INPUT_BUFFER_SIZE    150000
+
+/* tags used in wo01 */
+#define  ADDRESS_LEN                60
+#define  R11_REFERENCE_LEN          14
+#define  R15_REFERENCE_LEN          100
+
 /* THE REQUEST STRUCTURE*/
 typedef struct {
 
@@ -172,7 +212,9 @@ struct global_struct
         char    srctype[2];
     char    tempsrc[80];
 
-        int a;
+        int a; 
+		int x, y; /* variables used in remove_comma() */
+		char *tempreq; /* variables used in remove_comma() */
         char *line;
         char filename[1024];                    /* built filename */
         char imagepath[_MAX_PATH];              /* path where the images are */
@@ -185,7 +227,9 @@ struct global_struct
         /* INF File information */
         char webexec[80];                       
     char tmaxexec[80];                     
-    char hphost[80];                        
+    char hphost[80];
+	char wlport[80];
+    char fvfport[10];                       
     char webport[10];                       
     char tmaxport[10];                     
     char reqfile[30];                      
@@ -212,6 +256,12 @@ char tt_betag[TAG_BUFFER_LENGTH];
 
 char wo_btag[TAG_BUFFER_LENGTH];
 char wo_betag[TAG_BUFFER_LENGTH];
+
+char ft_btag[TAG_BUFFER_LENGTH];
+char ft_betag[TAG_BUFFER_LENGTH];
+
+char wl_btag[TAG_BUFFER_LENGTH];
+char wl_betag[TAG_BUFFER_LENGTH];
 
 char tag[5];
 
@@ -268,6 +318,7 @@ char tag[5];
         int max_record;
 
         int R16_count;
+        int R18_count;
         int R21_count;
         int R30_count;
         int R31_count;
@@ -275,6 +326,13 @@ char tag[5];
         int R40_count;
         int R41_count;
         int R42_count;
+		int R43_count;
+
+		/* tags used in wo01 */
+		char address[ADDRESS_LEN+1];
+		char reference_11[R11_REFERENCE_LEN+1];
+		char reference_15[R15_REFERENCE_LEN+1];
+
 
     tt0001_st_send *sendbuf0001;
     tt0001_st_recv *recvbuf0001;
@@ -420,6 +478,9 @@ char tag[5];
     tt0095_st_send *sendbuf0095;
     tt0095_st_recv *recvbuf0095;
 
+    tt0103_st_send *sendbuf0103;
+    tt0103_st_recv *recvbuf0103;
+
     tt0105_st_send *sendbuf0105;
     tt0105_st_recv *recvbuf0105;
 
@@ -461,4 +522,93 @@ char tag[5];
 
     tt0131_st_send *sendbuf0131;
     tt0131_st_recv *recvbuf0131;
+
+    tt0133_st_send *sendbuf0133;
+    tt0133_st_recv *recvbuf0133;
+
+    tt0135_st_send *sendbuf0135;
+    tt0135_st_recv *recvbuf0135;
+
+    tt0137_st_send *sendbuf0137;
+    tt0137_st_recv *recvbuf0137;
+
+	// bridal registry transactions
+
+    ft0001_st_send *ftsendbuf0001;
+    ft0001_st_recv *ftrecvbuf0001;
+
+    ft0002_st_send *ftsendbuf0002;
+    ft0002_st_recv *ftrecvbuf0002;
+
+    ft0006_st_send *ftsendbuf0006;
+    ft0006_st_recv *ftrecvbuf0006;
+
+    ft0007_st_send *ftsendbuf0007;
+    ft0007_st_recv *ftrecvbuf0007;
+
+    ft0008_st_send *ftsendbuf0008;
+    ft0008_st_recv *ftrecvbuf0008;
+
+    ft0010_st_send *ftsendbuf0010;
+    ft0010_st_recv *ftrecvbuf0010;
+
+    ft0020_st_send *ftsendbuf0020;
+    ft0020_st_recv *ftrecvbuf0020;
+
+    ft0022_st_send *ftsendbuf0022;
+    ft0022_st_recv *ftrecvbuf0022;
+
+    ft0023_st_send *ftsendbuf0023;
+    ft0023_st_recv *ftrecvbuf0023;
+
+    ft0024_st_send *ftsendbuf0024;
+    ft0024_st_recv *ftrecvbuf0024;
+
+    ft0025_st_send *ftsendbuf0025;
+    ft0025_st_recv *ftrecvbuf0025;
+
+    ft0030_st_send *ftsendbuf0030;
+    ft0030_st_recv *ftrecvbuf0030;
+
+    ft0037_st_send *ftsendbuf0037;
+    ft0037_st_recv *ftrecvbuf0037;
+
+    ft0070_st_send *ftsendbuf0070;
+    ft0070_st_recv *ftrecvbuf0070;
+
+    ft0071_st_send *ftsendbuf0071;
+    ft0071_st_recv *ftrecvbuf0071;
+
+    ft0073_st_send *ftsendbuf0073;
+    ft0073_st_recv *ftrecvbuf0073;
+
+    ft0074_st_send *ftsendbuf0074;
+    ft0074_st_recv *ftrecvbuf0074;
+
+    ft0075_st_send *ftsendbuf0075;
+    ft0075_st_recv *ftrecvbuf0075;
+
+    ft0089_st_send *ftsendbuf0089;
+    ft0089_st_recv *ftrecvbuf0089;
+
+    ft0127_st_send *ftsendbuf0127;
+    ft0127_st_recv *ftrecvbuf0127;
+
+// wishlist transactions
+
+    wl0003_st_send *wlsendbuf0003;
+    wl0003_st_recv *wlrecvbuf0003;
+
+    wl0005_st_send *wlsendbuf0005;
+    wl0005_st_recv *wlrecvbuf0005;
+
+    wl0006_st_send *wlsendbuf0006;
+    wl0006_st_recv *wlrecvbuf0006;
+
+    wl0007_st_send *wlsendbuf0007;
+    wl0007_st_recv *wlrecvbuf0007;
+
+    wl0008_st_send *wlsendbuf0008;
+    wl0008_st_recv *wlrecvbuf0008;
+
 };

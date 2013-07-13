@@ -268,6 +268,15 @@ int tt0091_ParceRecvStr(tt0091_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
         ap_rprintf(r,"		<COUNT>%s</COUNT>\n", handle_special_chars(gbp,ptr_recvbuf->count));
     gbp->count += tt0091_COUNT_LEN;
 
+	memset(ptr_recvbuf->hdr_full_cc_no, '\0', tt0091_HDR_FULL_CC_NO_LEN + 1);
+    memcpy(ptr_recvbuf->hdr_full_cc_no, sz_recvbufcat + gbp->count, tt0091_HDR_FULL_CC_NO_LEN );
+        ap_rprintf(r,"		<FULL_CC_NO>%s</FULL_CC_NO>\n", handle_special_chars(gbp,ptr_recvbuf->hdr_full_cc_no));
+    gbp->count += tt0091_HDR_FULL_CC_NO_LEN;
+
+	memset(ptr_recvbuf->hdr_filler_len, '\0', tt0091_HDR_FILLER_LEN + 1);
+    memcpy(ptr_recvbuf->hdr_filler_len, sz_recvbufcat + gbp->count, tt0091_HDR_FILLER_LEN );
+    gbp->count += tt0091_HDR_FILLER_LEN;
+
     // Build data from array
 
     for(gbp->i = 0 ; gbp->i < tt0091_STAND_ORD_DETAIL ; gbp->i++) 

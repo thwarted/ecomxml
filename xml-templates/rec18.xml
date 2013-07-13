@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!-- ONLY TWO RECORDS IN AN ORDER -->
+
+	<R18_1>
+           <R18_1_SEQ></R18_1_SEQ>
+           <R18_1_REC_TYPE></R18_1_REC_TYPE>
+           <R18_1_GC_NUM_1></R18_1_GC_NUM_1>
+           <R18_1_GC_AMT_1></R18_1_GC_AMT_1>
+           <R18_1_GC_NUM_2></R18_1_GC_NUM_2>
+           <R18_1_GC_AMT_2></R18_1_GC_AMT_2>
+           <R18_1_GC_NUM_3></R18_1_GC_NUM_3>
+           <R18_1_GC_AMT_3></R18_1_GC_AMT_3>
+           <R18_1_GC_NUM_4></R18_1_GC_NUM_4>
+           <R18_1_GC_AMT_4></R18_1_GC_AMT_4>
+           <R18_1_GC_NUM_5></R18_1_GC_NUM_5>
+           <R18_1_GC_AMT_5></R18_1_GC_AMT_5>
+           <R18_1_GC_NUM_6></R18_1_GC_NUM_6>
+           <R18_1_GC_AMT_6></R18_1_GC_AMT_6>
+           <R18_1_GC_NUM_7></R18_1_GC_NUM_7>
+           <R18_1_GC_AMT_7></R18_1_GC_AMT_7>
+           <R18_1_GC_NUM_8></R18_1_GC_NUM_8>
+           <R18_1_GC_AMT_8></R18_1_GC_AMT_8>
+           <R18_1_GC_NUM_9></R18_1_GC_NUM_9>
+           <R18_1_GC_AMT_9></R18_1_GC_AMT_9>
+           <R18_1_GC_NUM_10></R18_1_GC_NUM_10>
+           <R18_1_GC_AMT_10></R18_1_GC_AMT_10>
+
+	<R18_1>
+
+
+	<R18_2>
+           <R18_2_SEQ></R18_2_SEQ>
+           <R18_2_REC_TYPE></R18_2_REC_TYPE>
+           <R18_2_GC_NUM_1></R18_2_GC_NUM_1>
+           <R18_2_GC_AMT_1></R18_2_GC_AMT_1>
+           <R18_2_GC_NUM_2></R18_2_GC_NUM_2>
+           <R18_2_GC_AMT_2></R18_2_GC_AMT_2>
+           <R18_2_GC_NUM_3></R18_2_GC_NUM_3>
+           <R18_2_GC_AMT_3></R18_2_GC_AMT_3>
+           <R18_2_GC_NUM_4></R18_2_GC_NUM_4>
+           <R18_2_GC_AMT_4></R18_2_GC_AMT_4>
+           <R18_2_GC_NUM_5></R18_2_GC_NUM_5>
+           <R18_2_GC_AMT_5></R18_2_GC_AMT_5>
+           <R18_2_GC_NUM_6></R18_2_GC_NUM_6>
+           <R18_2_GC_AMT_6></R18_2_GC_AMT_6>
+           <R18_2_GC_NUM_7></R18_2_GC_NUM_7>
+           <R18_2_GC_AMT_7></R18_2_GC_AMT_7>
+           <R18_2_GC_NUM_8></R18_2_GC_NUM_8>
+           <R18_2_GC_AMT_8></R18_2_GC_AMT_8>
+           <R18_2_GC_NUM_9></R18_2_GC_NUM_9>
+           <R18_2_GC_AMT_9></R18_2_GC_AMT_9>
+           <R18_2_GC_NUM_10></R18_2_GC_NUM_10>
+           <R18_2_GC_AMT_10></R18_2_GC_AMT_10>
+
+	<R18_2>

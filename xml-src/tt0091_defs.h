@@ -1,7 +1,7 @@
 /* tt0091_defs.h Standing Order Review */
 
 #define  tt0091_LAN_SEND_BUF_LEN        158 
-#define  tt0091_LAN_RECV_BUF_LEN        28928 //28925//28941 
+#define  tt0091_LAN_RECV_BUF_LEN        29075 //28928 //28925//28941 
 
 /* Web to MACS Buffer  */
 
@@ -35,6 +35,8 @@
 #define  tt0091_HDR_CO_LEN                              2
 #define  tt0091_HDR_DIV_LEN                             2
 #define  tt0091_COUNT_LEN                               3
+#define  tt0091_HDR_FULL_CC_NO_LEN               20
+#define  tt0091_HDR_FILLER_LEN               100
 
 #define  tt0091_STAND_ORD_DETAIL                100
 
@@ -119,6 +121,8 @@ typedef struct
         char hdr_co[tt0091_HDR_CO_LEN+1];
         char hdr_div[tt0091_HDR_DIV_LEN+1];
         char count[tt0091_COUNT_LEN+1];
+		char hdr_full_cc_no[tt0091_HDR_FULL_CC_NO_LEN+1];
+		char hdr_filler_len[tt0091_HDR_FILLER_LEN+1];
         
     tt0091_stand_ord_detail_array stand_ord_detail[tt0091_STAND_ORD_DETAIL];
 

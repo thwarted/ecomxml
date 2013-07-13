@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- SINGLE OCCURENCE RECORD IN AN ORDER -->
+
+	<R13>
+           <R13_SEQ></R13_SEQ>
+           <R13_REC_TYPE></R13_REC_TYPE>
+           <R13_EMAIL_ADDR></R13_EMAIL_ADDR>
+           <R13_NET_PASSWORD></R13_NET_PASSWORD>
+           <R13_RECAP_FLAG></R13_RECAP_FLAG>
+           <R13_USER_ID></R13_USER_ID>
+           <R13_DEMOGRAPH></R13_DEMOGRAPH>
+           <R13_SAVE_CART></R13_SAVE_CART>
+	</R13>

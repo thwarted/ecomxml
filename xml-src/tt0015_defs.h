@@ -2,7 +2,7 @@
 
 
 #define  tt0015_LAN_SEND_BUF_LEN        98 //89 
-#define  tt0015_LAN_RECV_BUF_LEN        701 //700 //691  
+#define  tt0015_LAN_RECV_BUF_LEN        1281 //701 
 
 /* Web to MACS Buffer  */
 
@@ -35,6 +35,8 @@
 
 #define  tt0015_PROMPT_LEN             20
 #define  tt0015_RESP_LEN               2
+#define  tt0015_COMP_EDP_LEN			9
+#define  tt0015_COMP_ITEM_LEN			20
 #define  tt0015_CUSTOMFRAME_LEN         1
 
 typedef struct
@@ -54,6 +56,8 @@ typedef struct
 {
     char prompt[tt0015_PROMPT_LEN+1];
     char resp_len[tt0015_RESP_LEN+1];
+	char comp_edp_no[tt0015_COMP_EDP_LEN+1];
+	char comp_item_no[tt0015_COMP_ITEM_LEN+1];
 
 } tt0015_customize_array;
 

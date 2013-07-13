@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE tt0133 PUBLIC "-//Smith_Gardner//DTD XML 1.0//EN" "../xml-dtd/tt0133.dtd">
+             
+<!-- PRODUCT QUOTE -->
+
+<tt0133 id="tt0133">
+
+<!-- THIS IS THE ACTUAL DATA REQUIRED FOR TRANSACTION COMPLETION -->
+	<sg_data_to_macs>
+
+		<COMPANY>01</COMPANY>
+		<DIVISION>01</DIVISION>
+		<UID></UID>
+
+            <OFFER></OFFER>
+            <COD_FLAG></COD_FLAG>
+            <BU_CUST_NO></BU_CUST_NO>
+            <BU_COUNTRY></BU_COUNTRY>
+            <BU_CITY></BU_CITY>
+            <BU_ZIP></BU_ZIP>
+            
+            <ST_CUST_NO_1></ST_CUST_NO_1>
+            <ST_COUNTRY_1></ST_COUNTRY_1>
+            <ST_CITY_1></ST_CITY_1>
+            <ST_ZIP_1></ST_ZIP_1>
+            <ST_SHIPTO_NO_1></ST_SHIPTO_NO_1>
+
+           <ST_CUST_NO_2></ST_CUST_NO_2>
+            <ST_COUNTRY_2></ST_COUNTRY_2>
+            <ST_CITY_2></ST_CITY_2>
+            <ST_ZIP_2></ST_ZIP_2>
+            <ST_SHIPTO_NO_2></ST_SHIPTO_NO_2>
+
+<!-- UPTO 99 SHIPTO INFORMATION CAN BE ADDED -->
+
+           <ST_CUST_NO_99></ST_CUST_NO_99>
+            <ST_COUNTRY_99></ST_COUNTRY_99>
+            <ST_CITY_99></ST_CITY_99>
+            <ST_ZIP_99></ST_ZIP_99>
+            <ST_SHIPTO_NO_99></ST_SHIPTO_NO_99>
+
+           <ITEM_NO_1></ITEM_NO_1>
+           <ITEM_SHIPTO_NO_1></ITEM_SHIPTO_NO_1>
+           <ITEM_QTY_1></ITEM_QTY_1>
+           <ITEM_UNIT_PRICE_1></ITEM_UNIT_PRICE_1>
+
+<!--  UPTO 250 ITEM DETAILS CAN BE ADDED -->
+
+           <ITEM_NO_250></ITEM_NO_250>
+           <ITEM_SHIPTO_NO_250></ITEM_SHIPTO_NO_250>
+           <ITEM_QTY_250></ITEM_QTY_250>
+           <ITEM_UNIT_PRICE_250></ITEM_UNIT_PRICE_250>
+
+
+
+		
+	</sg_data_to_macs>
+
+<!-- THIS IS ANY ADDITIONAL TRANSACTION DATA -->
+	<user_data_for_return_with_response>
+
+		<a>ASDF</a>
+		<b>GHJK</b>
+		<c>HJKL</c>
+		<d>1234</d>
+		<e></e>
+		<f></f>
+		<g></g>
+		<h></h>
+		<i></i>
+		<j></j>
+		<k></k>
+		<l></l>
+		<m></m>
+		<n></n>
+		<o></o>
+		<p></p>
+		<q></q>
+		<r></r>
+		<s></s>
+		<t></t>
+		<u></u>
+		<v></v>
+		<w></w>
+		<x></x>
+		<y></y>
+		<z></z>
+
+	</user_data_for_return_with_response>
+
+</tt0133>

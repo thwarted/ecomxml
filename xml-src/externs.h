@@ -65,6 +65,8 @@ extern int              XML_Expat_Error(char *, char *, char *, char *, request_
 extern int     get_tag_from_seq(int, char *, char *, struct global_struct *);
 extern void    set_tag_name(char *, char *, int);
 extern int     get_tag_data(char *, char *, struct global_struct *, char *);
+extern int     get_node_pos(char *, struct global_struct *, char *);
+extern int     node_get_tag_data(char *, char *, struct global_struct *, char *);
 
 extern char pathname[_MAX_PATH];   /* defined in rxp.c */
 extern int kill_tmp_file;
@@ -85,9 +87,9 @@ extern char pt_message[];
 
 extern char e1_message[];
 
-extern char wo_tag[];;
+extern char wo_tag[];
 
-extern char tt_tag[];;
+extern char tt_tag[];
 
 extern char url_tag[];
 

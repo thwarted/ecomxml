@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- MULTIPLE OCCURENCE RECORD IN AN ORDER -->
+
+	<R33_1>
+           <R33_1_SEQ></R33_1_SEQ>
+           <R33_1_REC_TYPE></R33_1_REC_TYPE>
+           <R33_1_ST_EMAIL_ADDR></R33_1_ST_EMAIL_ADDR>
+	</R33_1>
+
+	<R33_2>
+           <R33_2_SEQ></R33_2_SEQ>
+           <R33_2_REC_TYPE></R33_2_REC_TYPE>
+           <R33_2_ST_EMAIL_ADDR></R33_2_ST_EMAIL_ADDR>
+	</R33_2>

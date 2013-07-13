@@ -2,8 +2,8 @@
 
 /* Web to MACS Buffer  */
 
-#define  tt0049_LAN_SEND_BUF_LEN        89 //62    
-#define  tt0049_LAN_RECV_BUF_LEN        20125 //20000  
+#define  tt0049_LAN_SEND_BUF_LEN        89       //62    
+#define  tt0049_LAN_RECV_BUF_LEN        20150    //20125 //20000  
 
 #define  tt0049_REQ_ID_LEN             4
 #define  tt0049_REC_ID_LEN             4
@@ -39,6 +39,7 @@
 #define  tt0049_R1_QTY_LEN                       5
 #define  tt0049_R1_UPS_LEN                       640
 #define  tt0049_R1_IMG_OVRD_LEN          8
+#define  tt0049_R1_FLAG_LEN                     1
 
 #define  tt0049_P1_COMP_COUNT                    25
 
@@ -68,6 +69,7 @@ typedef struct
         char r1_item_qty[tt0049_R1_QTY_LEN+1];
         char r1_upsl_X[tt0049_R1_UPS_LEN+1];
         char r1_image_ovrd[tt0049_R1_IMG_OVRD_LEN+1];
+        char r1_flag[tt0049_R1_FLAG_LEN+1];
 
 } tt0049_r1_comp_array;
 

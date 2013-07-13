@@ -262,6 +262,14 @@ int tt0015_ParceRecvStr(tt0015_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
         memcpy(ptr_recvbuf->customization_prompt[gbp->i].resp_len, sz_recvbufcat+gbp->count, tt0015_RESP_LEN);
         gbp->count += tt0015_RESP_LEN;
 
+		memset(ptr_recvbuf->customization_prompt[gbp->i].comp_edp_no, '\0', tt0015_COMP_EDP_LEN + 1);
+        memcpy(ptr_recvbuf->customization_prompt[gbp->i].comp_edp_no, sz_recvbufcat+gbp->count, tt0015_COMP_EDP_LEN);
+        gbp->count += tt0015_COMP_EDP_LEN;
+
+		memset(ptr_recvbuf->customization_prompt[gbp->i].comp_item_no, '\0', tt0015_COMP_ITEM_LEN + 1);
+        memcpy(ptr_recvbuf->customization_prompt[gbp->i].comp_item_no, sz_recvbufcat+gbp->count, tt0015_COMP_ITEM_LEN);
+        gbp->count += tt0015_COMP_ITEM_LEN;
+
                 if((strlen(ptr_recvbuf->customization_prompt[gbp->i].prompt)) > 0) 
                 {
                         ap_rprintf(r,"		<CUSTOMIZATION_PROMPTS>\n");
@@ -269,6 +277,10 @@ int tt0015_ParceRecvStr(tt0015_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
                                                                                                 handle_special_chars(gbp,ptr_recvbuf->customization_prompt[gbp->i].prompt));
                         ap_rprintf(r,"			<RESPONSE_LENGTH>%s</RESPONSE_LENGTH>\n", 
                                                                                                 handle_special_chars(gbp,ptr_recvbuf->customization_prompt[gbp->i].resp_len));
+						ap_rprintf(r,"			<CUSTOMIZATION_COMP_EDP>%s</CUSTOMIZATION_COMP_EDP>\n", 
+                                                                                                handle_special_chars(gbp,ptr_recvbuf->customization_prompt[gbp->i].comp_edp_no));
+						ap_rprintf(r,"			<CUSTOMIZATION_COMP_ITEM>%s</CUSTOMIZATION_COMP_ITEM>\n", 
+                                                                                                handle_special_chars(gbp,ptr_recvbuf->customization_prompt[gbp->i].comp_item_no));
                         ap_rprintf(r,"		</CUSTOMIZATION_PROMPTS>\n");
                 }
 

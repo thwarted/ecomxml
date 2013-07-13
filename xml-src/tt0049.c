@@ -282,6 +282,10 @@ int tt0049_ParceRecvStr(tt0049_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
                 memset(ptr_recvbuf->r1_component[gbp->i].r1_image_ovrd,'\0', tt0049_R1_IMG_OVRD_LEN+1);
                 memcpy(ptr_recvbuf->r1_component[gbp->i].r1_image_ovrd, sz_recvbufcat + gbp->count, tt0049_R1_IMG_OVRD_LEN);
                 gbp->count += tt0049_R1_IMG_OVRD_LEN;
+
+                memset(ptr_recvbuf->r1_component[gbp->i].r1_flag,'\0', tt0049_R1_FLAG_LEN+1);
+                memcpy(ptr_recvbuf->r1_component[gbp->i].r1_flag, sz_recvbufcat + gbp->count, tt0049_R1_FLAG_LEN);
+                gbp->count += tt0049_R1_FLAG_LEN;
         }
 
         gbp->k = atoi(ptr_recvbuf->r1_count);
@@ -298,6 +302,7 @@ int tt0049_ParceRecvStr(tt0049_st_recv *ptr_recvbuf, char *sz_recvbufcat, reques
                 ap_rprintf(r,"			<R1_PROD_QTY>%s</R1_PROD_QTY>\n", handle_special_chars(gbp,ptr_recvbuf->r1_component[gbp->i].r1_item_qty));
                 ap_rprintf(r,"			<R1_UPSL_X>%s</R1_UPSL_X>\n", handle_special_chars(gbp,ptr_recvbuf->r1_component[gbp->i].r1_upsl_X));
                 ap_rprintf(r,"			<R1_IMAGE_OVERRIDE>%s</R1_IMAGE_OVERRIDE>\n", handle_special_chars(gbp,ptr_recvbuf->r1_component[gbp->i].r1_image_ovrd));
+                ap_rprintf(r,"			<R1_FLAG>%s</R1_FLAG>\n", handle_special_chars(gbp,ptr_recvbuf->r1_component[gbp->i].r1_flag));
                 ap_rprintf(r,"		</R1_COMPONENTS_DETAILS>\n");
         }
 

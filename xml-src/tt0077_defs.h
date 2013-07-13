@@ -1,7 +1,7 @@
 /* tt0077_defs.h Coupon Validation */
 
-#define  tt0077_LAN_SEND_BUF_LEN        143 
-#define  tt0077_LAN_RECV_BUF_LEN        1736  
+#define  tt0077_LAN_SEND_BUF_LEN        233 
+#define  tt0077_LAN_RECV_BUF_LEN        1916  
 
 /* Web to MACS Buffer  */
 
@@ -17,7 +17,7 @@
 
 #define  tt0077_COUPON_DATA_COUNT               18
 
-#define  tt0077_COUP_VAL_CO_NUM_LEN     4
+#define  tt0077_COUP_VAL_CO_NUM_LEN     9
 
 /* MACS to Web Buffer  */
 
@@ -31,8 +31,8 @@
 #define  tt0077_COUPON_DATA_COUNT               18
 
 #define  tt0077_COUP_VAL_FLAG_LEN           2
-#define  tt0077_COUP_VAL_GOOD_CO_NUM_LEN    4
-#define  tt0077_COUP_VAL_BAD_CO_NUM_LEN     4 
+#define  tt0077_COUP_VAL_GOOD_CO_NUM_LEN    9
+#define  tt0077_COUP_VAL_BAD_CO_NUM_LEN     9 
 #define  tt0077_COUP_VAL_BAD_CO_REJECT_LEN      80
 
 

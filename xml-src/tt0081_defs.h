@@ -1,6 +1,6 @@
 /* tt0081_defs.h Coupon Cancel */
 
-#define  tt0081_LAN_SEND_BUF_LEN        143 
+#define  tt0081_LAN_SEND_BUF_LEN        233 
 #define  tt0081_LAN_RECV_BUF_LEN        152  
 
 /* Web to MACS Buffer  */
@@ -17,7 +17,7 @@
 
 #define  tt0081_COUPON_DATA_COUNT               18
 
-#define  tt0081_COUP_CAN_CO_NUM_LEN     4
+#define  tt0081_COUP_CAN_CO_NUM_LEN     9
 
 /* MACS to Web Buffer  */
 

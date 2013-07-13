@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!-- MULTIPLE OCCURENCE RECORD IN AN ORDER -->
+
+	<R30_1>
+           <R30_1_SEQ></R30_1_SEQ>
+           <R30_1_REC_TYPE></R30_1_REC_TYPE>
+           <R30_1_FNAME></R30_1_FNAME>
+           <R30_1_MINITIAL></R30_1_MINITIAL>
+           <R30_1_LNAME></R30_1_LNAME>
+           <R30_1_TITLE></R30_1_TITLE>
+           <R30_1_COMPANY_NAME></R30_1_COMPANY_NAME>
+           <R30_1_ADDRESS_REF1></R30_1_ADDRESS_REF1>
+           <R30_1_ADDRESS_REF2></R30_1_ADDRESS_REF2>
+           <R30_1_JAP_REF1></R30_1_JAP_REF1>
+           <R30_1_JAP_PREF></R30_1_JAP_PREF>
+           <R30_1_JAP_APT></R30_1_JAP_APT>
+           <R30_1_STREET></R30_1_STREET>
+           <R30_1_CITY></R30_1_CITY>
+           <R30_1_STATE></R30_1_STATE>
+           <R30_1_ZIP_CODE></R30_1_ZIP_CODE>
+           <R30_1_COUNTRY_CODE></R30_1_COUNTRY_CODE>
+           <R30_1_PHONE></R30_1_PHONE>
+           <R30_1_OLD_CUST_NUM></R30_1_OLD_CUST_NUM>
+           <R30_1_FULL_CUST_NUM></R30_1_FULL_CUST_NUM>
+           <R30_1_CUST_EDP></R30_1_CUST_EDP>
+           <R30_1_CONVENIENCE_FLAG></R30_1_CONVENIENCE_FLAG>
+           <R30_1_FUTURE_DATE></R30_1_FUTURE_DATE>
+           <R30_1_SHIP_METHOD></R30_1_SHIP_METHOD>
+           <R30_1_SHIPTO_NUM></R30_1_SHIPTO_NUM>
+	</R30_1>
+
+
+	<R30_2>
+           <R30_2_SEQ></R30_2_SEQ>
+           <R30_2_REC_TYPE></R30_2_REC_TYPE>
+           <R30_2_FNAME></R30_2_FNAME>
+           <R30_2_MINITIAL></R30_2_MINITIAL>
+           <R30_2_LNAME></R30_2_LNAME>
+           <R30_2_TITLE></R30_2_TITLE>
+           <R30_2_COMPANY_NAME></R30_2_COMPANY_NAME>
+           <R30_2_ADDRESS_REF1></R30_2_ADDRESS_REF1>
+           <R30_2_ADDRESS_REF2></R30_2_ADDRESS_REF2>
+           <R30_2_JAP_REF1></R30_2_JAP_REF1>
+           <R30_2_JAP_PREF></R30_2_JAP_PREF>
+           <R30_2_JAP_APT></R30_2_JAP_APT>
+           <R30_2_STREET></R30_2_STREET>
+           <R30_2_CITY></R30_2_CITY>
+           <R30_2_STATE></R30_2_STATE>
+           <R30_2_ZIP_CODE></R30_2_ZIP_CODE>
+           <R30_2_COUNTRY_CODE></R30_2_COUNTRY_CODE>
+           <R30_2_PHONE></R30_2_PHONE>
+           <R30_2_OLD_CUST_NUM></R30_2_OLD_CUST_NUM>
+           <R30_2_FULL_CUST_NUM></R30_2_FULL_CUST_NUM>
+           <R30_2_CUST_EDP></R30_2_CUST_EDP>
+           <R30_2_CONVENIENCE_FLAG></R30_2_CONVENIENCE_FLAG>
+           <R30_2_FUTURE_DATE></R30_2_FUTURE_DATE>
+           <R30_2_SHIP_METHOD></R30_2_SHIP_METHOD>
+           <R30_2_SHIPTO_NUM></R30_2_SHIPTO_NUM>
+	</R30_2>
+

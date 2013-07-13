@@ -172,7 +172,8 @@ int tt0067_CatSendStr(struct global_struct *gbp, char *sz_sendbufcat, tt0067_st_
                         "%-8.8s%-1.1s%-8.8s%-1.1s%-8.8s%-1.1s"
                         "%-8.8s%-1.1s%-8.8s%-1.1s%-8.8s%-1.1s"
                         "%-8.8s%-1.1s%-8.8s%-1.1s%-8.8s%-1.1s"
-                        "%-8.8s%-1.1s%-8.8s%-1.1s%-8.8s%-1.1s%-2.2s",
+                        "%-8.8s%-1.1s%-8.8s%-1.1s%-8.8s%-1.1s"
+                        "%-8.8s%-1.1s%-8.8s%-1.1s%-2.2s",
 
             ptr_sendbuf->request_id,
             ptr_sendbuf->record_id,
@@ -217,6 +218,10 @@ int tt0067_CatSendStr(struct global_struct *gbp, char *sz_sendbufcat, tt0067_st_
                         ptr_sendbuf->gc[16].gc_chk_dig,
                         ptr_sendbuf->gc[17].gc_num,
                         ptr_sendbuf->gc[17].gc_chk_dig,
+                        ptr_sendbuf->gc[18].gc_num,
+                        ptr_sendbuf->gc[18].gc_chk_dig,
+                        ptr_sendbuf->gc[19].gc_num,
+                        ptr_sendbuf->gc[19].gc_chk_dig,
                         ptr_sendbuf->gc_flag);
             
     return(gbp->j);

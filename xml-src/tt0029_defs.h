@@ -2,7 +2,7 @@
 
 /* Web to MACS Buffer  */
 
-#define  tt0029_LAN_SEND_BUF_LEN       1353  //1352
+#define  tt0029_LAN_SEND_BUF_LEN       1351  //1353  //1352
 #define  tt0029_LAN_RECV_BUF_LEN       12210 //12108 //12048 //12045 //12000
 
 #define  tt0029_REQ_ID_LEN             4
@@ -14,7 +14,7 @@
 #define  tt0029_FILLER_LEN                              25
 
 #define  tt0029_ITM_NO_LEN             20
-#define  tt0029_QTY_LEN                6
+#define  tt0029_QTY_LEN                4
 #define  tt0029_CART_FLAG_LEN          1
 #define  tt0029_CART_LINE_NO_LEN       3
 #define  tt0029_UPSELL_REQUEST_LEN     1
@@ -56,7 +56,7 @@
 
 #define  tt0029_MPB_COUNT                            9
 
-#define  tt0029_MPB_QTY_LEN            6
+#define  tt0029_MPB_QTY_LEN            5
 #define  tt0029_MPB_PRICE_LEN          10
 
 #define  tt0029_CUST_FLAG_LEN          1

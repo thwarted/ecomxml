@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- MULTIPLE OCCURENCE RECORD IN AN ORDER -->
+
+	<R42_1>
+           <R42_1_SEQ></R42_1_SEQ>
+           <R42_1_REC_TYPE></R42_1_REC_TYPE>
+           <R42_1_ITEM_QTY></R42_1_ITEM_QTY>
+           <R42_1_ITEM_EDP></R42_1_ITEM_EDP>
+           <R42_1_TAX_NUM></R42_1_TAX_NUM>
+           <R42_1_ITEM_NUM></R42_1_ITEM_NUM>
+           <R42_1_TAX_AMT></R42_1_TAX_AMT>
+           <R42_1_TAX_RATE></R42_1_TAX_RATE>
+           <R42_1_TAX_EXEMPT></R42_1_TAX_EXEMPT>
+           <R42_1_SHIP_METHOD></R42_1_SHIP_METHOD>
+           <R42_1_PH_AMT></R42_1_PH_AMT>
+           <R42_1_PRICE></R42_1_PRICE>
+	</R42_1>
+
+	<R42_2>
+           <R42_2_SEQ></R42_2_SEQ>
+           <R42_2_REC_TYPE></R42_2_REC_TYPE>
+           <R42_2_ITEM_QTY></R42_2_ITEM_QTY>
+           <R42_2_ITEM_EDP></R42_2_ITEM_EDP>
+           <R42_2_TAX_NUM></R42_2_TAX_NUM>
+           <R42_2_ITEM_NUM></R42_2_ITEM_NUM>
+           <R42_2_TAX_AMT></R42_2_TAX_AMT>
+           <R42_2_TAX_RATE></R42_2_TAX_RATE>
+           <R42_2_TAX_EXEMPT></R42_2_TAX_EXEMPT>
+           <R42_2_SHIP_METHOD></R42_2_SHIP_METHOD>
+           <R42_2_PH_AMT></R42_2_PH_AMT>
+           <R42_2_PRICE></R42_2_PRICE>
+	</R42_2>

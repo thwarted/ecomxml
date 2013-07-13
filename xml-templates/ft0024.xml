@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+            
+<!-- PRODUCT SHOP -->
+
+<ft0024 id="ft0024">
+
+<!-- THIS IS THE ACTUAL DATA REQUIRED FOR TRANSACTION COMPLETION -->
+	<sg_data_to_macs>
+
+		<COMPANY>01</COMPANY>
+		<DIVISION>01</DIVISION>
+		<UID></UID>
+		<PAGE_NUM></PAGE_NUM>
+		<PAGE_COUNT></PAGE_COUNT>
+		<ITEM_NUM></ITEM_NUM>
+		<ITEM_QTY></ITEM_QTY>
+		<CUSTOMER_NUM></CUSTOMER_NUM>
+		<OFFER_NUM></OFFER_NUM>
+		<CUSTOMER_TYPE></CUSTOMER_TYPE>
+		<CONTRACT></CONTRACT>
+		<VAR_ITEM_1></VAR_ITEM_1>
+		<VAR_QTY_1></VAR_QTY_1>
+		<VAR_PRICE_1></VAR_PRICE_1>
+		<VAR_ITEM_2></VAR_ITEM_2>
+		<VAR_QTY_2></VAR_QTY_2>
+		<VAR_PRICE_2></VAR_PRICE_2>
+		<VAR_ITEM_3></VAR_ITEM_3>
+		<VAR_QTY_3></VAR_QTY_3>
+		<VAR_PRICE_3></VAR_PRICE_3>
+		<VAR_ITEM_4></VAR_ITEM_4>
+		<VAR_QTY_4></VAR_QTY_4>
+		<VAR_PRICE_4></VAR_PRICE_4>
+		<VAR_ITEM_5></VAR_ITEM_5>
+		<VAR_QTY_5></VAR_QTY_5>
+		<VAR_PRICE_5></VAR_PRICE_5>
+		<VAR_ITEM_6></VAR_ITEM_6>
+		<VAR_QTY_6></VAR_QTY_6>
+		<VAR_PRICE_6></VAR_PRICE_6>
+		<VAR_ITEM_7></VAR_ITEM_7>
+		<VAR_QTY_7></VAR_QTY_7>
+		<VAR_PRICE_7></VAR_PRICE_7>
+		<VAR_ITEM_8></VAR_ITEM_8>
+		<VAR_QTY_8></VAR_QTY_8>
+		<VAR_PRICE_8></VAR_PRICE_8>
+		<VAR_ITEM_9></VAR_ITEM_9>
+		<VAR_QTY_9></VAR_QTY_9>
+		<VAR_PRICE_9></VAR_PRICE_9>
+		<VAR_ITEM_10></VAR_ITEM_10>
+		<VAR_QTY_10></VAR_QTY_10>
+		<VAR_PRICE_10></VAR_PRICE_10>
+		<VAR_ITEM_11></VAR_ITEM_11>
+		<VAR_QTY_11></VAR_QTY_11>
+		<VAR_PRICE_11></VAR_PRICE_11>
+		<VAR_ITEM_12></VAR_ITEM_12>
+		<VAR_QTY_12></VAR_QTY_12>
+		<VAR_PRICE_12></VAR_PRICE_12>
+		<VAR_ITEM_13></VAR_ITEM_13>
+		<VAR_QTY_13></VAR_QTY_13>
+		<VAR_PRICE_13></VAR_PRICE_13>
+		<VAR_ITEM_14></VAR_ITEM_14>
+		<VAR_QTY_14></VAR_QTY_14>
+		<VAR_PRICE_14></VAR_PRICE_14>
+		<VAR_ITEM_15></VAR_ITEM_15>
+		<VAR_QTY_15></VAR_QTY_15>
+		<VAR_PRICE_15></VAR_PRICE_15>
+		<VAR_ITEM_16></VAR_ITEM_16>
+		<VAR_QTY_16></VAR_QTY_16>
+		<VAR_PRICE_16></VAR_PRICE_16>
+		<VAR_ITEM_17></VAR_ITEM_17>
+		<VAR_QTY_17></VAR_QTY_17>
+		<VAR_PRICE_17></VAR_PRICE_17>
+		<VAR_ITEM_18></VAR_ITEM_18>
+		<VAR_QTY_18></VAR_QTY_18>
+		<VAR_PRICE_18></VAR_PRICE_18>
+		<VAR_ITEM_19></VAR_ITEM_19>
+		<VAR_QTY_19></VAR_QTY_19>
+		<VAR_PRICE_19></VAR_PRICE_19>
+		<VAR_ITEM_20></VAR_ITEM_20>
+		<VAR_QTY_20></VAR_QTY_20>
+		<VAR_PRICE_20></VAR_PRICE_20>
+		<VAR_ITEM_21></VAR_ITEM_21>
+		<VAR_QTY_21></VAR_QTY_21>
+		<VAR_PRICE_21></VAR_PRICE_21>
+		<VAR_ITEM_22></VAR_ITEM_22>
+		<VAR_QTY_22></VAR_QTY_22>
+		<VAR_PRICE_22></VAR_PRICE_22>
+		<VAR_ITEM_23></VAR_ITEM_23>
+		<VAR_QTY_23></VAR_QTY_23>
+		<VAR_PRICE_23></VAR_PRICE_23>
+		<VAR_ITEM_24></VAR_ITEM_24>
+		<VAR_QTY_24></VAR_QTY_24>
+		<VAR_PRICE_24></VAR_PRICE_24>
+		<VAR_ITEM_25></VAR_ITEM_25>
+		<VAR_QTY_25></VAR_QTY_25>
+		<VAR_PRICE_25></VAR_PRICE_25>
+		<SHOP_TYPE></SHOP_TYPE>
+		<SHIPTO_COUNT></SHIPTO_COUNT>
+
+	</sg_data_to_macs>
+
+<!-- THIS IS ANY ADDITIONAL TRANSACTION DATA -->
+	<user_data_for_return_with_response>
+
+		<a>ASDF</a>
+		<b>GHJK</b>
+		<c>HJKL</c>
+		<d>1234</d>
+		<e></e>
+		<f></f>
+		<g></g>
+		<h></h>
+		<i></i>
+		<j></j>
+		<k></k>
+		<l></l>
+		<m></m>
+		<n></n>
+		<o></o>
+		<p></p>
+		<q></q>
+		<r></r>
+		<s></s>
+		<t></t>
+		<u></u>
+		<v></v>
+		<w></w>
+		<x></x>
+		<y></y>
+		<z></z>
+
+	</user_data_for_return_with_response>
+
+</ft0024>

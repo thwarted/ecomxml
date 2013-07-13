@@ -64,6 +64,12 @@
 		<GC_NUM_18></GC_NUM_18>
 		<GC_CHK_DIG_18></GC_CHK_DIG_18>
 		<GC_AMT_18></GC_AMT_18>
+                <GC_NUM_19></GC_NUM_19>
+		<GC_CHK_DIG_19></GC_CHK_DIG_19>
+		<GC_AMT_19></GC_AMT_19>
+                <GC_NUM_20></GC_NUM_20>
+		<GC_CHK_DIG_20></GC_CHK_DIG_20>
+		<GC_AMT_20></GC_AMT_20>
 		<GC_FLAG></GC_FLAG>
 		
 	</sg_data_to_macs>
